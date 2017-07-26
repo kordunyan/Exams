@@ -2,30 +2,62 @@ package com.exams.main;
 
 import com.exams.entity.Exam;
 import com.exams.entity.Subject;
-import com.exams.entity.mapper.ExamMapper;
-import com.exams.entity.mapper.SubjectMapper;
 import com.exams.service.impl.ExamServiceImpl;
 import com.exams.service.impl.SubjectServiceImpl;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.time.LocalDate;
-import java.time.Month;
-import java.util.List;
 
 
 public class Main {
 	public static void main(String[] args) {
-		/*SubjectServiceImpl subjectService = new SubjectServiceImpl();
-		ExamServiceImpl service = new ExamServiceImpl();
+		SubjectServiceImpl subjectService = new SubjectServiceImpl();
+		ExamServiceImpl examService = new ExamServiceImpl();
 
-		Subject subject = subjectService.getByTitle("English");
+		/*Subject subject = new Subject("Philosofi");
+		try {
+			subjectService.addSubject(subject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}*/
 
-		System.out.println(service.getAvgBySubjectId(subject.getId()));*/
+		/*Subject subject = subjectService.getByTitle("Philosofi");
+		System.out.println(subject);
+		subject.setTitle("Philosofi");*/
+
+
+		//subjectService.delete(subject);
+
+
+
+
+		//System.out.println(examService.getAvgBySubjectId(1));
+
+		/*Exam exam = new Exam();
+		exam.setMark(140);
+		exam.setSubject(subject);
+		exam.setCreateDate(LocalDate.of(2017, Month.APRIL, 10));
+		try {
+			examService.addExam(exam);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}*/
+
+		Exam exam = examService.getById(10);
+
+		System.out.println(exam);
+		System.out.println(exam.getSubject());
+		/*exam.setMark(10);
+
+		try {
+			examService.update(exam);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}*/
+
+		//examService.delete(exam);
+
+
+		/*//Subject subject = subjectService.getByTitle("English");
+
+		//System.out.println(service.getAvgBySubjectId(subject.getId()));
 
 
 		String resource = "mybatis-config.xml";
@@ -51,19 +83,32 @@ public class Main {
 			ExamMapper examMapper = session.getMapper(ExamMapper.class);
 			Exam exam = examMapper.getById(2);
 			System.out.println(exam);
+			System.out.println("Find by subject id");
+			List<Exam> exams = examMapper.getBySubjectId(1);
+			for(Exam exam1 : exams){
+				System.out.println(exam1);
+			}
 
-			Exam inexam = new Exam();
-			inexam.setMark(15);
-			inexam.setCreateDate(LocalDate.of(2017, Month.APRIL, 5));
-			inexam.setSubject(subject);
 
-			examMapper.addExam(inexam);
+			List<Exam> subjectExams = examMapper.getByDate(LocalDate.of(2017, Month.APRIL, 2));
+
+			for(Exam exam1 : subjectExams){
+				System.out.println(exam1.getSubject());
+			}
+
+			SubjectMarkMapper subjectMarkMapper = session.getMapper(SubjectMarkMapper.class);
+			List<SubjectMark> subjectMarks = subjectMarkMapper.getByDate(LocalDate.of(2017, Month.APRIL, 2));
+			for(SubjectMark sm : subjectMarks){
+				System.out.println(sm);
+			}
+
+			System.out.println("AVG by subject");
+			System.out.println(examMapper.getAvgBySubject(1));
 
 			session.commit();
 
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-
+		}*/
 	}
 }

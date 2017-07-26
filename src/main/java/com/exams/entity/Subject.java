@@ -1,5 +1,9 @@
 package com.exams.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -7,7 +11,10 @@ import java.util.Set;
 /**
  * Created by sanya on 25.07.2017.
  */
+@Setter
+@Getter
 @Entity
+@NoArgsConstructor
 public class Subject {
 
 	@Id
@@ -20,26 +27,7 @@ public class Subject {
 	@OneToMany(orphanRemoval = true, mappedBy = "subject", cascade = CascadeType.ALL)
 	private Set<Exam> exams = new HashSet<>();
 
-	public Subject() {
-	}
-
 	public Subject(String title) {
-		this.title = title;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
 		this.title = title;
 	}
 

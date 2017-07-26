@@ -1,7 +1,8 @@
 package com.exams.service.impl;
 
 import com.exams.dao.SubjectDAO;
-import com.exams.dao.impl.SubjectDAOImpl;
+import com.exams.dao.hibernateImpl.SubjectHDAOImpl;
+import com.exams.dao.mybatisImpl.SubjectMDAOImpl;
 import com.exams.entity.Subject;
 import com.exams.service.SubjectService;
 import com.exams.validator.Validator;
@@ -16,7 +17,8 @@ public class SubjectServiceImpl implements SubjectService {
 	private Validator validator;
 
 	public SubjectServiceImpl(){
-		this.dao = new SubjectDAOImpl();
+		//this.dao = new SubjectHDAOImpl();
+		this.dao = new SubjectMDAOImpl();
 		this.validator = new SubjectValidator();
 	}
 
@@ -31,5 +33,18 @@ public class SubjectServiceImpl implements SubjectService {
 	@Override
 	public Subject getByTitle(String title) {
 		return dao.getByTitle(title);
+	}
+
+	@Override
+	public void delete(Subject subject) {
+		dao.delete(subject);
+	}
+
+	@Override
+	public void update(Subject subject) throws Exception{
+		if(!validator.vlidate(subject)){
+			throw new Exception("Incorect subject");
+		}
+		dao.update(subject);
 	}
 }

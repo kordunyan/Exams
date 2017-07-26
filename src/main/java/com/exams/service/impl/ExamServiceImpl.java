@@ -1,7 +1,8 @@
 package com.exams.service.impl;
 
 import com.exams.dao.ExamDAO;
-import com.exams.dao.impl.ExamDAOImpl;
+import com.exams.dao.hibernateImpl.ExamHDAOImpl;
+import com.exams.dao.mybatisImpl.ExamMDAOImpl;
 import com.exams.entity.Exam;
 import com.exams.service.ExamService;
 import com.exams.validator.Validator;
@@ -19,7 +20,8 @@ public class ExamServiceImpl implements ExamService {
 	private Validator validator;
 
 	public ExamServiceImpl(){
-		this.dao = new ExamDAOImpl();
+		//this.dao = new ExamHDAOImpl();
+		this.dao = new ExamMDAOImpl();
 		this.validator = new LocalDateValidator();
 	}
 
@@ -49,5 +51,18 @@ public class ExamServiceImpl implements ExamService {
 	@Override
 	public Double getAvgBySubjectId(Integer subjectId) {
 		return dao.getAvgBySubjectId(subjectId);
+	}
+
+	@Override
+	public void delete(Exam exam) {
+		dao.delete(exam);
+	}
+
+	@Override
+	public void update(Exam exam) throws Exception {
+		if(!validator.vlidate(exam.getCreateDate())){
+			throw new Exception("Incorect date");
+		}
+		dao.update(exam);
 	}
 }

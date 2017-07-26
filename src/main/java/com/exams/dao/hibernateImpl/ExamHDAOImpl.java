@@ -1,4 +1,4 @@
-package com.exams.dao.impl;
+package com.exams.dao.hibernateImpl;
 
 import com.exams.dao.ExamDAO;
 import com.exams.entity.Exam;
@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by sanya on 25.07.2017.
  */
-public class ExamDAOImpl implements ExamDAO {
+public class ExamHDAOImpl implements ExamDAO {
 	@Override
 	public void addExam(Exam exam) {
 		try (Session session = SessionUtil.getSession()) {
@@ -72,5 +72,29 @@ public class ExamDAOImpl implements ExamDAO {
 			ex.printStackTrace();
 		}
 		return 0.0;
+	}
+
+	@Override
+	public void delete(Exam exam) {
+		try(Session session = SessionUtil.getSession()){
+			Transaction tx = session.beginTransaction();
+			session.delete(exam);
+			tx.commit();
+			session.close();
+		}
+		catch (Exception ex){
+			ex.printStackTrace();
+		}
+	}
+
+	@Override
+	public void update(Exam exam) {
+		try (Session session = SessionUtil.getSession()) {
+			Transaction tx = session.beginTransaction();
+			session.update(exam);
+			tx.commit();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 }

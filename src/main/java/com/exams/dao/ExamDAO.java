@@ -18,4 +18,8 @@ public interface ExamDAO {
 	List<Exam> getByCreateDate(LocalDate createDate);
 
 	Double getAvgBySubjectId(Integer subjectId);
+
+	void delete(Exam exam);
+
+	void update(Exam exam);
 }

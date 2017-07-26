@@ -16,4 +16,8 @@ public interface ExamService {
 	List<Exam> getByCreateDate(LocalDate createDate);
 
 	Double getAvgBySubjectId(Integer subjectId);
+
+	void delete(Exam exam);
+
+	void update(Exam exam) throws Exception;
 }
