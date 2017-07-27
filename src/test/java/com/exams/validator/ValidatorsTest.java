@@ -15,6 +15,8 @@ import static org.testng.AssertJUnit.assertTrue;
  * Created by sanya on 27.07.2017.
  */
 public class ValidatorsTest {
+
+
 	@DataProvider(name = "subjectTitleDataProvider")
 	public Object[][] subjectTitleDataProvider() {
 		return new Object[][]{
