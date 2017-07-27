@@ -65,7 +65,7 @@ public class ExamHDAOImpl implements ExamDAO {
 	@Override
 	public Double getAvgBySubjectId(Integer subjectId) {
 		try (Session session = SessionUtil.getSession()) {
-			Query query = session.createQuery("SELECT AVG(e.mark) FROM Exam e WHERE e.subject.id = :p_subject_id");
+			Query query = session.createQuery("SELECT ROUND(AVG(e.mark), 2) FROM Exam e WHERE e.subject.id = :p_subject_id");
 			query.setParameter("p_subject_id", subjectId);
 			return (Double) query.uniqueResult();
 		} catch (Exception ex) {
@@ -76,13 +76,12 @@ public class ExamHDAOImpl implements ExamDAO {
 
 	@Override
 	public void delete(Exam exam) {
-		try(Session session = SessionUtil.getSession()){
+		try (Session session = SessionUtil.getSession()) {
 			Transaction tx = session.beginTransaction();
 			session.delete(exam);
 			tx.commit();
 			session.close();
-		}
-		catch (Exception ex){
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}

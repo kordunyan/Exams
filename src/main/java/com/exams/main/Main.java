@@ -5,11 +5,15 @@ import com.exams.entity.Subject;
 import com.exams.service.impl.ExamServiceImpl;
 import com.exams.service.impl.SubjectServiceImpl;
 
+import java.time.LocalDate;
+import java.time.Month;
+
 
 public class Main {
 	public static void main(String[] args) {
 		SubjectServiceImpl subjectService = new SubjectServiceImpl();
 		ExamServiceImpl examService = new ExamServiceImpl();
+
 
 		/*Subject subject = new Subject("Philosofi");
 		try {
@@ -18,9 +22,9 @@ public class Main {
 			e.printStackTrace();
 		}*/
 
-		/*Subject subject = subjectService.getByTitle("Philosofi");
-		System.out.println(subject);
-		subject.setTitle("Philosofi");*/
+		Subject subject = subjectService.getByTitle("Java");
+		//System.out.println(subject);
+		//subject.setTitle("Philosofi");
 
 
 		//subjectService.delete(subject);
@@ -31,19 +35,23 @@ public class Main {
 		//System.out.println(examService.getAvgBySubjectId(1));
 
 		/*Exam exam = new Exam();
-		exam.setMark(140);
+		exam.setMark(13);
 		exam.setSubject(subject);
-		exam.setCreateDate(LocalDate.of(2017, Month.APRIL, 10));
-		try {
+		exam.setCreateDate(LocalDate.of(2017, Month.APRIL, 10));*/
+		/*try {
 			examService.addExam(exam);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}*/
 
-		Exam exam = examService.getById(10);
+		//Exam exam = examService.getById(10);
 
-		System.out.println(exam);
-		System.out.println(exam.getSubject());
+		//System.out.println(exam);
+		//System.out.println(exam.getSubject());
+
+
+		//System.out.println(examService.getAvgBySubjectId(1));
+
 		/*exam.setMark(10);
 
 		try {
@@ -57,7 +65,7 @@ public class Main {
 
 		/*//Subject subject = subjectService.getByTitle("English");
 
-		//System.out.println(service.getAvgBySubjectId(subject.getId()));
+		System.out.println(service.getAvgBySubjectId(subject.getId()));
 
 
 		String resource = "mybatis-config.xml";
@@ -96,14 +104,7 @@ public class Main {
 				System.out.println(exam1.getSubject());
 			}
 
-			SubjectMarkMapper subjectMarkMapper = session.getMapper(SubjectMarkMapper.class);
-			List<SubjectMark> subjectMarks = subjectMarkMapper.getByDate(LocalDate.of(2017, Month.APRIL, 2));
-			for(SubjectMark sm : subjectMarks){
-				System.out.println(sm);
-			}
 
-			System.out.println("AVG by subject");
-			System.out.println(examMapper.getAvgBySubject(1));
 
 			session.commit();
 
