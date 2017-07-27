@@ -37,10 +37,10 @@ public class ExamHDAOImpl implements ExamDAO {
 	}
 
 	@Override
-	public List<Exam> getBySubjectId(Integer subjectId) {
+	public List<Exam> getBySubjectId(Integer subjectId, boolean orderType) {
 		List<Exam> exam = null;
 		try (Session session = SessionUtil.getSession()) {
-			Query<Exam> query = session.createQuery("FROM Exam e WHERE e.subject.id = :p_subject_id ORDER BY e.createDate ASC");
+			Query<Exam> query = session.createQuery("FROM Exam e WHERE e.subject.id = :p_subject_id ORDER BY e.createDate "+ ((orderType)? "ASC":"DESC"));
 			query.setParameter("p_subject_id", subjectId);
 			exam = query.list();
 		} catch (Exception ex) {
@@ -53,7 +53,7 @@ public class ExamHDAOImpl implements ExamDAO {
 	public List<Exam> getByCreateDate(LocalDate createDate) {
 		List<Exam> exam = null;
 		try (Session session = SessionUtil.getSession()) {
-			Query<Exam> query = session.createQuery("FROM Exam e WHERE e.createDate = :p_create_date");
+			Query<Exam> query = session.createQuery("FROM Exam e WHERE e.createDate = :p_create_date ORDER BY e.subject.title ASC");
 			query.setParameter("p_create_date", createDate);
 			exam = query.list();
 		} catch (Exception ex) {

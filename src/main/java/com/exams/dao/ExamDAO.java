@@ -13,7 +13,7 @@ public interface ExamDAO {
 
 	Exam getExamById(Integer id);
 
-	List<Exam> getBySubjectId(Integer subjectId);
+	List<Exam> getBySubjectId(Integer subjectId, boolean orderType);
 
 	List<Exam> getByCreateDate(LocalDate createDate);
 

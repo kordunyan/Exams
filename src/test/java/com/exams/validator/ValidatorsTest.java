@@ -58,5 +58,4 @@ public class ValidatorsTest {
 		date = date.minusDays(1);
 		assertTrue(validator.vlidate(date));
 	}
-
 }

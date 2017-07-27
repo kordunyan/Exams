@@ -1,6 +1,7 @@
 package com.exams.dao;
 
 import com.exams.entity.Subject;
+import com.exams.exception.SubjectTitleExists;
 
 /**
  * Created by sanya on 25.07.2017.
@@ -13,4 +14,8 @@ public interface SubjectDAO {
     void delete(Subject subject);
 
     void update(Subject subject);
+
+    void deleteAll();
+
+    Long getCount();
 }

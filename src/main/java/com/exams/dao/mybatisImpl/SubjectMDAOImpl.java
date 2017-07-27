@@ -3,12 +3,14 @@ package com.exams.dao.mybatisImpl;
 import com.exams.dao.SubjectDAO;
 import com.exams.entity.Subject;
 import com.exams.entity.mapper.SubjectMapper;
+import com.exams.exception.SubjectTitleExists;
 import com.exams.util.MyBatisUtil;
+import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
 
 public class SubjectMDAOImpl implements SubjectDAO {
     @Override
-    public void addSubject(Subject subject) {
+    public void addSubject(Subject subject){
         SqlSession session = MyBatisUtil.getSqlSessnioFactory().openSession();
         SubjectMapper mapper = session.getMapper(SubjectMapper.class);
         mapper.insert(subject);
@@ -41,5 +43,23 @@ public class SubjectMDAOImpl implements SubjectDAO {
         mapper.update(subject);
         session.commit();
         session.close();
+    }
+
+    @Override
+    public void deleteAll() {
+        SqlSession session = MyBatisUtil.getSqlSessnioFactory().openSession();
+        SubjectMapper mapper = session.getMapper(SubjectMapper.class);
+        mapper.deleteAll();
+        session.commit();
+        session.close();
+    }
+
+    @Override
+    public Long getCount() {
+        SqlSession session = MyBatisUtil.getSqlSessnioFactory().openSession();
+        SubjectMapper mapper = session.getMapper(SubjectMapper.class);
+        Long count =  mapper.getCount();
+        session.close();
+        return count;
     }
 }

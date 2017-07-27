@@ -57,4 +57,27 @@ public class SubjectHDAOImpl implements SubjectDAO {
             ex.printStackTrace();
         }
     }
+
+    @Override
+    public void deleteAll() {
+        try (Session session = SessionUtil.getSession()) {
+            Transaction tx = session.beginTransaction();
+            Query query = session.createQuery("delete FROM Subject");
+            query.executeUpdate();
+            tx.commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public Long getCount() {
+        try (Session session = SessionUtil.getSession()) {
+            Query query = session.createQuery("SELECT COUNT(*) FROM Subject");
+            return (Long) query.uniqueResult();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return -1l;
+    }
 }

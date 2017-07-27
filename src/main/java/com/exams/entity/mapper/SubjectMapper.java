@@ -27,4 +27,10 @@ public interface SubjectMapper {
 
 	@Update("UPDATE subject SET title=#{title} WHERE id=#{id}")
 	void update(Subject subject);
+
+	@Delete("DELETE FROM subject")
+	void deleteAll();
+
+	@Select("SELECT COUNT(*) FROM subject")
+	Long getCount();
 }

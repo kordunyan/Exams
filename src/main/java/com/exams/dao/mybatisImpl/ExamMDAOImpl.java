@@ -30,10 +30,10 @@ public class ExamMDAOImpl implements ExamDAO{
     }
 
     @Override
-    public List<Exam> getBySubjectId(Integer subjectId) {
+    public List<Exam> getBySubjectId(Integer subjectId, boolean orderType) {
         SqlSession session = MyBatisUtil.getSqlSessnioFactory().openSession();
         ExamMapper mapper = session.getMapper(ExamMapper.class);
-        List<Exam> result = mapper.getBySubjectId(subjectId);
+        List<Exam> result = mapper.getBySubjectId(subjectId, orderType);
         session.close();
         return result;
     }

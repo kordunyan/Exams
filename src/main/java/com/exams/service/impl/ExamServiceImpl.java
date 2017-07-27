@@ -20,8 +20,8 @@ public class ExamServiceImpl implements ExamService {
 	private Validator validator;
 
 	public ExamServiceImpl(){
-		//this.dao = new ExamHDAOImpl();
-		this.dao = new ExamMDAOImpl();
+		this.dao = new ExamHDAOImpl();
+		//this.dao = new ExamMDAOImpl();
 		this.validator = new LocalDateValidator();
 	}
 
@@ -39,8 +39,8 @@ public class ExamServiceImpl implements ExamService {
 	}
 
 	@Override
-	public List<Exam> getBySubjectId(Integer subjectId) {
-		return dao.getBySubjectId(subjectId);
+	public List<Exam> getBySubjectId(Integer subjectId, boolean orderType) {
+		return dao.getBySubjectId(subjectId, orderType);
 	}
 
 	@Override

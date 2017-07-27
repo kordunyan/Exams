@@ -47,4 +47,9 @@ public class SubjectServiceImpl implements SubjectService {
 		}
 		dao.update(subject);
 	}
+
+	@Override
+	public Long getcount() {
+		return dao.getCount();
+	}
 }
