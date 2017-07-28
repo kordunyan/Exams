@@ -16,7 +16,6 @@ import static org.testng.AssertJUnit.assertTrue;
  */
 public class ValidatorsTest {
 
-
 	@DataProvider(name = "subjectTitleDataProvider")
 	public Object[][] subjectTitleDataProvider() {
 		return new Object[][]{
@@ -55,7 +54,6 @@ public class ValidatorsTest {
 	public void testValidLocalDate(){
 		Validator<LocalDate> validator = new LocalDateValidator();
 		LocalDate date = LocalDate.now();
-		date = date.minusDays(1);
 		assertTrue(validator.vlidate(date));
 	}
 }

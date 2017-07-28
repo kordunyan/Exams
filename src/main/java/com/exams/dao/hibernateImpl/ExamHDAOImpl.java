@@ -2,6 +2,7 @@ package com.exams.dao.hibernateImpl;
 
 import com.exams.dao.ExamDAO;
 import com.exams.entity.Exam;
+import com.exams.entity.Subject;
 import com.exams.util.SessionUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -91,6 +92,44 @@ public class ExamHDAOImpl implements ExamDAO {
 		try (Session session = SessionUtil.getSession()) {
 			Transaction tx = session.beginTransaction();
 			session.update(exam);
+			tx.commit();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	@Override
+	public Exam getBySubjectAndDate(Subject subject, LocalDate date) {
+		Exam exam = null;
+		try (Session session = SessionUtil.getSession()) {
+			Query<Exam> query = session.createQuery("FROM Exam e WHERE e.subject.id = :p_subject_id AND createDate = :p_createCate");
+			query.setParameter("p_subject_id", subject.getId());
+			query.setParameter("p_createCate", date);
+			return query.uniqueResult();
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public Long getCount() {
+		try (Session session = SessionUtil.getSession()) {
+			Query query = session.createQuery("SELECT COUNT(*) FROM Exam");
+			return (Long) query.uniqueResult();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return -1l;
+	}
+
+	@Override
+	public void deleteAll() {
+		try (Session session = SessionUtil.getSession()) {
+			Transaction tx = session.beginTransaction();
+			Query query = session.createQuery("delete FROM Exam");
+			query.executeUpdate();
 			tx.commit();
 		} catch (Exception ex) {
 			ex.printStackTrace();

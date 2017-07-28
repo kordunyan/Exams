@@ -15,4 +15,6 @@ public interface SubjectService {
     void update(Subject subject) throws Exception;
 
     Long getcount();
+
+    void deleteAll();
 }

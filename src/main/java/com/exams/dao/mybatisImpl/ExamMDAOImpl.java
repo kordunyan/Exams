@@ -2,7 +2,9 @@ package com.exams.dao.mybatisImpl;
 
 import com.exams.dao.ExamDAO;
 import com.exams.entity.Exam;
+import com.exams.entity.Subject;
 import com.exams.entity.mapper.ExamMapper;
+import com.exams.entity.mapper.SubjectMapper;
 import com.exams.util.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 
@@ -73,4 +75,32 @@ public class ExamMDAOImpl implements ExamDAO{
         session.commit();
         session.close();
     }
+
+    @Override
+    public Exam getBySubjectAndDate(Subject subject, LocalDate date) {
+        SqlSession session = MyBatisUtil.getSqlSessnioFactory().openSession();
+        ExamMapper mapper = session.getMapper(ExamMapper.class);
+        Exam exam = mapper.getBySubjectAndDate(subject, date);
+        session.close();
+        return exam;
+    }
+
+    @Override
+    public Long getCount() {
+        SqlSession session = MyBatisUtil.getSqlSessnioFactory().openSession();
+        ExamMapper mapper = session.getMapper(ExamMapper.class);
+        Long count = mapper.getCount();
+        session.close();
+        return count;
+    }
+
+    @Override
+    public void deleteAll() {
+        SqlSession session = MyBatisUtil.getSqlSessnioFactory().openSession();
+        ExamMapper mapper = session.getMapper(ExamMapper.class);
+        mapper.deleteAll();
+        session.commit();
+        session.close();
+    }
+
 }

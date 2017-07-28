@@ -15,14 +15,6 @@ public class Main {
 		SubjectServiceImpl subjectService = new SubjectServiceImpl();
 		ExamServiceImpl examService = new ExamServiceImpl();
 
-		List<Exam> exams = examService.getByCreateDate(LocalDate.of(2017, Month.APRIL, 3));
-
-		for(Exam exam : exams){
-			System.out.println(exam.getSubject());
-		}
-
-
-		System.out.println("count : " + subjectService.getcount());
 
 
 		/*Subject subject = new Subject("Philosofi");
@@ -32,14 +24,28 @@ public class Main {
 			e.printStackTrace();
 		}*/
 
-		//Subject subject = subjectService.getByTitle("Java");
-		//System.out.println(subject);
-		//subject.setTitle("Philosofi");
+		Subject subject = subjectService.getByTitle("Java");
 
 
-		//subjectService.delete(subject);
+		Exam exam = new Exam();
+		exam.setMark(10);
+		exam.setCreateDate(LocalDate.of(2017, Month.APRIL, 3));
+		exam.setSubject(subject);
+
+		try {
+			examService.addExam(exam);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		System.out.println("Exam count: " + examService.getCount());
 
 
+		/*		try {
+			examService.addExam(exam);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}*/
 
 
 		//System.out.println(examService.getAvgBySubjectId(1));

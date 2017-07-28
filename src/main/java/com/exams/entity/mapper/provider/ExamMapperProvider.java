@@ -8,13 +8,12 @@ import java.util.Map;
 public class ExamMapperProvider {
 
     public String getBySubjectIdSQL(Map<String, Object> map) {
-        Integer id = (Integer) map.get("param1");
         Boolean orderType = (Boolean) map.get("param2");
         return new SQL() {
             {
                 SELECT("id, mark, createDate, subject_id");
                 FROM("exam");
-                WHERE("subject_id="+id);
+                WHERE("subject_id=#{param1}");
                 ORDER_BY("createDate " + ((orderType)? "ASC":"DESC"));
             }
         }.toString();

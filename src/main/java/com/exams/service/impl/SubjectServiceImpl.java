@@ -4,6 +4,7 @@ import com.exams.dao.SubjectDAO;
 import com.exams.dao.hibernateImpl.SubjectHDAOImpl;
 import com.exams.dao.mybatisImpl.SubjectMDAOImpl;
 import com.exams.entity.Subject;
+import com.exams.exception.IncorectSubjectTitleException;
 import com.exams.service.SubjectService;
 import com.exams.validator.Validator;
 import com.exams.validator.impl.SubjectValidator;
@@ -25,7 +26,7 @@ public class SubjectServiceImpl implements SubjectService {
 	@Override
 	public void addSubject(Subject subject) throws Exception{
 		if(!validator.vlidate(subject)){
-			throw new Exception("Incorect subject");
+			throw new IncorectSubjectTitleException("Incorect subject");
 		}
 		dao.addSubject(subject);
 	}
@@ -43,7 +44,7 @@ public class SubjectServiceImpl implements SubjectService {
 	@Override
 	public void update(Subject subject) throws Exception{
 		if(!validator.vlidate(subject)){
-			throw new Exception("Incorect subject");
+			throw new IncorectSubjectTitleException("Incorect subject");
 		}
 		dao.update(subject);
 	}
@@ -51,5 +52,10 @@ public class SubjectServiceImpl implements SubjectService {
 	@Override
 	public Long getcount() {
 		return dao.getCount();
+	}
+
+	@Override
+	public void deleteAll() {
+		dao.deleteAll();
 	}
 }

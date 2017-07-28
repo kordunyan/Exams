@@ -1,6 +1,7 @@
 package com.exams.service;
 
 import com.exams.entity.Exam;
+import com.exams.entity.Subject;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -8,6 +9,8 @@ import java.util.List;
 
 public interface ExamService {
 	void addExam(Exam exam) throws Exception;
+
+	void update(Exam exam) throws Exception;
 
 	Exam getById(Integer id);
 
@@ -19,5 +22,9 @@ public interface ExamService {
 
 	void delete(Exam exam);
 
-	void update(Exam exam) throws Exception;
+	Exam getBySubjectAndDate(Subject subject, LocalDate date);
+
+	Long getCount();
+
+	void deleteAll();
 }
