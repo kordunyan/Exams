@@ -15,10 +15,10 @@ public class Main {
 		SubjectServiceImpl subjectService = new SubjectServiceImpl();
 		ExamServiceImpl examService = new ExamServiceImpl();
 
-		List<Exam> exams = examService.getByCreateDate(LocalDate.of(2017, Month.APRIL, 3));
+		List<Exam> exams = examService.getBySubjectId(3, true);
 
 		for(Exam exam : exams){
-			System.out.println(exam.getSubject());
+			System.out.println(exam);
 		}
 
 
