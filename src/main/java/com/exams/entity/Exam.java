@@ -36,6 +36,24 @@ public class Exam {
 	}
 
 	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Exam exam = (Exam) o;
+
+		if (mark != null ? !mark.equals(exam.mark) : exam.mark != null) return false;
+		return createDate != null ? createDate.equals(exam.createDate) : exam.createDate == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = mark != null ? mark.hashCode() : 0;
+		result = 31 * result + (createDate != null ? createDate.hashCode() : 0);
+		return result;
+	}
+
+	@Override
 	public String toString() {
 		return "Exam{" +
 				"id=" + id +

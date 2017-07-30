@@ -1,6 +1,7 @@
 package com.exams.entity.mapper;
 
 import com.exams.entity.Exam;
+import com.exams.entity.Subject;
 import com.exams.entity.mapper.provider.ExamMapperProvider;
 import org.apache.ibatis.annotations.*;
 
@@ -26,7 +27,6 @@ public interface ExamMapper {
     void addExam(Exam exam);
 
 
-    //@Select("SELECT id, mark, createDate, subject_id FROM exam WHERE subject_id = #{id} ORDER BY createDate ASC")
     @SelectProvider(type= ExamMapperProvider.class, method = "getBySubjectIdSQL")
     List<Exam> getBySubjectId(int id, boolean orderType);
 
@@ -48,4 +48,13 @@ public interface ExamMapper {
 
     @Update("UPDATE exam SET createDate = #{createDate}, mark = #{mark}, subject_id = #{subject.id} WHERE id=#{id}")
     void update(Exam exam);
+
+    @Select("SELECT id, mark, createDate, subject_id FROM exam  WHERE subject_id = #{param1.id} AND createDate = #{param2}")
+    Exam getBySubjectAndDate(Subject subject, LocalDate date);
+
+    @Select("SELECT COUNT(*) FROM exam")
+    Long getCount();
+
+    @Delete("DELETE FROM exam")
+    void deleteAll();
 }

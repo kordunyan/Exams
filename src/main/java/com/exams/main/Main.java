@@ -1,28 +1,14 @@
 package com.exams.main;
 
-import com.exams.entity.Exam;
-import com.exams.entity.Subject;
 import com.exams.service.impl.ExamServiceImpl;
 import com.exams.service.impl.SubjectServiceImpl;
 
-import java.time.LocalDate;
-import java.time.Month;
-import java.util.List;
 
 
 public class Main {
 	public static void main(String[] args) {
 		SubjectServiceImpl subjectService = new SubjectServiceImpl();
 		ExamServiceImpl examService = new ExamServiceImpl();
-
-		List<Exam> exams = examService.getBySubjectId(3, true);
-
-		for(Exam exam : exams){
-			System.out.println(exam);
-		}
-
-
-		System.out.println("count : " + subjectService.getcount());
 
 
 		/*Subject subject = new Subject("Philosofi");

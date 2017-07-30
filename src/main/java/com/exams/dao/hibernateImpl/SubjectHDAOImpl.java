@@ -7,6 +7,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import java.util.List;
+
 /**
  * Created by sanya on 25.07.2017.
  */
@@ -79,5 +81,10 @@ public class SubjectHDAOImpl implements SubjectDAO {
             ex.printStackTrace();
         }
         return -1l;
+    }
+
+    @Override
+    public List<Subject> getAll() {
+        return null;
     }
 }

@@ -3,6 +3,8 @@ package com.exams.dao;
 import com.exams.entity.Subject;
 import com.exams.exception.SubjectTitleExists;
 
+import java.util.List;
+
 /**
  * Created by sanya on 25.07.2017.
  */
@@ -18,4 +20,6 @@ public interface SubjectDAO {
     void deleteAll();
 
     Long getCount();
+
+    List<Subject> getAll();
 }

@@ -4,6 +4,9 @@ import com.exams.dao.ExamDAO;
 import com.exams.dao.hibernateImpl.ExamHDAOImpl;
 import com.exams.dao.mybatisImpl.ExamMDAOImpl;
 import com.exams.entity.Exam;
+import com.exams.entity.Subject;
+import com.exams.exception.ExamExistsException;
+import com.exams.exception.IncorectDateException;
 import com.exams.service.ExamService;
 import com.exams.validator.Validator;
 import com.exams.validator.impl.LocalDateValidator;
@@ -28,7 +31,10 @@ public class ExamServiceImpl implements ExamService {
 	@Override
 	public void addExam(Exam exam) throws Exception{
 		if(!validator.vlidate(exam.getCreateDate())){
-			throw new Exception("Incorect date");
+			throw new IncorectDateException("Incorect date");
+		}
+		if(dao.getBySubjectAndDate(exam.getSubject(), exam.getCreateDate()) != null){
+			throw new ExamExistsException("Such exam exists on this date");
 		}
 		dao.addExam(exam);
 	}
@@ -59,10 +65,31 @@ public class ExamServiceImpl implements ExamService {
 	}
 
 	@Override
+	public Exam getBySubjectAndDate(Subject subject, LocalDate date) {
+		return dao.getBySubjectAndDate(subject, date);
+	}
+
+	@Override
+	public Long getCount() {
+		return dao.getCount();
+	}
+
+	@Override
+	public void deleteAll() {
+		dao.deleteAll();
+	}
+
+	@Override
 	public void update(Exam exam) throws Exception {
 		if(!validator.vlidate(exam.getCreateDate())){
-			throw new Exception("Incorect date");
+			throw new IncorectDateException("Incorect date");
+		}
+		if(dao.getBySubjectAndDate(exam.getSubject(), exam.getCreateDate()) != null){
+			throw new ExamExistsException("Such exam exists on this date");
 		}
 		dao.update(exam);
 	}
+
+
+
 }

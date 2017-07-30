@@ -1,6 +1,7 @@
 package com.exams.dao;
 
 import com.exams.entity.Exam;
+import com.exams.entity.Subject;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
  * Created by sanya on 25.07.2017.
  */
 public interface ExamDAO {
+
 	void addExam(Exam exam);
 
 	Exam getExamById(Integer id);
@@ -22,4 +24,10 @@ public interface ExamDAO {
 	void delete(Exam exam);
 
 	void update(Exam exam);
+
+	Exam getBySubjectAndDate(Subject subject, LocalDate date);
+
+	Long getCount();
+
+	void deleteAll();
 }
