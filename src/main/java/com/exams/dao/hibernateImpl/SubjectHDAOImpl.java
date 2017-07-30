@@ -39,6 +39,17 @@ public class SubjectHDAOImpl implements SubjectDAO {
     }
 
     @Override
+    public Subject getById(int id) {
+        Subject subject = null;
+        try (Session session = SessionUtil.getSession()) {
+            subject = session.byId(Subject.class).load(id);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return subject;
+    }
+
+    @Override
     public void delete(Subject subject) {
         try (Session session = SessionUtil.getSession()) {
             Transaction tx = session.beginTransaction();
@@ -85,6 +96,13 @@ public class SubjectHDAOImpl implements SubjectDAO {
 
     @Override
     public List<Subject> getAll() {
-        return null;
+        List<Subject> result = null;
+        try (Session session = SessionUtil.getSession()) {
+            Query<Subject> query = session.createQuery("FROM Subject");
+            result = query.list();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return result;
     }
 }

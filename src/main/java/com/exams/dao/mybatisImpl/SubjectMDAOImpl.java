@@ -30,6 +30,15 @@ public class SubjectMDAOImpl implements SubjectDAO {
     }
 
     @Override
+    public Subject getById(int id) {
+        SqlSession session = MyBatisUtil.getSqlSessnioFactory().openSession();
+        SubjectMapper mapper = session.getMapper(SubjectMapper.class);
+        Subject subject = mapper.getById(id);
+        session.close();
+        return subject;
+    }
+
+    @Override
     public void delete(Subject subject) {
         SqlSession session = MyBatisUtil.getSqlSessnioFactory().openSession();
         SubjectMapper mapper = session.getMapper(SubjectMapper.class);

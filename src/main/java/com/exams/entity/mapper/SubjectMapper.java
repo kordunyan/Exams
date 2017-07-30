@@ -15,6 +15,9 @@ public interface SubjectMapper {
 	@Select("SELECT id, title FROM subject WHERE title=#{title}")
 	Subject getByTitle(String title);
 
+	@Select("SELECT id, title FROM subject WHERE id=#{id}")
+	Subject getById(int id);
+
 	@Insert("INSERT INTO subject (title) VALUES (#{title})")
 	@Options(keyProperty = "id")
 	void insert(Subject subject);

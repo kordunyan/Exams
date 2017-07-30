@@ -65,4 +65,9 @@ public class SubjectServiceImpl implements SubjectService {
 	public List<Subject> getAll() {
 		return dao.getAll();
 	}
+
+	@Override
+	public Subject getById(int id) {
+		return dao.getById(id);
+	}
 }

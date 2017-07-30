@@ -22,4 +22,6 @@ public interface SubjectDAO {
     Long getCount();
 
     List<Subject> getAll();
+
+    Subject getById(int id);
 }

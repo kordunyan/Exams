@@ -21,4 +21,6 @@ public interface SubjectService {
     void deleteAll();
 
     List<Subject> getAll();
+
+    Subject getById(int id);
 }
