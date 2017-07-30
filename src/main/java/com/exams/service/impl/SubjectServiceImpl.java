@@ -26,9 +26,12 @@ public class SubjectServiceImpl implements SubjectService {
 	}
 
 	@Override
-	public void addSubject(Subject subject) throws Exception{
+	public void addSubject(Subject subject) throws IncorectSubjectTitleException{
 		if(!validator.vlidate(subject)){
-			throw new IncorectSubjectTitleException("Incorect subject");
+			throw new IncorectSubjectTitleException("Incorect subject title");
+		}
+		if(dao.getByTitle(subject.getTitle()) != null){
+			throw new IncorectSubjectTitleException("Subject with same title already exists");
 		}
 		dao.addSubject(subject);
 	}
@@ -44,9 +47,12 @@ public class SubjectServiceImpl implements SubjectService {
 	}
 
 	@Override
-	public void update(Subject subject) throws Exception{
+	public void update(Subject subject) throws IncorectSubjectTitleException{
 		if(!validator.vlidate(subject)){
 			throw new IncorectSubjectTitleException("Incorect subject");
+		}
+		if(dao.getByTitle(subject.getTitle()) != null){
+			throw new IncorectSubjectTitleException("Subject with same title already exists");
 		}
 		dao.update(subject);
 	}

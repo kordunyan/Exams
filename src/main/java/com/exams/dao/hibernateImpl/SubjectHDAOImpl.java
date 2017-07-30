@@ -98,7 +98,7 @@ public class SubjectHDAOImpl implements SubjectDAO {
     public List<Subject> getAll() {
         List<Subject> result = null;
         try (Session session = SessionUtil.getSession()) {
-            Query<Subject> query = session.createQuery("FROM Subject");
+            Query<Subject> query = session.createQuery("FROM Subject s ORDER BY s.title");
             result = query.list();
         } catch (Exception ex) {
             ex.printStackTrace();

@@ -1,6 +1,7 @@
 package com.exams.service;
 
 import com.exams.entity.Subject;
+import com.exams.exception.IncorectSubjectTitleException;
 
 import java.util.List;
 
@@ -8,13 +9,13 @@ import java.util.List;
  * Created by sanya on 25.07.2017.
  */
 public interface SubjectService {
-    void addSubject(Subject subject) throws Exception;
+    void addSubject(Subject subject) throws IncorectSubjectTitleException;
 
     Subject getByTitle(String title);
 
     void delete(Subject subject);
 
-    void update(Subject subject) throws Exception;
+    void update(Subject subject) throws IncorectSubjectTitleException;
 
     Long getcount();
 

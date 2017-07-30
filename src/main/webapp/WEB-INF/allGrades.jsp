@@ -6,8 +6,8 @@
     <meta charset="utf-8">
     <title>All grades</title>
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -26,7 +26,7 @@
 
             <h3 class="text-center">All grades of ${subject.title}</h3>
 
-            <a href="" class="btn btn-primary btn-add-grade">+ Add grade</a>
+            <a href="/add/grade?subject=${param.subject}" class="btn btn-primary btn-add-grade">+ Add grade</a>
 
             <table class="table table-striped content-table">
                 <thead>
@@ -54,8 +54,8 @@
     </div>
 </div>
 
-<script src="scripts/jquery-2.1.4.min.js"></script>
-<script src="scripts/bootstrap.min.js"></script>
+<script src="/scripts/jquery-2.1.4.min.js"></script>
+<script src="/scripts/bootstrap.min.js"></script>
 
 </body>
 </html>

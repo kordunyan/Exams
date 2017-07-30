@@ -29,7 +29,7 @@ public class ExamServiceImpl implements ExamService {
 	}
 
 	@Override
-	public void addExam(Exam exam) throws Exception{
+	public void addExam(Exam exam) throws IncorectDateException, ExamExistsException{
 		if(!validator.vlidate(exam.getCreateDate())){
 			throw new IncorectDateException("Incorect date");
 		}
@@ -80,7 +80,7 @@ public class ExamServiceImpl implements ExamService {
 	}
 
 	@Override
-	public void update(Exam exam) throws Exception {
+	public void update(Exam exam) throws IncorectDateException, ExamExistsException {
 		if(!validator.vlidate(exam.getCreateDate())){
 			throw new IncorectDateException("Incorect date");
 		}

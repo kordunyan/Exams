@@ -22,7 +22,7 @@ public interface SubjectMapper {
 	@Options(keyProperty = "id")
 	void insert(Subject subject);
 
-	@Select("SELECT id, title FROM subject")
+	@Select("SELECT id, title FROM subject ORDER BY title")
 	List<Subject> findAllSubject();
 
 	@Delete("DELETE FROM subject WHERE id=#{id}")

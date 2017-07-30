@@ -2,15 +2,17 @@ package com.exams.service;
 
 import com.exams.entity.Exam;
 import com.exams.entity.Subject;
+import com.exams.exception.ExamExistsException;
+import com.exams.exception.IncorectDateException;
 
 import java.time.LocalDate;
 import java.util.List;
 
 
 public interface ExamService {
-	void addExam(Exam exam) throws Exception;
+	void addExam(Exam exam) throws IncorectDateException, ExamExistsException;
 
-	void update(Exam exam) throws Exception;
+	void update(Exam exam) throws IncorectDateException, ExamExistsException;
 
 	Exam getById(Integer id);
 

@@ -6,7 +6,6 @@ body {
   position: relative;
   padding: 0 !important;
   overflow: auto !important;
-  font-family: monospace;
 }
 .main-nav {
   margin-top: 70px;
@@ -64,7 +63,7 @@ body {
 }
 
 .order-link .glyphicon{
-  font-size: 9px;
+  font-size: 12px;
 }
 
 .form-input-date{
@@ -81,4 +80,13 @@ select{
 
 .p-avg{
   margin-left:28px;
+}
+
+.add-form{
+  margin-top:50px;
+}
+
+.form-info{
+  margin-top:7px;
+  margin-left:2px;
 }

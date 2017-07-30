@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <title>All subjects</title>
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -35,7 +35,7 @@
                 </thead>
                 <c:forEach var="subject" items="${subjects}">
                     <tr>
-                        <td><strong>${subject.title}</strong></td>
+                        <td>${subject.title}</td>
                         <td><a href="/grades?subject=${subject.id}">Grades</a></td>
                         <td><a href="/avg?subject=${subject.id}">AVG grade</a></td>
                     </tr>
@@ -46,8 +46,8 @@
     </div>
 </div>
 
-<script src="scripts/jquery-2.1.4.min.js"></script>
-<script src="scripts/bootstrap.min.js"></script>
+<script src="/scripts/jquery-2.1.4.min.js"></script>
+<script src="/scripts/bootstrap.min.js"></script>
 
 </body>
 </html>

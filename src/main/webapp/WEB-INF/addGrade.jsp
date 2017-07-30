@@ -1,0 +1,83 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Add grade</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link rel='stylesheet' type='text/css' href='/css/jquery-ui.css'/>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <jsp:include page="../nav.jsp"/>
+
+        <div class="col-md-9 main-book-wraper">
+
+            <h3 class="text-center">Add grade</h3>
+
+            <c:if test="${subject != null}">
+                
+                <c:if test="${examError != null}">
+                    <div class="alert alert-danger" role="alert"><strong>Oh snap!</strong> ${examError.message}</div>
+                </c:if>
+                
+                <form class="form-horizontal add-form" action="/add/grade" method="post">
+                    <input type="hidden" name="subject" value="${param.subject}">
+                    <div class="form-group <c:if test="${titleError != null}">has-error</c:if>">
+                        <label class="col-sm-2 col-sm-offset-2 control-label">Subject</label>
+                        <div class="col-sm-5">
+                            <p class="form-info">${subject.title}</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group <c:if test="${errorDate != null}">has-error</c:if>">
+                        <label for="createDate" class="col-sm-2 col-sm-offset-2 control-label">Date</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" name="createdate" value="${param.createdate}" id="createDate" placeholder="yyyy-mm-dd">
+                            <span class="help-block">${errorDate.message}</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group <c:if test="${errorMark != null}">has-error</c:if>">
+                        <label for="mark" class="col-sm-2 col-sm-offset-2 control-label">Mark</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" name="mark" value="${param.mark}" id="mark" placeholder="mark">
+                            <span class="help-block">${errorMark.message}</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-5">
+                            <button type="submit" class="btn btn-primary">Add grade</button>
+                        </div>
+                    </div>
+                </form>
+            </c:if>
+            <c:if test="${subject == null}">
+                <div class="alert alert-danger" role="alert"><strong>Oh snap!</strong> Such subject not exists</div>
+            </c:if>
+        </div>
+    </div>
+</div>
+
+<script src="/scripts/jquery-2.1.4.min.js"></script>
+<script src='/scripts/jquery-ui.js'></script>
+<script src='/scripts/ui.datepicker-ru.js'></script>
+<script src="/scripts/bootstrap.min.js"></script>
+<script src="/scripts/getByDate.js"></script>
+
+</body>
+</html>
+
