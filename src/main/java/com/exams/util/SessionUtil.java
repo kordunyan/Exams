@@ -14,11 +14,13 @@ import java.util.logging.Logger;
 public class SessionUtil {
 	private static final SessionUtil instance = new SessionUtil();
 	private final SessionFactory factory;
-	private static final String CONFIG_NAME = "/configuration.properties";
+	private static final String PROD_CONFIG_NAME = "hibernate.cfg.xml";
+	private static final String TEST_CONFIG_NAME = "test-hibernate.cfg.xml";
 	Logger logger = Logger.getLogger(this.getClass().toString());
 
 	private SessionUtil(){
-		StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
+		StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure(PROD_CONFIG_NAME).build();
+		//StandardServiceRegistry registry1 = new StandardServiceRegistryBuilder().configure()
 		factory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
 	}
 

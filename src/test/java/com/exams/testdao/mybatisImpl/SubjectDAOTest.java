@@ -1,16 +1,11 @@
 package com.exams.testdao.mybatisImpl;
 
 import com.exams.dao.SubjectDAO;
-import com.exams.dao.hibernateImpl.SubjectHDAOImpl;
 import com.exams.dao.mybatisImpl.SubjectMDAOImpl;
 import com.exams.entity.Subject;
 
 import org.testng.annotations.*;
 
-
-import java.util.List;
-
-import static com.sun.xml.internal.ws.dump.LoggingDumpTube.Position.Before;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertNotNull;
 

@@ -5,15 +5,8 @@
     <meta charset="utf-8">
     <title>All subjects</title>
 
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <link href="<c:url value="/css/bootstrap.min.css"/>" rel="stylesheet">
+    <link href="<c:url value="/css/style.css"/>" rel="stylesheet">
 
 </head>
 <body>
@@ -26,7 +19,6 @@
 
             <h3 class="text-center">All subjects</h3>
 
-
             <table class="table table-striped content-table">
                 <thead>
                 <tr>
@@ -36,8 +28,8 @@
                 <c:forEach var="subject" items="${subjects}">
                     <tr>
                         <td>${subject.title}</td>
-                        <td><a href="/grades?subject=${subject.id}">Grades</a></td>
-                        <td><a href="/avg?subject=${subject.id}">AVG grade</a></td>
+                        <td><a href="<c:url value="/grades?subject=${subject.id}"/>">Grades</a></td>
+                        <td><a href="<c:url value="/avg?subject=${subject.id}"/>">AVG grade</a></td>
                     </tr>
                 </c:forEach>
             </table>
@@ -46,8 +38,8 @@
     </div>
 </div>
 
-<script src="/scripts/jquery-2.1.4.min.js"></script>
-<script src="/scripts/bootstrap.min.js"></script>
+<script src="<c:url value="/scripts/jquery-2.1.4.min.js"/>"></script>
+<script src="<c:url value="/scripts/bootstrap.min.js"/>"></script>
 
 </body>
 </html>

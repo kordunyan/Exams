@@ -6,15 +6,8 @@
     <meta charset="utf-8">
     <title>All grades</title>
 
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <link href="<c:url value="/css/bootstrap.min.css"/>" rel="stylesheet">
+    <link href="<c:url value="/css/style.css"/>" rel="stylesheet">
 
 </head>
 <body>
@@ -26,13 +19,13 @@
 
             <h3 class="text-center">All grades of ${subject.title}</h3>
 
-            <a href="/add/grade?subject=${param.subject}" class="btn btn-primary btn-add-grade">+ Add grade</a>
+            <a href="<c:url value="/add/grade?subject=${param.subject}"/>" class="btn btn-primary btn-add-grade">+ Add grade</a>
 
             <table class="table table-striped content-table">
                 <thead>
                 <tr>
                     <th>
-                        <a class="order-link" href="/grades?subject=${subjectId}&order=${!order}">Date
+                        <a class="order-link" href="<c:url value="/grades?subject=${subjectId}&order=${!order}"/>">Date
                             <span class="glyphicon
                         <c:choose>
                             <c:when test="${!order}">glyphicon-triangle-bottom</c:when>
@@ -54,8 +47,8 @@
     </div>
 </div>
 
-<script src="/scripts/jquery-2.1.4.min.js"></script>
-<script src="/scripts/bootstrap.min.js"></script>
+<script src="<c:url value="/scripts/jquery-2.1.4.min.js"/>"></script>
+<script src="<c:url value="/scripts/bootstrap.min.js"/>"></script>
 
 </body>
 </html>

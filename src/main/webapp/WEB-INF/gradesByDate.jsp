@@ -5,16 +5,9 @@
     <meta charset="utf-8">
     <title>All subjects</title>
 
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
-    <link rel='stylesheet' type='text/css' href='/css/jquery-ui.css'/>
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <link href="<c:url value="/css/bootstrap.min.css"/>" rel="stylesheet">
+    <link href="<c:url value="/css/style.css"/>" rel="stylesheet">
+    <link rel='stylesheet' type='text/css' href="<c:url value="/css/jquery-ui.css"/>"/>
 
 </head>
 <body>
@@ -27,7 +20,7 @@
 
             <h3 class="text-center">Grades by date</h3>
 
-            <form class="form-inline form-input-date" action="/bydate">
+            <form class="form-inline form-input-date" action="<c:url value="/bydate"/>">
                 <div class="form-group">
                     <label for="createDate">Date</label>
                     <input type="text" class="form-control" name="date" <c:if test="${date != null}">value="${date}"</c:if> id="createDate">
@@ -56,11 +49,11 @@
     </div>
 </div>
 
-<script src="/scripts/jquery-2.1.4.min.js"></script>
-<script src='/scripts/jquery-ui.js'></script>
-<script src='/scripts/ui.datepicker-ru.js'></script>
-<script src="/scripts/bootstrap.min.js"></script>
-<script src="/scripts/getByDate.js"></script>
+<script src="<c:url value="/scripts/jquery-2.1.4.min.js"/>"></script>
+<script src='<c:url value="/scripts/jquery-ui.js"/>'></script>
+<script src='<c:url value="/scripts/ui.datepicker-ru.js"/>'></script>
+<script src="<c:url value="/scripts/bootstrap.min.js"/>"></script>
+<script src="<c:url value="/scripts/getByDate.js"/>"></script>
 
 
 

@@ -38,11 +38,11 @@ public class AddGrade extends HttpServlet {
 			Subject subject = subjectService.getById(subjectId);
 			if(subject == null) request.getRequestDispatcher("/WEB-INF/addGrade.jsp").forward(request, response);
 			request.setAttribute("subject", subject);
-			int mark = Integer.parseInt(request.getParameter("mark"));
+			int mark = Math.abs(Integer.parseInt(request.getParameter("mark")));
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			LocalDate date = LocalDate.parse(request.getParameter("createdate"), dtf);
 			examService.addExam(new Exam(mark, date, subject));
-			response.sendRedirect(String.format("/grades?subject=%d", subject.getId()));
+			response.sendRedirect(String.format("%s/grades?subject=%d", request.getContextPath(), subject.getId()));
 			return;
 		}
 		catch(ExamExistsException ex){

@@ -10,10 +10,12 @@ import java.io.InputStream;
 public class MyBatisUtil {
     private static SqlSessionFactory sqlSessionFactory;
 
+    private static final String PROD_CONFIG_NAME = "mybatis-config.xml";
+    private static final String TEST_CONFIG_NAME = "test-mybatis-config.xml";
+
     static{
-        String resource = "mybatis-config.xml";
         try{
-            InputStream inputStream = Resources.getResourceAsStream(resource);
+            InputStream inputStream = Resources.getResourceAsStream(PROD_CONFIG_NAME);
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         }
         catch (IOException ex){

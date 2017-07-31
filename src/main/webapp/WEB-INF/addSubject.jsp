@@ -5,16 +5,8 @@
     <meta charset="utf-8">
     <title>Add subject</title>
 
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
-    <link rel='stylesheet' type='text/css' href='css/jquery-ui.css'/>
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <link href="<c:url value="/css/bootstrap.min.css"/>" rel="stylesheet">
+    <link href="<c:url value="/css/style.css"/>" rel="stylesheet">
 
 </head>
 <body>
@@ -27,7 +19,7 @@
 
             <h3 class="text-center">Add subject</h3>
 
-            <form class="form-horizontal add-form" action="/add/subject" method="post">
+            <form class="form-horizontal add-form" action="<c:url value="/add/subject"/>" method="post">
                 <div class="form-group <c:if test="${titleError != null}">has-error</c:if>">
                     <label for="subjectTitle" class="col-sm-2 control-label">Title</label>
                     <div class="col-sm-10">
@@ -46,8 +38,8 @@
     </div>
 </div>
 
-<script src="/scripts/jquery-2.1.4.min.js"></script>
-<script src="/scripts/bootstrap.min.js"></script>
+<script src="<c:url value="/scripts/jquery-2.1.4.min.js"/>"></script>
+<script src="<c:url value="/scripts/bootstrap.min.js"/>"></script>
 
 </body>
 </html>

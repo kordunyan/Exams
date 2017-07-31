@@ -5,16 +5,9 @@
     <meta charset="utf-8">
     <title>Add grade</title>
 
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
-    <link rel='stylesheet' type='text/css' href='/css/jquery-ui.css'/>
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <link href="<c:url value="/css/bootstrap.min.css"/>" rel="stylesheet">
+    <link href="<c:url value="/css/style.css"/>" rel="stylesheet">
+    <link rel='stylesheet' type='text/css' href="<c:url value="/css/jquery-ui.css"/>"/>
 
 </head>
 <body>
@@ -33,7 +26,7 @@
                     <div class="alert alert-danger" role="alert"><strong>Oh snap!</strong> ${examError.message}</div>
                 </c:if>
                 
-                <form class="form-horizontal add-form" action="/add/grade" method="post">
+                <form class="form-horizontal add-form" action="<c:url value="/add/grade"/>" method="post">
                     <input type="hidden" name="subject" value="${param.subject}">
                     <div class="form-group <c:if test="${titleError != null}">has-error</c:if>">
                         <label class="col-sm-2 col-sm-offset-2 control-label">Subject</label>
@@ -72,11 +65,11 @@
     </div>
 </div>
 
-<script src="/scripts/jquery-2.1.4.min.js"></script>
-<script src='/scripts/jquery-ui.js'></script>
-<script src='/scripts/ui.datepicker-ru.js'></script>
-<script src="/scripts/bootstrap.min.js"></script>
-<script src="/scripts/getByDate.js"></script>
+<script src="<c:url value="/scripts/jquery-2.1.4.min.js"/>"></script>
+<script src='<c:url value="/scripts/jquery-ui.js"/>'></script>
+<script src='<c:url value="/scripts/ui.datepicker-ru.js"/>'></script>
+<script src="<c:url value="/scripts/bootstrap.min.js"/>"></script>
+<script src="<c:url value="/scripts/getByDate.js"/>"></script>
 
 </body>
 </html>
