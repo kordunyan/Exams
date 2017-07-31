@@ -1,5 +1,6 @@
 package com.exams.servlet;
 
+import com.exams.dao.factory.ServiceFactory;
 import com.exams.entity.Subject;
 import com.exams.service.SubjectService;
 import com.exams.service.impl.SubjectServiceImpl;
@@ -20,7 +21,7 @@ public class IndexServlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		this.subjectService = new SubjectServiceImpl();
+		this.subjectService = ServiceFactory.getSubjectService();
 	}
 
 	@Override

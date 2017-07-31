@@ -4,6 +4,8 @@ import com.exams.dao.SubjectDAO;
 import com.exams.dao.mybatisImpl.SubjectMDAOImpl;
 import com.exams.entity.Subject;
 
+import com.exams.util.MyBatisUtil;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.testng.annotations.*;
 
 import static org.testng.AssertJUnit.assertEquals;
@@ -17,7 +19,8 @@ public class SubjectDAOTest {
     @BeforeClass
     public void beforeClass(){
         //this.dao = new SubjectHDAOImpl();
-        this.dao = new SubjectMDAOImpl();
+        SqlSessionFactory sqlSessionFactory = new MyBatisUtil("test").getSqlSessnioFactory();
+        this.dao = new SubjectMDAOImpl(sqlSessionFactory);
         dao.deleteAll();
     }
 

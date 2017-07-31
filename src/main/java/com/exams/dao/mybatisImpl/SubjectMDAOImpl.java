@@ -7,13 +7,21 @@ import com.exams.exception.SubjectTitleExists;
 import com.exams.util.MyBatisUtil;
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 
 import java.util.List;
 
 public class SubjectMDAOImpl implements SubjectDAO {
+
+    private SqlSessionFactory sqlSessionFactory;
+
+    public SubjectMDAOImpl(SqlSessionFactory sqlSessionFactory){
+        this.sqlSessionFactory = sqlSessionFactory;
+    }
+
     @Override
     public void addSubject(Subject subject){
-        SqlSession session = MyBatisUtil.getSqlSessnioFactory().openSession();
+        SqlSession session = sqlSessionFactory.openSession();
         SubjectMapper mapper = session.getMapper(SubjectMapper.class);
         mapper.insert(subject);
         session.commit();
@@ -22,7 +30,7 @@ public class SubjectMDAOImpl implements SubjectDAO {
 
     @Override
     public Subject getByTitle(String title) {
-        SqlSession session = MyBatisUtil.getSqlSessnioFactory().openSession();
+        SqlSession session = sqlSessionFactory.openSession();
         SubjectMapper mapper = session.getMapper(SubjectMapper.class);
         Subject subject = mapper.getByTitle(title);
         session.close();
@@ -31,7 +39,7 @@ public class SubjectMDAOImpl implements SubjectDAO {
 
     @Override
     public Subject getById(int id) {
-        SqlSession session = MyBatisUtil.getSqlSessnioFactory().openSession();
+        SqlSession session = sqlSessionFactory.openSession();
         SubjectMapper mapper = session.getMapper(SubjectMapper.class);
         Subject subject = mapper.getById(id);
         session.close();
@@ -40,7 +48,7 @@ public class SubjectMDAOImpl implements SubjectDAO {
 
     @Override
     public void delete(Subject subject) {
-        SqlSession session = MyBatisUtil.getSqlSessnioFactory().openSession();
+        SqlSession session = sqlSessionFactory.openSession();
         SubjectMapper mapper = session.getMapper(SubjectMapper.class);
         mapper.delete(subject);
         session.commit();
@@ -49,7 +57,7 @@ public class SubjectMDAOImpl implements SubjectDAO {
 
     @Override
     public void update(Subject subject) {
-        SqlSession session = MyBatisUtil.getSqlSessnioFactory().openSession();
+        SqlSession session = sqlSessionFactory.openSession();
         SubjectMapper mapper = session.getMapper(SubjectMapper.class);
         mapper.update(subject);
         session.commit();
@@ -58,7 +66,7 @@ public class SubjectMDAOImpl implements SubjectDAO {
 
     @Override
     public void deleteAll() {
-        SqlSession session = MyBatisUtil.getSqlSessnioFactory().openSession();
+        SqlSession session = sqlSessionFactory.openSession();
         SubjectMapper mapper = session.getMapper(SubjectMapper.class);
         mapper.deleteAll();
         session.commit();
@@ -67,7 +75,7 @@ public class SubjectMDAOImpl implements SubjectDAO {
 
     @Override
     public Long getCount() {
-        SqlSession session = MyBatisUtil.getSqlSessnioFactory().openSession();
+        SqlSession session = sqlSessionFactory.openSession();
         SubjectMapper mapper = session.getMapper(SubjectMapper.class);
         Long count =  mapper.getCount();
         session.close();
@@ -76,7 +84,7 @@ public class SubjectMDAOImpl implements SubjectDAO {
 
     @Override
     public List<Subject> getAll() {
-        SqlSession session = MyBatisUtil.getSqlSessnioFactory().openSession();
+        SqlSession session = sqlSessionFactory.openSession();
         SubjectMapper mapper = session.getMapper(SubjectMapper.class);
         List<Subject> subjects =  mapper.findAllSubject();
         session.close();

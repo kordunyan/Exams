@@ -1,5 +1,6 @@
 package com.exams.servlet;
 
+import com.exams.dao.factory.ServiceFactory;
 import com.exams.entity.Exam;
 import com.exams.service.ExamService;
 import com.exams.service.impl.ExamServiceImpl;
@@ -22,7 +23,7 @@ public class GetByDate extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		this.examService = new ExamServiceImpl();
+		this.examService = ServiceFactory.getExamService();
 	}
 
 	@Override

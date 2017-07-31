@@ -8,22 +8,28 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class MyBatisUtil {
-    private static SqlSessionFactory sqlSessionFactory;
+    private SqlSessionFactory sqlSessionFactory;
 
     private static final String PROD_CONFIG_NAME = "mybatis-config.xml";
     private static final String TEST_CONFIG_NAME = "test-mybatis-config.xml";
 
-    static{
-        try{
-            InputStream inputStream = Resources.getResourceAsStream(PROD_CONFIG_NAME);
+    public MyBatisUtil(String type) {
+        try {
+            InputStream inputStream = null;
+            switch (type){
+                case "prod":
+                    inputStream = Resources.getResourceAsStream(PROD_CONFIG_NAME);
+                    break;
+                default:
+                    inputStream = Resources.getResourceAsStream(TEST_CONFIG_NAME);
+            }
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        }
-        catch (IOException ex){
+        } catch (IOException ex){
             ex.printStackTrace();
         }
     }
 
-    public static SqlSessionFactory getSqlSessnioFactory(){
+    public  SqlSessionFactory getSqlSessnioFactory() {
         return sqlSessionFactory;
     }
 }

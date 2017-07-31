@@ -22,9 +22,10 @@ public class ExamServiceImpl implements ExamService {
 	private ExamDAO dao;
 	private Validator validator;
 
-	public ExamServiceImpl(){
+	public ExamServiceImpl(ExamDAO dao){
 		//this.dao = new ExamHDAOImpl();
-		this.dao = new ExamMDAOImpl();
+		//this.dao = new ExamMDAOImpl();
+		this.dao = dao;
 		this.validator = new LocalDateValidator();
 	}
 

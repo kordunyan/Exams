@@ -1,14 +1,29 @@
 package com.exams.main;
 
+import com.exams.dao.factory.ServiceFactory;
+import com.exams.entity.Subject;
+import com.exams.service.ExamService;
+import com.exams.service.SubjectService;
 import com.exams.service.impl.ExamServiceImpl;
 import com.exams.service.impl.SubjectServiceImpl;
 
+import java.util.List;
 
 
 public class Main {
 	public static void main(String[] args) {
-		SubjectServiceImpl subjectService = new SubjectServiceImpl();
-		ExamServiceImpl examService = new ExamServiceImpl();
+
+		/*SubjectService subjectService = ServiceFactory.getSubjectService();
+
+		List<Subject> subjects = subjectService.getAll();
+
+		for (Subject subject : subjects){
+			System.out.println(subject);
+		}*/
+
+		ExamService examService = ServiceFactory.getExamService();
+
+		System.out.println(examService.getCount());
 
 
 		/*Subject subject = new Subject("Philosofi");

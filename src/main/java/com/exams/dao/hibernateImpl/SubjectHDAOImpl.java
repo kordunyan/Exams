@@ -14,6 +14,7 @@ import java.util.List;
  */
 public class SubjectHDAOImpl implements SubjectDAO {
 
+
     @Override
     public void addSubject(Subject subject) {
         try (Session session = SessionUtil.getSession()) {

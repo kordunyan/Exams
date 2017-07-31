@@ -1,5 +1,6 @@
 package com.exams.servlet;
 
+import com.exams.dao.factory.ServiceFactory;
 import com.exams.entity.Subject;
 import com.exams.service.ExamService;
 import com.exams.service.SubjectService;
@@ -23,8 +24,8 @@ public class AVGBySubject extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		this.examService = new ExamServiceImpl();
-		this.subjectService = new SubjectServiceImpl();
+		this.examService = ServiceFactory.getExamService();
+		this.subjectService = ServiceFactory.getSubjectService();
 	}
 
 	@Override

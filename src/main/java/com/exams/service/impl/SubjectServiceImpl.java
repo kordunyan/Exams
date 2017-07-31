@@ -19,9 +19,10 @@ public class SubjectServiceImpl implements SubjectService {
 	private SubjectDAO dao;
 	private Validator validator;
 
-	public SubjectServiceImpl(){
+	public SubjectServiceImpl(SubjectDAO dao){
 		//this.dao = new SubjectHDAOImpl();
-		this.dao = new SubjectMDAOImpl();
+		//this.dao = new SubjectMDAOImpl();
+		this.dao = dao;
 		this.validator = new SubjectValidator();
 	}
 

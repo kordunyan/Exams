@@ -1,5 +1,6 @@
 package com.exams.servlet;
 
+import com.exams.dao.factory.ServiceFactory;
 import com.exams.entity.Subject;
 import com.exams.exception.IncorectSubjectTitleException;
 import com.exams.service.SubjectService;
@@ -21,7 +22,7 @@ public class AddSubject extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		this.subjectService = new SubjectServiceImpl();
+		this.subjectService = ServiceFactory.getSubjectService();
 	}
 
 	@Override
