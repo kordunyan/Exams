@@ -29,5 +29,7 @@ public interface ExamDAO {
 
 	Long getCount();
 
+	Long getCountBySubject(int subjectId);
+
 	void deleteAll();
 }

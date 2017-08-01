@@ -24,4 +24,6 @@ public interface SubjectDAO {
     List<Subject> getAll();
 
     Subject getById(int id);
+
+    void setEnabled(int subjectId, boolean isEnable);
 }

@@ -45,6 +45,15 @@ public class SubjectMDAOImpl implements SubjectDAO {
     }
 
     @Override
+    public void setEnabled(int subjectId, boolean isEnable) {
+        SqlSession session = sqlSessionFactory.openSession();
+        SubjectMapper mapper = session.getMapper(SubjectMapper.class);
+        mapper.setEnabled(subjectId, isEnable);
+        session.commit();
+        session.close();
+    }
+
+    @Override
     public void delete(Subject subject) {
         SqlSession session = sqlSessionFactory.openSession();
         SubjectMapper mapper = session.getMapper(SubjectMapper.class);

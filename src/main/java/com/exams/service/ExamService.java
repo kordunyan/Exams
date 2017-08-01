@@ -28,5 +28,7 @@ public interface ExamService {
 
 	Long getCount();
 
+	Long getCountBySubject(int subjectId);
+
 	void deleteAll();
 }

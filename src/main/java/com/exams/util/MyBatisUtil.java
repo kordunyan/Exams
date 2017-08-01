@@ -1,5 +1,6 @@
 package com.exams.util;
 
+import com.exams.dao.factory.DatabaseType;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
@@ -13,12 +14,15 @@ public class MyBatisUtil {
     private static final String PROD_CONFIG_NAME = "mybatis-config.xml";
     private static final String TEST_CONFIG_NAME = "test-mybatis-config.xml";
 
-    public MyBatisUtil(String type) {
+    public MyBatisUtil(DatabaseType dataBaseType) {
         try {
             InputStream inputStream = null;
-            switch (type){
-                case "prod":
+            switch (dataBaseType){
+                case PRODUCTION:
                     inputStream = Resources.getResourceAsStream(PROD_CONFIG_NAME);
+                    break;
+                case TEST:
+                    inputStream = Resources.getResourceAsStream(TEST_CONFIG_NAME);
                     break;
                 default:
                     inputStream = Resources.getResourceAsStream(TEST_CONFIG_NAME);

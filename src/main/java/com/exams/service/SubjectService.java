@@ -24,4 +24,6 @@ public interface SubjectService {
     List<Subject> getAll();
 
     Subject getById(int id);
+
+    void setEnabled(int subjectId, boolean isEnabled);
 }

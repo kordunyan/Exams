@@ -19,17 +19,25 @@
 
             <h3 class="text-center">All subjects</h3>
 
-            <table class="table table-striped content-table">
+            <table class="table content-table">
                 <thead>
                 <tr>
                     <th colspan="4"></th>
                 </tr>
                 </thead>
                 <c:forEach var="subject" items="${subjects}">
-                    <tr>
+                    <tr <c:if test="${!subject.isEnabled}">class="danger"</c:if>>
                         <td>${subject.title}</td>
                         <td><a href="<c:url value="/grades?subject=${subject.id}"/>">Grades</a></td>
                         <td><a href="<c:url value="/avg?subject=${subject.id}"/>">AVG grade</a></td>
+                        <td class="text-right">
+                             <c:if test="${subject.isEnabled}">
+                                <form class="without-margin form-delete-subject" action="<c:url value="/delete/subject/"/>" method="post">
+                                    <input type="hidden" name="subject" value="${subject.id}" />
+                                    <input type="submit" value="Delete" class="btn btn-default" />
+                                </form>
+                            </c:if>
+                        </td>
                     </tr>
                 </c:forEach>
             </table>
@@ -38,8 +46,52 @@
     </div>
 </div>
 
+
+<div class="modal fade" id="countedSubject" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Delete subject ?</h4>
+      </div>
+      <div class="modal-body">
+        <p id="delete-subject-modal-content"></p>
+      </div>
+      <div class="modal-footer">
+        <form class="form-inline" action="<c:url value="/subject/delete"/>" method="post">
+            <input type="hidden" name="subject" id="input-delete-subject"/>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Delete</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="error-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Error !</h4>
+      </div>
+      <div class="modal-body">
+        <p>Server error. Please try later</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <script src="<c:url value="/scripts/jquery-2.1.4.min.js"/>"></script>
 <script src="<c:url value="/scripts/bootstrap.min.js"/>"></script>
+<script src="<c:url value="/scripts/indexPage.js"/>"></script>
 
 </body>
 </html>

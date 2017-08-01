@@ -57,4 +57,7 @@ public interface ExamMapper {
 
     @Delete("DELETE FROM exam")
     void deleteAll();
+
+    @Select("SELECT COUNT(*) FROM exam WHERE subject_id = #{subjectId}")
+    Long getCountBySubjectId(int subjectId);
 }

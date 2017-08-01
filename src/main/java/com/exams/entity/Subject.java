@@ -27,6 +27,9 @@ public class Subject {
 	@OneToMany(orphanRemoval = true, mappedBy = "subject", cascade = CascadeType.ALL)
 	private Set<Exam> exams = new HashSet<>();
 
+	@Column
+	private Boolean isEnabled;
+
 	public Subject(String title) {
 		this.title = title;
 	}
@@ -54,6 +57,7 @@ public class Subject {
 		return "Subject{" +
 				"id=" + id +
 				", title='" + title + '\'' +
+				", isEnabled=" + isEnabled +
 				'}';
 	}
 }

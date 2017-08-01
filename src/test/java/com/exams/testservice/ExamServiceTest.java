@@ -1,5 +1,6 @@
 package com.exams.testservice;
 
+import com.exams.dao.factory.DatabaseType;
 import com.exams.dao.factory.ServiceFactory;
 import com.exams.entity.Exam;
 import com.exams.entity.Subject;
@@ -51,7 +52,7 @@ public class ExamServiceTest {
 
     @BeforeClass
     public void init() {
-        ServiceFactory.setDataBaseConfig("test");
+        ServiceFactory.setDataBaseConfig(DatabaseType.TEST);
         this.examService = ServiceFactory.getExamService();
         this.subjectService = ServiceFactory.getSubjectService();
         examService.deleteAll();
@@ -148,6 +149,5 @@ public class ExamServiceTest {
     public void clean() {
         examService.deleteAll();
         subjectService.deleteAll();
-        ServiceFactory.setDataBaseConfig("prod");
     }
 }

@@ -58,6 +58,10 @@ body {
   margin:0 20px;
 }
 
+.content-table>tbody>tr>td{
+  vertical-align:middle;
+}
+
 .order-link, .order-link:hover{
   color: #1e2022;
 }
@@ -89,4 +93,8 @@ select{
 .form-info{
   margin-top:7px;
   margin-left:2px;
+}
+
+.without-margin{
+    margin-bottom:0px;
 }

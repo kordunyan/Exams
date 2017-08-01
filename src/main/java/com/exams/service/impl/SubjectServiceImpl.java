@@ -15,111 +15,117 @@ import java.util.List;
 @Log4j
 public class SubjectServiceImpl implements SubjectService {
 
-	private SubjectDAO dao;
-	private Validator validator;
+    private SubjectDAO dao;
+    private Validator validator;
 
-	public SubjectServiceImpl(SubjectDAO dao){
-		//this.dao = new SubjectHDAOImpl();
-		//this.dao = new SubjectMDAOImpl();
-		this.dao = dao;
-		this.validator = new SubjectValidator();
-	}
+    public SubjectServiceImpl(SubjectDAO dao) {
+        this.dao = dao;
+        this.validator = new SubjectValidator();
+    }
 
-	@Override
-	public void addSubject(Subject subject) throws IncorectSubjectTitleException{
-		if(!validator.vlidate(subject)){
-			throw new IncorectSubjectTitleException("Incorect subject title");
-		}
-		if(dao.getByTitle(subject.getTitle()) != null){
-			throw new IncorectSubjectTitleException("Subject with same title already exists");
-		}
-		try{
-			log.info("Add subject: " + subject);
-			dao.addSubject(subject);
-		}
-		catch(Exception ex){
-			log.error("Error to add subject " + subject, ex);
-		}
-	}
+    @Override
+    public void addSubject(Subject subject) throws IncorectSubjectTitleException {
+        log.info("Add subject: " + subject);
+        if (!validator.vlidate(subject)) {
+            throw new IncorectSubjectTitleException("Incorect subject title");
+        }
+        if (dao.getByTitle(subject.getTitle()) != null) {
+            throw new IncorectSubjectTitleException("Subject with same title already exists");
+        }
+        try {
+            subject.setIsEnabled(true);
+            dao.addSubject(subject);
+        } catch (Exception ex) {
+            log.error("Error to add subject " + subject, ex);
+            throw ex;
+        }
+    }
 
-	@Override
-	public Subject getByTitle(String title) {
-		try{
-			log.info("Get subject by title: " + title);
-			return dao.getByTitle(title);
-		}
-		catch(Exception ex){
-			log.error("Error get subject  by title: " + title, ex);
-		}
-		return null;
-	}
+    @Override
+    public Subject getByTitle(String title) {
+        log.info("Get subject by title: " + title);
+        try {
+            return dao.getByTitle(title);
+        } catch (Exception ex) {
+            log.error("Error get subject  by title: " + title, ex);
+            throw ex;
+        }
+    }
 
-	@Override
-	public void delete(Subject subject) {
-		try{
-			log.info("Delete subject: " + subject);
-			dao.delete(subject);
-		}
-		catch(Exception ex){
-			log.error("Error Delete subject: " + subject, ex);
-		}
-	}
+    @Override
+    public void delete(Subject subject) {
+        log.info("Delete subject: " + subject);
+        try {
+            dao.delete(subject);
+        } catch (Exception ex) {
+            log.error("Error Delete subject: " + subject, ex);
+            throw ex;
+        }
+    }
 
-	@Override
-	public void update(Subject subject) throws IncorectSubjectTitleException{
-		if(!validator.vlidate(subject)){
-			throw new IncorectSubjectTitleException("Incorect subject");
-		}
-		if(dao.getByTitle(subject.getTitle()) != null){
-			throw new IncorectSubjectTitleException("Subject with same title already exists");
-		}
-		try{
-			log.info("Update subject: " + subject);
-			dao.update(subject);
-		}
-		catch(Exception ex){
-			log.error("Error to Update subject " + subject, ex);
-		}
-	}
+    @Override
+    public void update(Subject subject) throws IncorectSubjectTitleException {
+        log.info("Update subject: " + subject);
+        if (!validator.vlidate(subject)) {
+            throw new IncorectSubjectTitleException("Incorect subject");
+        }
+        if (dao.getByTitle(subject.getTitle()) != null) {
+            throw new IncorectSubjectTitleException("Subject with same title already exists");
+        }
+        try {
+            dao.update(subject);
+        } catch (Exception ex) {
+            log.error("Error to Update subject " + subject, ex);
+            throw ex;
+        }
+    }
 
-	@Override
-	public Long getcount() {
-		try{
-			log.info("Get count");
-			return dao.getCount();
-		}
-		catch(Exception ex){
-			log.error("Error get count", ex);
-		}
-		return null;
-	}
+    @Override
+    public Long getcount() {
+        log.info("Get count");
+        try {
+            return dao.getCount();
+        } catch (Exception ex) {
+            log.error("Error get count", ex);
+            throw ex;
+        }
+    }
 
-	@Override
-	public void deleteAll() {
-		dao.deleteAll();
-	}
+    @Override
+    public void deleteAll() {
+        dao.deleteAll();
+    }
 
-	@Override
-	public List<Subject> getAll() {
-		try{
-			log.info("Get all subjects");
-			return dao.getAll();
-		}
-		catch (Exception ex){
-			log.error("Error to get all subject", ex);
-		}
-		return null;
-	}
+    @Override
+    public List<Subject> getAll() {
+        log.info("Get all subjects");
+        try {
+            return dao.getAll();
+        } catch (Exception ex) {
+            log.error("Error to get all subject", ex);
+            throw ex;
+        }
+    }
 
-	@Override
-	public Subject getById(int id) {
-		try{
-			log.info("Get subject by id: " + id);
-			return dao.getById(id);
-		}
-		catch(Exception ex){
-			log.error("Error get subject  by id: " + id, ex);
-		}
-		return null;
-	}
+    @Override
+    public Subject getById(int id) {
+        log.info("Get subject by id: " + id);
+        try {
+            return dao.getById(id);
+        } catch (Exception ex) {
+            log.error("Error get subject  by id: " + id, ex);
+            throw ex;
+        }
+    }
+
+    @Override
+    public void setEnabled(int subjectId, boolean isEnabled) {
+        log.info("Set enabled subject id: " + subjectId + ", isEnabled: " + isEnabled);
+        try {
+            dao.setEnabled(subjectId, isEnabled);
+        } catch (Exception ex) {
+            log.error("Error to set enabled subject id: " + subjectId + ", isEnabled: " + isEnabled, ex);
+            throw ex;
+        }
+    }
 }

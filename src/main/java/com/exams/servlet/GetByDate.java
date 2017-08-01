@@ -1,5 +1,6 @@
 package com.exams.servlet;
 
+import com.exams.dao.factory.DatabaseType;
 import com.exams.dao.factory.ServiceFactory;
 import com.exams.entity.Exam;
 import com.exams.service.ExamService;
@@ -23,6 +24,7 @@ public class GetByDate extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		super.init();
+		ServiceFactory.setDataBaseConfig(DatabaseType.PRODUCTION);
 		this.examService = ServiceFactory.getExamService();
 	}
 

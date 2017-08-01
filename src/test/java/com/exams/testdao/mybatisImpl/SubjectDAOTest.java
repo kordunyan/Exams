@@ -1,6 +1,7 @@
 package com.exams.testdao.mybatisImpl;
 
 import com.exams.dao.SubjectDAO;
+import com.exams.dao.factory.DatabaseType;
 import com.exams.dao.mybatisImpl.SubjectMDAOImpl;
 import com.exams.entity.Subject;
 
@@ -19,7 +20,7 @@ public class SubjectDAOTest {
     @BeforeClass
     public void beforeClass(){
         //this.dao = new SubjectHDAOImpl();
-        SqlSessionFactory sqlSessionFactory = new MyBatisUtil("test").getSqlSessnioFactory();
+        SqlSessionFactory sqlSessionFactory = new MyBatisUtil(DatabaseType.TEST).getSqlSessnioFactory();
         this.dao = new SubjectMDAOImpl(sqlSessionFactory);
         dao.deleteAll();
     }

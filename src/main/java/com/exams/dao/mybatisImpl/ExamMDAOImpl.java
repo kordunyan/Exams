@@ -102,6 +102,15 @@ public class ExamMDAOImpl implements ExamDAO{
     }
 
     @Override
+    public Long getCountBySubject(int subjectId) {
+        SqlSession session = sqlSessionFactory.openSession();
+        ExamMapper mapper = session.getMapper(ExamMapper.class);
+        Long count = mapper.getCountBySubjectId(subjectId);
+        session.close();
+        return count;
+    }
+
+    @Override
     public void deleteAll() {
         SqlSession session = sqlSessionFactory.openSession();
         ExamMapper mapper = session.getMapper(ExamMapper.class);

@@ -22,14 +22,13 @@ public class ExamServiceImpl implements ExamService {
 	private Validator validator;
 
 	public ExamServiceImpl(ExamDAO dao){
-		//this.dao = new ExamHDAOImpl();
-		//this.dao = new ExamMDAOImpl();
 		this.dao = dao;
 		this.validator = new LocalDateValidator();
 	}
 
 	@Override
 	public void addExam(Exam exam) throws IncorectDateException, ExamExistsException{
+		log.info("Add exam : " + exam);
 		if(!validator.vlidate(exam.getCreateDate())){
 			throw new IncorectDateException("Incorect date");
 		}
@@ -37,11 +36,11 @@ public class ExamServiceImpl implements ExamService {
 			throw new ExamExistsException("Such exam exists on this date");
 		}
 		try{
-			log.info("Add exam : " + exam);
 			dao.addExam(exam);
 		}
 		catch (Exception ex){
 			log.error(" Error to add exam : " + exam, ex);
+			throw ex;
 		}
 	}
 
@@ -53,8 +52,8 @@ public class ExamServiceImpl implements ExamService {
 		}
 		catch(Exception ex){
 			log.error("Error to get exam by id: " + id, ex);
+			throw ex;
 		}
-		return null;
 	}
 
 	@Override
@@ -65,8 +64,8 @@ public class ExamServiceImpl implements ExamService {
 		}
 		catch(Exception ex){
 			log.error("Error to get exam by subject id: " + subjectId + ", order: " + orderType, ex);
+			throw ex;
 		}
-		return null;
 	}
 
 	@Override
@@ -77,8 +76,8 @@ public class ExamServiceImpl implements ExamService {
 		}
 		catch(Exception ex){
 			log.error("Error to get exam by create date: " + createDate, ex);
+			throw ex;
 		}
-		return null;
 	}
 
 	@Override
@@ -89,8 +88,8 @@ public class ExamServiceImpl implements ExamService {
 		}
 		catch(Exception ex){
 			log.error("Error to get avg by subkect id: " + subjectId, ex);
+			throw ex;
 		}
-		return null;
 	}
 
 	@Override
@@ -101,6 +100,7 @@ public class ExamServiceImpl implements ExamService {
 		}
 		catch(Exception ex){
 			log.error("Error to delete exam: " + exam, ex);
+			throw ex;
 		}
 	}
 
@@ -112,20 +112,32 @@ public class ExamServiceImpl implements ExamService {
 		}
 		catch(Exception ex){
 			log.error("Error to get by subject: " + subject + ", date: " + date, ex);
+			throw ex;
 		}
-		return null;
 	}
 
 	@Override
 	public Long getCount() {
+		log.info("Get count");
 		try{
-			log.info("Get count");
 			return dao.getCount();
 		}
 		catch(Exception ex){
 			log.error("Error to get count", ex);
+			throw ex;
 		}
-		return null;
+	}
+
+	@Override
+	public Long getCountBySubject(int subjectId) {
+		log.info("Get count by subject id: " + subjectId);
+		try{
+			return dao.getCountBySubject(subjectId);
+		}
+		catch (Exception ex){
+			log.error("Error to get count by subject id: " + subjectId);
+			throw ex;
+		}
 	}
 
 	@Override
@@ -136,6 +148,7 @@ public class ExamServiceImpl implements ExamService {
 		}
 		catch(Exception ex){
 			log.error("Error to delete all", ex);
+			throw ex;
 		}
 	}
 
@@ -153,6 +166,7 @@ public class ExamServiceImpl implements ExamService {
 		}
 		catch (Exception ex){
 			log.error("Error to update exam : " + exam, ex);
+			throw ex;
 		}
 	}
 

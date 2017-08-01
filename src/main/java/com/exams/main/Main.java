@@ -1,5 +1,6 @@
 package com.exams.main;
 
+import com.exams.dao.factory.DatabaseType;
 import com.exams.dao.factory.ServiceFactory;
 import com.exams.entity.Subject;
 import com.exams.service.ExamService;
@@ -13,17 +14,14 @@ import java.util.List;
 public class Main {
 	public static void main(String[] args) {
 
-		/*SubjectService subjectService = ServiceFactory.getSubjectService();
-
-		List<Subject> subjects = subjectService.getAll();
-
-		for (Subject subject : subjects){
-			System.out.println(subject);
-		}*/
-
+		ServiceFactory.setDataBaseConfig(DatabaseType.PRODUCTION);
+		SubjectService subjectService = ServiceFactory.getSubjectService();
 		ExamService examService = ServiceFactory.getExamService();
 
-		System.out.println(examService.getCount());
+		Subject subject = subjectService.getByTitle("Java");
+		System.out.println(subject);
+
+		subjectService.setEnabled(subject.getId(), false);
 
 
 		/*Subject subject = new Subject("Philosofi");
