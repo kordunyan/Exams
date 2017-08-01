@@ -3,9 +3,7 @@ package com.exams.dao.mybatisImpl;
 import com.exams.dao.SubjectDAO;
 import com.exams.entity.Subject;
 import com.exams.entity.mapper.SubjectMapper;
-import com.exams.exception.SubjectTitleExists;
 import com.exams.util.MyBatisUtil;
-import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 

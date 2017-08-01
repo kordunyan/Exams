@@ -10,13 +10,12 @@ import com.exams.exception.IncorectDateException;
 import com.exams.service.ExamService;
 import com.exams.validator.Validator;
 import com.exams.validator.impl.LocalDateValidator;
+import lombok.extern.log4j.Log4j;
 
 import java.time.LocalDate;
 import java.util.List;
 
-/**
- * Created by sanya on 25.07.2017.
- */
+@Log4j
 public class ExamServiceImpl implements ExamService {
 
 	private ExamDAO dao;
@@ -37,47 +36,107 @@ public class ExamServiceImpl implements ExamService {
 		if(dao.getBySubjectAndDate(exam.getSubject(), exam.getCreateDate()) != null){
 			throw new ExamExistsException("Such exam exists on this date");
 		}
-		dao.addExam(exam);
+		try{
+			log.info("Add exam : " + exam);
+			dao.addExam(exam);
+		}
+		catch (Exception ex){
+			log.error(" Error to add exam : " + exam, ex);
+		}
 	}
 
 	@Override
 	public Exam getById(Integer id) {
-		return dao.getExamById(id);
+		try{
+			log.info("Get exam by id: " + id);
+			return dao.getExamById(id);
+		}
+		catch(Exception ex){
+			log.error("Error to get exam by id: " + id, ex);
+		}
+		return null;
 	}
 
 	@Override
 	public List<Exam> getBySubjectId(Integer subjectId, boolean orderType) {
-		return dao.getBySubjectId(subjectId, orderType);
+		try{
+			log.info("Get exam by subject id: " + subjectId + ", order: " + orderType);
+			return dao.getBySubjectId(subjectId, orderType);
+		}
+		catch(Exception ex){
+			log.error("Error to get exam by subject id: " + subjectId + ", order: " + orderType, ex);
+		}
+		return null;
 	}
 
 	@Override
 	public List<Exam> getByCreateDate(LocalDate createDate) {
-		return dao.getByCreateDate(createDate);
+		try{
+			log.info("Get exam by create date: " + createDate);
+			return dao.getByCreateDate(createDate);
+		}
+		catch(Exception ex){
+			log.error("Error to get exam by create date: " + createDate, ex);
+		}
+		return null;
 	}
 
 	@Override
 	public Double getAvgBySubjectId(Integer subjectId) {
-		return dao.getAvgBySubjectId(subjectId);
+		try{
+			log.info("Get avg by subkect id: " + subjectId);
+			return dao.getAvgBySubjectId(subjectId);
+		}
+		catch(Exception ex){
+			log.error("Error to get avg by subkect id: " + subjectId, ex);
+		}
+		return null;
 	}
 
 	@Override
 	public void delete(Exam exam) {
-		dao.delete(exam);
+		try{
+			log.info("Delete exam: " + exam);
+			dao.delete(exam);
+		}
+		catch(Exception ex){
+			log.error("Error to delete exam: " + exam, ex);
+		}
 	}
 
 	@Override
 	public Exam getBySubjectAndDate(Subject subject, LocalDate date) {
-		return dao.getBySubjectAndDate(subject, date);
+		try{
+			log.info("Get by subject: " + subject + ", date: " + date);
+			return dao.getBySubjectAndDate(subject, date);
+		}
+		catch(Exception ex){
+			log.error("Error to get by subject: " + subject + ", date: " + date, ex);
+		}
+		return null;
 	}
 
 	@Override
 	public Long getCount() {
-		return dao.getCount();
+		try{
+			log.info("Get count");
+			return dao.getCount();
+		}
+		catch(Exception ex){
+			log.error("Error to get count", ex);
+		}
+		return null;
 	}
 
 	@Override
 	public void deleteAll() {
-		dao.deleteAll();
+		try{
+			log.info("Delete all");
+			dao.deleteAll();
+		}
+		catch(Exception ex){
+			log.error("Error to delete all", ex);
+		}
 	}
 
 	@Override
@@ -88,7 +147,13 @@ public class ExamServiceImpl implements ExamService {
 		if(dao.getBySubjectAndDate(exam.getSubject(), exam.getCreateDate()) != null){
 			throw new ExamExistsException("Such exam exists on this date");
 		}
-		dao.update(exam);
+		try{
+			log.info("Update exam : " + exam);
+			dao.update(exam);
+		}
+		catch (Exception ex){
+			log.error("Error to update exam : " + exam, ex);
+		}
 	}
 
 
