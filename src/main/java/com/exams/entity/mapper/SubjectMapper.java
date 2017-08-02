@@ -25,6 +25,9 @@ public interface SubjectMapper {
 	@Select("SELECT id, title, isenabled FROM subject ORDER BY title")
 	List<Subject> findAllSubject();
 
+	@Select("SELECT id, title, isenabled FROM subject ORDER BY title limit #{param2} offset #{param1}")
+	List<Subject> getPerPage(int offset, int limit);
+
 	@Delete("DELETE FROM subject WHERE id=#{id}")
 	void delete(Subject subjectMy);
 

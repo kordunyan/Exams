@@ -98,3 +98,7 @@ select{
 .without-margin{
     margin-bottom:0px;
 }
+
+.pagination{
+    margin-top:50px;
+}

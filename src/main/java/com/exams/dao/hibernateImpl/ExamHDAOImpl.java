@@ -47,6 +47,17 @@ public class ExamHDAOImpl implements ExamDAO {
 	}
 
 	@Override
+	public List<Exam> getBySubjectIdForPage(Integer page, Integer perPage, Integer subjectId, boolean orderType) {
+		try (Session session = sessionFactory.openSession()) {
+			Query<Exam> query = session.createQuery("FROM Exam e WHERE e.subject.id = :p_subject_id ORDER BY e.createDate "+ ((orderType)? "ASC":"DESC"));
+			query.setParameter("p_subject_id", subjectId);
+			query.setFirstResult((page-1)*perPage);
+			query.setMaxResults(perPage);
+			return query.list();
+		}
+	}
+
+	@Override
 	public List<Exam> getByCreateDate(LocalDate createDate) {
 		try (Session session = sessionFactory.openSession()) {
 			Query<Exam> query = session.createQuery("FROM Exam e WHERE e.createDate = :p_create_date ORDER BY e.subject.title ASC");

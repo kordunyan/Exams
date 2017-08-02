@@ -5,8 +5,10 @@ import com.exams.dao.factory.ServiceFactory;
 import com.exams.entity.Exam;
 import com.exams.entity.Subject;
 import com.exams.service.ExamService;
+import com.exams.service.PaginationService;
 import com.exams.service.SubjectService;
 import com.exams.service.impl.ExamServiceImpl;
+import com.exams.service.impl.PaginationServiceImpl;
 import com.exams.service.impl.SubjectServiceImpl;
 
 import javax.servlet.ServletException;
@@ -36,11 +38,29 @@ public class GradesBySubject extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int page;
+		try{
+			page = Integer.parseInt(request.getParameter("page"));
+		}
+		catch (Exception ex){
+			page = 1;
+		}
+
+
 		try{
 			int subjectId = Integer.parseInt(request.getParameter("subject"));
 			boolean order = Boolean.parseBoolean(request.getParameter("order"));
-			List<Exam> exams = examService.getBySubjectId(subjectId, order);
+			List<Exam> exams = examService.getExamsForPage(page, ExamServiceImpl.PER_PAGE, subjectId, order);
 			Subject subject = subjectService.getById(subjectId);
+
+			long countItems = examService.getCountBySubject(subjectId);
+			int pages = examService.calculateCountPages(countItems, ExamServiceImpl.PER_PAGE);
+			PaginationService pagination = new PaginationServiceImpl(5, pages, page);
+			request.setAttribute("currentPage", page);
+			request.setAttribute("startPage", pagination.getStart());
+			request.setAttribute("endPage", pagination.getEnd());
+			request.setAttribute("pages", pages);
+
 			request.setAttribute("order", order);
 			request.setAttribute("subject", subject);
 			request.setAttribute("subjectId", subjectId);

@@ -41,7 +41,11 @@
                     </tr>
                 </c:forEach>
             </table>
-
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-3 col-md-9">
+            <jsp:include page="../pagination.jsp"/>
         </div>
     </div>
 </div>

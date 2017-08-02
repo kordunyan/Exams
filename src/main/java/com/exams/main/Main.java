@@ -2,10 +2,13 @@ package com.exams.main;
 
 import com.exams.dao.factory.DatabaseType;
 import com.exams.dao.factory.ServiceFactory;
+import com.exams.entity.Exam;
 import com.exams.entity.Subject;
 import com.exams.service.ExamService;
+import com.exams.service.PaginationService;
 import com.exams.service.SubjectService;
 import com.exams.service.impl.ExamServiceImpl;
+import com.exams.service.impl.PaginationServiceImpl;
 import com.exams.service.impl.SubjectServiceImpl;
 
 import java.util.List;
@@ -14,14 +17,39 @@ import java.util.List;
 public class Main {
 	public static void main(String[] args) {
 
+
 		ServiceFactory.setDataBaseConfig(DatabaseType.PRODUCTION);
 		SubjectService subjectService = ServiceFactory.getSubjectService();
 		ExamService examService = ServiceFactory.getExamService();
 
 		Subject subject = subjectService.getByTitle("Java");
-		System.out.println(subject);
 
-		subjectService.setEnabled(subject.getId(), false);
+		System.out.println("Count exams: " + examService.getCountBySubject(subject.getId()));
+
+		List<Exam> exams = examService.getExamsForPage(3, ExamServiceImpl.PER_PAGE, subject.getId(), true);
+		for(Exam exam : exams){
+			System.out.println(exam);
+		}
+
+
+		//List<Exam> exams = examService.
+
+		/*
+
+
+
+		long count = subjectService.getcount();
+		int pages = subjectService.calculateCountPages(count, SubjectServiceImpl.PER_PAGE);
+
+		System.out.println("Count: " + count);
+		System.out.println("Pages: " + pages);
+
+		List<Subject> subjects = subjectService.getFormPage(1, SubjectServiceImpl.PER_PAGE);
+
+		for(Subject subject : subjects){
+			System.out.println(subject);
+		}
+*/
 
 
 		/*Subject subject = new Subject("Philosofi");

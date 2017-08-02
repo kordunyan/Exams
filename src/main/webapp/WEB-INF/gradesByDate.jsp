@@ -46,7 +46,10 @@
                 </table>
             </c:if>
             <c:if test="${exams != null && exams.size() == 0 }">
-                <div class="alert alert-warning" role="alert">Nothing found on this date</div>
+                <div class="alert alert-warning" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    Nothing found on this date
+                </div>
             </c:if>
         </div>
     </div>

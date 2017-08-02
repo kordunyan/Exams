@@ -30,8 +30,14 @@
                 </div>
                 <button type="submit" class="btn btn-default">Show</button>
             </form>
-            <c:if test="${curSubject != null}">
+            <c:if test="${curSubject != null && avg != null}">
                 <h4 class="p-avg">AVG grade = ${avg}</h4>
+            </c:if>
+            <c:if test="${curSubject != null && avg == null}">
+                <div class="alert alert-warning" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    Subject ${subject.title} dont have any marks
+                </div>
             </c:if>
         </div>
     </div>

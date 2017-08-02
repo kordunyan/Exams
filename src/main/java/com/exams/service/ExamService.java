@@ -30,5 +30,9 @@ public interface ExamService {
 
 	Long getCountBySubject(int subjectId);
 
+	List<Exam> getExamsForPage(Integer page, Integer perPage, Integer subjectId, boolean orderType);
+
 	void deleteAll();
+
+	int calculateCountPages(long countItems, int perPage);
 }

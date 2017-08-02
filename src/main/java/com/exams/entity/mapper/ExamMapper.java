@@ -4,6 +4,7 @@ import com.exams.entity.Exam;
 import com.exams.entity.Subject;
 import com.exams.entity.mapper.provider.ExamMapperProvider;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.session.RowBounds;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -30,6 +31,9 @@ public interface ExamMapper {
     @SelectProvider(type= ExamMapperProvider.class, method = "getBySubjectIdSQL")
     List<Exam> getBySubjectId(int id, boolean orderType);
 
+    @SelectProvider(type= ExamMapperProvider.class, method = "getBySubjectIdForPageSQL")
+    List<Exam> getBySubjectIdForPage(int id, boolean orderType, RowBounds rowBounds);
+
     @Select("SELECT exam.id, mark, createDate, subject_id FROM exam INNER JOIN subject ON exam.subject_id = subject.id  WHERE createDate = #{date} ORDER BY subject.title ASC")
     @Results({
             @Result(id = true, column = "id", property = "id"),
@@ -42,6 +46,7 @@ public interface ExamMapper {
 
     @Select("SELECT ROUND(AVG(mark), 2) FROM exam WHERE subject_id = #{id}")
     Double getAvgBySubject(int id);
+
 
     @Delete("DELETE FROM exam WHERE id=#{id}")
     void delete(Exam exam);

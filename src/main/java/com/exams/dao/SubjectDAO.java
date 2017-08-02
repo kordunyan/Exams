@@ -26,4 +26,6 @@ public interface SubjectDAO {
     Subject getById(int id);
 
     void setEnabled(int subjectId, boolean isEnable);
+
+    List<Subject> getForPage(Integer page, Integer perPage);
 }

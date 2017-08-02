@@ -26,7 +26,7 @@
                     <div class="alert alert-danger" role="alert"><strong>Oh snap!</strong> ${examError.message}</div>
                 </c:if>
                 
-                <form class="form-horizontal add-form" action="<c:url value="/add/grade"/>" method="post">
+                <form class="form-horizontal add-form" id="form-add-grade" action="<c:url value="/add/grade"/>" method="post">
                     <input type="hidden" name="subject" value="${param.subject}">
                     <div class="form-group <c:if test="${titleError != null}">has-error</c:if>">
                         <label class="col-sm-2 col-sm-offset-2 control-label">Subject</label>

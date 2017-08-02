@@ -23,7 +23,11 @@ public interface SubjectService {
 
     List<Subject> getAll();
 
+    List<Subject> getFormPage(int page, int perPage);
+
     Subject getById(int id);
 
     void setEnabled(int subjectId, boolean isEnabled);
+
+    int calculateCountPages(long countItems, int perPage);
 }

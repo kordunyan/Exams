@@ -15,6 +15,8 @@ import java.util.List;
 @Log4j
 public class SubjectServiceImpl implements SubjectService {
 
+    public static final int PER_PAGE = 7;
+
     private SubjectDAO dao;
     private Validator validator;
 
@@ -108,6 +110,18 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
+    public List<Subject> getFormPage(int page, int perPage) {
+        log.info("Get subjects for page: " + page + ", per page: " + perPage);
+        try{
+            return dao.getForPage(page, perPage);
+        }
+        catch(Exception ex){
+            log.error("Error to get subjects for page: " + page + ", per page: " + perPage, ex);
+            throw ex;
+        }
+    }
+
+    @Override
     public Subject getById(int id) {
         log.info("Get subject by id: " + id);
         try {
@@ -127,5 +141,9 @@ public class SubjectServiceImpl implements SubjectService {
             log.error("Error to set enabled subject id: " + subjectId + ", isEnabled: " + isEnabled, ex);
             throw ex;
         }
+    }
+
+    public int calculateCountPages(long countItems, int perPage){
+        return (int) Math.ceil((double) countItems / perPage);
     }
 }

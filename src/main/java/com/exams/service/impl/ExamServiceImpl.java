@@ -18,6 +18,8 @@ import java.util.List;
 @Log4j
 public class ExamServiceImpl implements ExamService {
 
+	public static final int PER_PAGE = 5;
+
 	private ExamDAO dao;
 	private Validator validator;
 
@@ -64,6 +66,18 @@ public class ExamServiceImpl implements ExamService {
 		}
 		catch(Exception ex){
 			log.error("Error to get exam by subject id: " + subjectId + ", order: " + orderType, ex);
+			throw ex;
+		}
+	}
+
+	@Override
+	public List<Exam> getExamsForPage(Integer page, Integer perPage, Integer subjectId, boolean orderType) {
+		log.info("Get exam by subject id: " + subjectId + ", order: " + orderType + ", page: " + page + ", perPage: " + perPage);
+		try{
+			return dao.getBySubjectIdForPage(page, perPage, subjectId, orderType);
+		}
+		catch (Exception ex){
+			log.error("Get exam by subject id: " + subjectId + ", order: " + orderType + ", page: " + page + ", perPage: " + perPage, ex);
 			throw ex;
 		}
 	}
@@ -170,6 +184,8 @@ public class ExamServiceImpl implements ExamService {
 		}
 	}
 
-
+	public int calculateCountPages(long countItems, int perPage){
+		return (int) Math.ceil((double) countItems / perPage);
+	}
 
 }

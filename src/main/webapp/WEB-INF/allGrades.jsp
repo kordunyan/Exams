@@ -51,6 +51,49 @@
                 </c:forEach>
             </table>
         </div>
+        <div class="row">
+                <div class="col-md-offset-3 col-md-9">
+                    <nav class="text-center">
+
+                                              <c:if test="${pages > 1}">
+                                              <ul class="pagination">
+                                                <c:if test="${currentPage != 1}">
+
+                                                    <li>
+                                                        <a href="<c:url value="/grades?page=1&subject=${subject.id}"/>" aria-label="Previous">
+                                                        <span aria-hidden="true">&laquo;</span>
+                                                        </a>
+                                                    </li>
+                                                </c:if>
+                                                <c:if test="${currentPage > 1}">
+                                                    <li>
+                                                        <a href="<c:url value="/grades?page=${currentPage-1}&subject=${subject.id}"/>" aria-label="Previous">
+                                                            <span aria-hidden="true">&lsaquo;</span>
+                                                        </a>
+                                                    </li>
+                                                </c:if>
+                                                <c:forEach var="p" begin="${startPage}" end="${endPage}">
+                                                    <li <c:if test="${p == currentPage}">class="active"</c:if>  ><a href="<c:url value="/grades?page=${p}&subject=${subject.id}"/>">${p}</a></li>
+                                                </c:forEach>
+                                                <c:if test="${currentPage < pages}">
+                                                    <li>
+                                                        <a href="<c:url value="/grades?page=${currentPage+1}&subject=${subject.id}"/>" aria-label="Next">
+                                                        <span aria-hidden="true">&rsaquo;</span>
+                                                        </a>
+                                                    </li>
+                                                </c:if>
+                                                <c:if test="${currentPage != pages}">
+                                                    <li>
+                                                        <a href="<c:url value="/grades?page=${pages}&subject=${subject.id}"/>" aria-label="Previous">
+                                                            <span aria-hidden="true">&raquo;</span>
+                                                        </a>
+                                                    </li>
+                                                </c:if>
+                                    </ul>
+                                    </c:if>
+                                </nav>
+                </div>
+            </div>
     </div>
 </div>
 

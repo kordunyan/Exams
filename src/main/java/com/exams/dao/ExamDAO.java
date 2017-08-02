@@ -17,6 +17,8 @@ public interface ExamDAO {
 
 	List<Exam> getBySubjectId(Integer subjectId, boolean orderType);
 
+	List<Exam> getBySubjectIdForPage(Integer page, Integer perPage, Integer subjectId, boolean orderType);
+
 	List<Exam> getByCreateDate(LocalDate createDate);
 
 	Double getAvgBySubjectId(Integer subjectId);

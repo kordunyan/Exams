@@ -54,6 +54,15 @@ public class SubjectMDAOImpl implements SubjectDAO {
     }
 
     @Override
+    public List<Subject> getForPage(Integer page, Integer perPage) {
+        SqlSession session = sqlSessionFactory.openSession();
+        SubjectMapper mapper = session.getMapper(SubjectMapper.class);
+        List<Subject> subjects =  mapper.getPerPage((page-1)*perPage, perPage);
+        session.close();
+        return subjects;
+    }
+
+    @Override
     public void delete(Subject subject) {
         SqlSession session = sqlSessionFactory.openSession();
         SubjectMapper mapper = session.getMapper(SubjectMapper.class);

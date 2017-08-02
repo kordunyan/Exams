@@ -6,6 +6,7 @@ import com.exams.entity.Subject;
 import com.exams.entity.mapper.ExamMapper;
 import com.exams.entity.mapper.SubjectMapper;
 import com.exams.util.MyBatisUtil;
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -43,6 +44,15 @@ public class ExamMDAOImpl implements ExamDAO{
         SqlSession session = sqlSessionFactory.openSession();
         ExamMapper mapper = session.getMapper(ExamMapper.class);
         List<Exam> result = mapper.getBySubjectId(subjectId, orderType);
+        session.close();
+        return result;
+    }
+
+    @Override
+    public List<Exam> getBySubjectIdForPage(Integer page, Integer perPage, Integer subjectId, boolean orderType) {
+        SqlSession session = sqlSessionFactory.openSession();
+        ExamMapper mapper = session.getMapper(ExamMapper.class);
+        List<Exam> result = mapper.getBySubjectIdForPage(subjectId, orderType, new RowBounds((page-1)*perPage, perPage));
         session.close();
         return result;
     }

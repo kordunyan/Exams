@@ -47,7 +47,6 @@ public class SubjectHDAOImpl implements SubjectDAO {
 
     @Override
     public void setEnabled(int subjectId, boolean isEnable) {
-        System.out.println("HIBARBATE SET IS ENABLED");
         try (Session session = sessionFactory.openSession()) {
             Transaction tx = session.beginTransaction();
             Query<Subject> query = session.createQuery("UPDATE Subject SET isenabled = :p_isenabled WHERE id = :p_id");
@@ -55,6 +54,16 @@ public class SubjectHDAOImpl implements SubjectDAO {
             query.setParameter("p_isenabled", isEnable);
             query.executeUpdate();
             tx.commit();
+        }
+    }
+
+    @Override
+    public List<Subject> getForPage(Integer page, Integer perPage) {
+        try (Session session = sessionFactory.openSession()) {
+            Query<Subject> query = session.createQuery("FROM Subject s ORDER BY s.title");
+            query.setFirstResult((page-1)*perPage);
+            query.setMaxResults(perPage);
+            return query.list();
         }
     }
 
