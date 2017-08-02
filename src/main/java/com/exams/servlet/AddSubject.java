@@ -38,7 +38,8 @@ public class AddSubject extends HttpServlet {
 			request.setAttribute("page", "add/subject");
 			request.getRequestDispatcher("/WEB-INF/addSubject.jsp").forward(request, response);
 		}
-		response.sendRedirect(request.getContextPath());
+		if(request.getContextPath().equals("")) response.sendRedirect("/");
+		else response.sendRedirect(request.getContextPath());
 	}
 
 	@Override

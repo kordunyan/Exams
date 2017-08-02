@@ -47,6 +47,7 @@ public class DeleteSubject extends HttpServlet {
         catch (Exception ex){
             log.error("Error to delete or disable subject", ex);
         }
-        response.sendRedirect(request.getContextPath());
+        if(request.getContextPath().equals("")) response.sendRedirect("/");
+        else response.sendRedirect(request.getContextPath());
     }
 }

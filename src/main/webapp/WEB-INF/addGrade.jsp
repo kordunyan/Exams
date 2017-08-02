@@ -20,7 +20,7 @@
 
             <h3 class="text-center">Add grade</h3>
 
-            <c:if test="${subject != null}">
+            <c:if test="${subject != null && subject.isEnabled}">
                 
                 <c:if test="${examError != null}">
                     <div class="alert alert-danger" role="alert"><strong>Oh snap!</strong> ${examError.message}</div>
@@ -61,6 +61,9 @@
             <c:if test="${subject == null}">
                 <div class="alert alert-danger" role="alert"><strong>Oh snap!</strong> Such subject not exists</div>
             </c:if>
+            <c:if test="${!subject.isEnabled}">
+                <div class="alert alert-danger" role="alert"><strong>Subject ${subject.title} is disabled! </strong></div>
+            </c:if>
         </div>
     </div>
 </div>
@@ -69,7 +72,7 @@
 <script src='<c:url value="/scripts/jquery-ui.js"/>'></script>
 <script src='<c:url value="/scripts/ui.datepicker-ru.js"/>'></script>
 <script src="<c:url value="/scripts/bootstrap.min.js"/>"></script>
-<script src="<c:url value="/scripts/getByDate.js"/>"></script>
+<script src="<c:url value="/scripts/addGrade.js"/>"></script>
 
 </body>
 </html>

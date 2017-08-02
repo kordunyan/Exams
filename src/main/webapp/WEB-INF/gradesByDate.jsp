@@ -29,7 +29,7 @@
             </form>
 
             
-            <c:if test="${date != null}">
+            <c:if test="${exams != null && exams.size() > 0 }">
                 <table class="table table-striped content-table">
                     <thead>
                     <tr>
@@ -44,6 +44,9 @@
                         </tr>
                     </c:forEach>
                 </table>
+            </c:if>
+            <c:if test="${exams != null && exams.size() == 0 }">
+                <div class="alert alert-warning" role="alert">Nothing found on this date</div>
             </c:if>
         </div>
     </div>

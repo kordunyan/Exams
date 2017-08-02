@@ -39,7 +39,7 @@ public class AddGrade extends HttpServlet {
 		try{
 			int subjectId = Integer.parseInt(request.getParameter("subject"));
 			Subject subject = subjectService.getById(subjectId);
-			if(subject == null) request.getRequestDispatcher("/WEB-INF/addGrade.jsp").forward(request, response);
+			if(subject == null || !subject.getIsEnabled()) request.getRequestDispatcher("/WEB-INF/addGrade.jsp").forward(request, response);
 			request.setAttribute("subject", subject);
 			int mark = Math.abs(Integer.parseInt(request.getParameter("mark")));
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -60,7 +60,6 @@ public class AddGrade extends HttpServlet {
 		catch(Exception ex){
 			ex.printStackTrace();
 		}
-
 		request.getRequestDispatcher("/WEB-INF/addGrade.jsp").forward(request, response);
 	}
 

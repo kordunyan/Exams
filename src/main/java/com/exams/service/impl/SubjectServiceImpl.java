@@ -27,7 +27,7 @@ public class SubjectServiceImpl implements SubjectService {
     public void addSubject(Subject subject) throws IncorectSubjectTitleException {
         log.info("Add subject: " + subject);
         if (!validator.vlidate(subject)) {
-            throw new IncorectSubjectTitleException("Incorect subject title");
+            throw new IncorectSubjectTitleException("Title must contain between 2 and 35 characters");
         }
         if (dao.getByTitle(subject.getTitle()) != null) {
             throw new IncorectSubjectTitleException("Subject with same title already exists");
@@ -67,7 +67,7 @@ public class SubjectServiceImpl implements SubjectService {
     public void update(Subject subject) throws IncorectSubjectTitleException {
         log.info("Update subject: " + subject);
         if (!validator.vlidate(subject)) {
-            throw new IncorectSubjectTitleException("Incorect subject");
+            throw new IncorectSubjectTitleException("Title must contain between 3 and 35 characters");
         }
         if (dao.getByTitle(subject.getTitle()) != null) {
             throw new IncorectSubjectTitleException("Subject with same title already exists");

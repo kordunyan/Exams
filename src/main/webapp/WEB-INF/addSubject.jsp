@@ -19,7 +19,7 @@
 
             <h3 class="text-center">Add subject</h3>
 
-            <form class="form-horizontal add-form" action="<c:url value="/add/subject"/>" method="post">
+            <form class="form-horizontal add-form" id="formAddSubject" action="<c:url value="/add/subject"/>" method="post">
                 <div class="form-group <c:if test="${titleError != null}">has-error</c:if>">
                     <label for="subjectTitle" class="col-sm-2 control-label">Title</label>
                     <div class="col-sm-10">
@@ -40,6 +40,7 @@
 
 <script src="<c:url value="/scripts/jquery-2.1.4.min.js"/>"></script>
 <script src="<c:url value="/scripts/bootstrap.min.js"/>"></script>
+<script src="<c:url value="/scripts/addSubject.js"/>"></script>
 
 </body>
 </html>

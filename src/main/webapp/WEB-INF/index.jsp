@@ -26,13 +26,13 @@
                 </tr>
                 </thead>
                 <c:forEach var="subject" items="${subjects}">
-                    <tr <c:if test="${!subject.isEnabled}">class="danger"</c:if>>
+                    <tr <c:if test="${!subject.isEnabled}">class="warning"</c:if>>
                         <td>${subject.title}</td>
                         <td><a href="<c:url value="/grades?subject=${subject.id}"/>">Grades</a></td>
                         <td><a href="<c:url value="/avg?subject=${subject.id}"/>">AVG grade</a></td>
                         <td class="text-right">
                              <c:if test="${subject.isEnabled}">
-                                <form class="without-margin form-delete-subject" action="<c:url value="/delete/subject/"/>" method="post">
+                                <form class="without-margin form-delete-subject" action="#" method="get">
                                     <input type="hidden" name="subject" value="${subject.id}" />
                                     <input type="submit" value="Delete" class="btn btn-default" />
                                 </form>
