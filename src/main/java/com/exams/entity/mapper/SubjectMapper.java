@@ -53,6 +53,4 @@ public interface SubjectMapper {
 
 	@Update("UPDATE subject SET isenabled=#{param2} WHERE id=#{param1}")
 	void setEnabled(int subjectId, boolean isEnabled);
-
-
 }

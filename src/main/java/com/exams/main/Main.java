@@ -4,13 +4,16 @@ import com.exams.dao.factory.DatabaseType;
 import com.exams.dao.factory.ServiceFactory;
 import com.exams.entity.Exam;
 import com.exams.entity.Subject;
+import com.exams.entity.User;
 import com.exams.service.ExamService;
 import com.exams.service.PaginationService;
 import com.exams.service.SubjectService;
+import com.exams.service.UserService;
 import com.exams.service.impl.ExamServiceImpl;
 import com.exams.service.impl.PaginationServiceImpl;
 import com.exams.service.impl.SubjectServiceImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -18,11 +21,34 @@ public class Main {
 	public static void main(String[] args) {
 
 
-
+		List<String> list = new ArrayList<>();
+		list.add("1");
+		list.add("2");
+		list.add("3");
+		list.add("4");
+		list.add("5");
 
 
 
 		/*ServiceFactory.setDataBaseConfig(DatabaseType.PRODUCTION);
+
+
+		UserService  userService = ServiceFactory.getUserService();
+
+		User user = new User();
+		user.setLogin("admin");
+		user.setPassword("12345");
+
+		//userService.addUser(user);
+
+		User search = new User();
+		search.setLogin("admin");
+		search.setPassword("12345");
+		System.out.println(userService.getByLoginAndPassword(search));
+
+		System.out.println(userService.isExists(search));
+
+
 		SubjectService subjectService = ServiceFactory.getSubjectService();
 		ExamService examService = ServiceFactory.getExamService();
 
@@ -34,7 +60,7 @@ public class Main {
 		for(Exam exam : exams){
 			System.out.println(exam);
 		}
-
+*/
 
 		//List<Exam> exams = examService.
 

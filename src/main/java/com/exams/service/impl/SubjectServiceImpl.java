@@ -12,7 +12,7 @@ import lombok.extern.log4j.Log4j;
 
 import java.util.List;
 
-@Log4j
+@Log4j(topic = "file")
 public class SubjectServiceImpl implements SubjectService {
 
     public static final int PER_PAGE = 7;

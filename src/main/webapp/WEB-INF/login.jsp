@@ -14,14 +14,20 @@
                 <div class="panel panel-primary login-panel">
                     <div class="panel-heading">Login</div>
                     <div class="panel-body">
-                        <form>
-                            <div class="form-group">
+                        <form action="<c:url value="/login"/>" method="post">
 
-                                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Login">
+                            <c:if test="${messages.containsKey(\"login\")}">
+                                <div class="alert alert-danger">
+                                    ${messages.get("login")}
+                                </div>
+                            </c:if>
+                            <div class="form-group <c:if test="${messages.containsKey(\"username\")}">has-error</c:if>" ">
+                                <input type="text" class="form-control" name="login" placeholder="Login">
+                                <span class="help-block">${messages.get("username")}</span>
                             </div>
-                            <div class="form-group">
-
-                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                            <div class="form-group <c:if test="${messages.containsKey(\"password\")}">has-error</c:if>">
+                                <input type="password" class="form-control" name="password" placeholder="Password">
+                                <span class="help-block">${messages.get("password")}</span>
                             </div>
                             <button type="submit" class="btn btn-default">Sign in</button>
                         </form>

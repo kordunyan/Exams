@@ -19,5 +19,6 @@
     <mappers><!--в данном блоке необходимо описать маперы, которые используются в проекте-->
         <mapper class="com.exams.entity.mapper.SubjectMapper"/>
         <mapper class="com.exams.entity.mapper.ExamMapper"/>
+        <mapper class="com.exams.entity.mapper.UserMapper"/>
     </mappers>
 </configuration>

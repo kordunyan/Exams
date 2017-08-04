@@ -30,7 +30,7 @@
                 </a>
             </li>
         </c:if>
-        <c:if test="${currentPage != pages}">
+        <c:if test="${currentPage != pages && pages != 0}">
             <li>
                 <a href="<c:url value="/?page=${pages}"/>" aria-label="Previous">
                     <span aria-hidden="true">&raquo;</span>

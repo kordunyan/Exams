@@ -21,7 +21,7 @@
             <c:if test="${subject.isEnabled}">
                 <a href="<c:url value="/add/grade?subject=${param.subject}"/>" class="btn btn-primary btn-add-grade">+ Add grade</a>
             </c:if>
-
+            <c:if test="${exams != null && exams.size() > 0 }">
             <table class="table table-striped content-table">
                 <thead>
                 <tr>
@@ -50,6 +50,15 @@
                     </tr>
                 </c:forEach>
             </table>
+            </c:if>
+            <c:if test="${exams != null && exams.size() == 0 }">
+                <div class="alert alert-warning" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    Nothing found on this date
+                </div>
+            </c:if>
+
+
         </div>
         <div class="row">
                 <div class="col-md-offset-3 col-md-9">

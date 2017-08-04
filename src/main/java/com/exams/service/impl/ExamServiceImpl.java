@@ -15,7 +15,7 @@ import lombok.extern.log4j.Log4j;
 import java.time.LocalDate;
 import java.util.List;
 
-@Log4j
+@Log4j(topic = "file")
 public class ExamServiceImpl implements ExamService {
 
 	public static final int PER_PAGE = 5;

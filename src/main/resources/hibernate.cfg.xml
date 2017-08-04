@@ -14,5 +14,6 @@
         <property name="c3p0.timeout">10</property>
         <mapping class="com.exams.entity.Exam"/>
         <mapping class="com.exams.entity.Subject"/>
+        <mapping class="com.exams.entity.User"/>
     </session-factory>
 </hibernate-configuration>
