@@ -68,6 +68,11 @@ public class SubjectHDAOImpl implements SubjectDAO {
     }
 
     @Override
+    public List<Subject> getAllWithExams() {
+        return getAll();
+    }
+
+    @Override
     public void delete(Subject subject) {
         try (Session session = sessionFactory.openSession()) {
             Transaction tx = session.beginTransaction();

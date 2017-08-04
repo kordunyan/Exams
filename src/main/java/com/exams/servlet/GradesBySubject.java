@@ -46,7 +46,6 @@ public class GradesBySubject extends HttpServlet {
 			page = 1;
 		}
 
-
 		try{
 			int subjectId = Integer.parseInt(request.getParameter("subject"));
 			boolean order = Boolean.parseBoolean(request.getParameter("order"));

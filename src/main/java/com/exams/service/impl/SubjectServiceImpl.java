@@ -110,6 +110,17 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
+    public List<Subject> getAllWithExams() {
+        log.info("Get all subjects with exams");
+        try {
+            return dao.getAllWithExams();
+        } catch (Exception ex) {
+            log.error("Error to get all subject with exams", ex);
+            throw ex;
+        }
+    }
+
+    @Override
     public List<Subject> getFormPage(int page, int perPage) {
         log.info("Get subjects for page: " + page + ", per page: " + perPage);
         try{

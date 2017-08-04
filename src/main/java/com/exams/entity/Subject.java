@@ -5,7 +5,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -24,8 +26,8 @@ public class Subject {
 	@Column(unique = true)
 	private String title;
 
-	@OneToMany(orphanRemoval = true, mappedBy = "subject", cascade = CascadeType.ALL)
-	private Set<Exam> exams = new HashSet<>();
+	@OneToMany(orphanRemoval = true, mappedBy = "subject", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<Exam> exams = new ArrayList<>();
 
 	@Column
 	private Boolean isEnabled;

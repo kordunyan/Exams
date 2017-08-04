@@ -1,5 +1,6 @@
 package com.exams.entity.mapper;
 
+import com.exams.entity.Exam;
 import com.exams.entity.Subject;
 import org.apache.ibatis.annotations.*;
 
@@ -25,6 +26,16 @@ public interface SubjectMapper {
 	@Select("SELECT id, title, isenabled FROM subject ORDER BY title")
 	List<Subject> findAllSubject();
 
+	@Select("SELECT id, title, isenabled FROM subject ORDER BY title")
+	@Results(value = {
+			@Result(id=true, column = "id", property = "id"),
+			@Result(column = "title", property = "title"),
+			@Result(column = "isenabled", property = "isEnabled"),
+			@Result(property="exams", column="subject_id", javaType= List.class, many=@Many(select = "com.exams.entity.mapper.ExamMapper.getBySubject"))
+	})
+	List<Subject> findAllSubjectWithExams();
+
+
 	@Select("SELECT id, title, isenabled FROM subject ORDER BY title limit #{param2} offset #{param1}")
 	List<Subject> getPerPage(int offset, int limit);
 
@@ -42,4 +53,6 @@ public interface SubjectMapper {
 
 	@Update("UPDATE subject SET isenabled=#{param2} WHERE id=#{param1}")
 	void setEnabled(int subjectId, boolean isEnabled);
+
+
 }

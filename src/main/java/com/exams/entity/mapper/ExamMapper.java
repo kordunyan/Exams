@@ -47,6 +47,8 @@ public interface ExamMapper {
     @Select("SELECT ROUND(AVG(mark), 2) FROM exam WHERE subject_id = #{id}")
     Double getAvgBySubject(int id);
 
+    @Select("SELECT id, mark, createDate, subject_id FROM exam  WHERE subject_id = #{subject_id}")
+    List<Exam> getBySubject(int subject_id);
 
     @Delete("DELETE FROM exam WHERE id=#{id}")
     void delete(Exam exam);

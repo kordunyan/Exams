@@ -28,4 +28,6 @@ public interface SubjectDAO {
     void setEnabled(int subjectId, boolean isEnable);
 
     List<Subject> getForPage(Integer page, Integer perPage);
+
+    List<Subject> getAllWithExams();
 }
