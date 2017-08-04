@@ -10,57 +10,33 @@ import com.exams.service.SubjectService;
 import com.exams.service.impl.ExamServiceImpl;
 import com.exams.service.impl.PaginationServiceImpl;
 import com.exams.service.impl.SubjectServiceImpl;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
-import java.io.*;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class Main {
-
-	private static final String FILE_PATH = "examresults.json";
-
-	public static int value = 0;
-
 	public static void main(String[] args) {
 
 
-		ServiceFactory.setDataBaseConfig(DatabaseType.PRODUCTION);
+
+
+
+
+		/*ServiceFactory.setDataBaseConfig(DatabaseType.PRODUCTION);
 		SubjectService subjectService = ServiceFactory.getSubjectService();
 		ExamService examService = ServiceFactory.getExamService();
 
-		/*List<Subject> subjects = subjectService.getAllWithExams();
+		Subject subject = subjectService.getByTitle("Java");
 
-		for(Subject subject :  subjects){
-			subject.setExams(examService.getBySubjectId(subject.getId(), true));
+		System.out.println("Count exams: " + examService.getCountBySubject(subject.getId()));
+
+		List<Exam> exams = examService.getExamsForPage(3, ExamServiceImpl.PER_PAGE, subject.getId(), true);
+		for(Exam exam : exams){
+			System.out.println(exam);
 		}
 
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-		try (Writer writer = new FileWriter(FILE_PATH)) {
-			gson.toJson(subjects, writer);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}*/
-
-		try {
-			Gson gson = new GsonBuilder().setPrettyPrinting().create();
-			BufferedReader br = new BufferedReader(new FileReader(FILE_PATH));
-			List<Subject> subjects = new ArrayList<>();
-			Type type = new TypeToken<List<Subject>>() {
-			}.getType();
-			subjects = gson.fromJson(br, type);
-
-
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-
+		//List<Exam> exams = examService.
 
 		/*
 
