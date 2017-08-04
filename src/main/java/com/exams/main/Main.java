@@ -18,7 +18,11 @@ public class Main {
 	public static void main(String[] args) {
 
 
-		ServiceFactory.setDataBaseConfig(DatabaseType.PRODUCTION);
+
+
+
+
+		/*ServiceFactory.setDataBaseConfig(DatabaseType.PRODUCTION);
 		SubjectService subjectService = ServiceFactory.getSubjectService();
 		ExamService examService = ServiceFactory.getExamService();
 
@@ -29,7 +33,7 @@ public class Main {
 		List<Exam> exams = examService.getExamsForPage(3, ExamServiceImpl.PER_PAGE, subject.getId(), true);
 		for(Exam exam : exams){
 			System.out.println(exam);
-		}
+		}*/
 
 
 		//List<Exam> exams = examService.
