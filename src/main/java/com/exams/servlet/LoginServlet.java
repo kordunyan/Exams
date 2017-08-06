@@ -49,7 +49,7 @@ public class LoginServlet extends HttpServlet{
 			user.setLogin(login);
 			User checked = userService.getByLoginAndPassword(user);
 			if(checked != null){
-				log.info("User '" + user.getLogin() + "', is logged");
+				log.info("User '" + user.getLogin() + "', is logged in");
 				HttpSession session = request.getSession();
 				session.setAttribute("user", checked);
 				response.sendRedirect(request.getContextPath() + "/");

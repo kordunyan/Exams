@@ -19,90 +19,53 @@
 
             <h3 class="text-center">All grades of ${subject.title}</h3>
             <c:if test="${subject.isEnabled}">
-                <a href="<c:url value="/add/grade?subject=${param.subject}"/>" class="btn btn-primary btn-add-grade">+ Add grade</a>
+                <a href="<c:url value="/add/grade?subject=${param.subject}"/>" class="btn btn-primary btn-add-grade">+
+                    Add grade</a>
             </c:if>
             <c:if test="${exams != null && exams.size() > 0 }">
-            <table class="table table-striped content-table">
-                <thead>
-                <tr>
-                    <th>
-                        <a class="order-link" href="<c:url value="/grades?subject=${subjectId}&order=${!order}"/>">Date
-                            <span class="glyphicon
+                <table class="table table-striped content-table">
+                    <thead>
+                    <tr>
+                        <th>
+                            <a class="order-link" href="<c:url value="/grades?subject=${subjectId}&order=${!order}"/>">Date
+                                <span class="glyphicon
                         <c:choose>
                             <c:when test="${!order}">glyphicon-triangle-bottom</c:when>
                             <c:when test="${order}">glyphicon-triangle-top</c:when>
                         </c:choose>"></span>
-                        </a>
-                    </th>
-                    <th colspan="2">Mark</th>
-                </tr>
-                </thead>
-                <c:forEach var="exam" items="${exams}">
-                    <tr>
-                        <td>${exam.createDate}</td>
-                        <td>${exam.mark}</td>
-                        <td class="text-right">
-                            <form action="#" class="without-margin form-delete-mark">
-                                <input type="hidden" name="mark" value="${exam.id}">
-                                <input type="submit" value="Delete" class="btn btn-default">
-                            </form>
-                        </td>
+                            </a>
+                        </th>
+                        <th colspan="2">Mark</th>
                     </tr>
-                </c:forEach>
-            </table>
+                    </thead>
+                    <c:forEach var="exam" items="${exams}">
+                        <tr>
+                            <td>${exam.createDate}</td>
+                            <td>${exam.mark}</td>
+                            <td class="text-right">
+                                <form action="#" class="without-margin form-delete-mark">
+                                    <input type="hidden" name="mark" value="${exam.id}">
+                                    <input type="submit" value="Delete" class="btn btn-default">
+                                </form>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
             </c:if>
             <c:if test="${exams != null && exams.size() == 0 }">
                 <div class="alert alert-warning" role="alert">
                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                    Nothing found on this date
+                    This subject not have a mark
                 </div>
             </c:if>
 
 
         </div>
         <div class="row">
-                <div class="col-md-offset-3 col-md-9">
-                    <nav class="text-center">
-
-                                              <c:if test="${pages > 1}">
-                                              <ul class="pagination">
-                                                <c:if test="${currentPage != 1}">
-
-                                                    <li>
-                                                        <a href="<c:url value="/grades?page=1&subject=${subject.id}"/>" aria-label="Previous">
-                                                        <span aria-hidden="true">&laquo;</span>
-                                                        </a>
-                                                    </li>
-                                                </c:if>
-                                                <c:if test="${currentPage > 1}">
-                                                    <li>
-                                                        <a href="<c:url value="/grades?page=${currentPage-1}&subject=${subject.id}"/>" aria-label="Previous">
-                                                            <span aria-hidden="true">&lsaquo;</span>
-                                                        </a>
-                                                    </li>
-                                                </c:if>
-                                                <c:forEach var="p" begin="${startPage}" end="${endPage}">
-                                                    <li <c:if test="${p == currentPage}">class="active"</c:if>  ><a href="<c:url value="/grades?page=${p}&subject=${subject.id}"/>">${p}</a></li>
-                                                </c:forEach>
-                                                <c:if test="${currentPage < pages}">
-                                                    <li>
-                                                        <a href="<c:url value="/grades?page=${currentPage+1}&subject=${subject.id}"/>" aria-label="Next">
-                                                        <span aria-hidden="true">&rsaquo;</span>
-                                                        </a>
-                                                    </li>
-                                                </c:if>
-                                                <c:if test="${currentPage != pages}">
-                                                    <li>
-                                                        <a href="<c:url value="/grades?page=${pages}&subject=${subject.id}"/>" aria-label="Previous">
-                                                            <span aria-hidden="true">&raquo;</span>
-                                                        </a>
-                                                    </li>
-                                                </c:if>
-                                    </ul>
-                                    </c:if>
-                                </nav>
-                </div>
+            <div class="col-md-offset-3 col-md-9">
+                <jsp:include page="../pagination.jsp"/>
             </div>
+        </div>
     </div>
 </div>
 
@@ -110,7 +73,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
                 <h4 class="modal-title">Delete mark ?</h4>
             </div>
             <div class="modal-body">

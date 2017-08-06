@@ -23,8 +23,6 @@ public interface SubjectService {
 
     List<Subject> getAll();
 
-    List<Subject> getAllWithExams();
-
     List<Subject> getFormPage(int page, int perPage);
 
     Subject getById(int id);

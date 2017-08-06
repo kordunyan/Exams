@@ -51,15 +51,10 @@ public class GradesBySubject extends HttpServlet {
 			boolean order = Boolean.parseBoolean(request.getParameter("order"));
 			List<Exam> exams = examService.getExamsForPage(page, ExamServiceImpl.PER_PAGE, subjectId, order);
 			Subject subject = subjectService.getById(subjectId);
-
 			long countItems = examService.getCountBySubject(subjectId);
 			int pages = examService.calculateCountPages(countItems, ExamServiceImpl.PER_PAGE);
-			PaginationService pagination = new PaginationServiceImpl(5, pages, page);
-			request.setAttribute("currentPage", page);
-			request.setAttribute("startPage", pagination.getStart());
-			request.setAttribute("endPage", pagination.getEnd());
-			request.setAttribute("pages", pages);
-
+			PaginationService pagination = new PaginationServiceImpl(5, pages, page, "/grades?subject="+subject.getId()+"&page=");
+			request.setAttribute("pagination", pagination);
 			request.setAttribute("order", order);
 			request.setAttribute("subject", subject);
 			request.setAttribute("subjectId", subjectId);

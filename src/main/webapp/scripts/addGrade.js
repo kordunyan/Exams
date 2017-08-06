@@ -1,16 +1,5 @@
 (function(){
 
-    let max = new Date();
-    let min = new Date(max.getFullYear(), 0, 1);
-
-    $("#createDate").datepicker({
-        changeMonth:true,
-        changeYear:true,
-        showOtherMonths:true,
-        dateFormat: 'yy-mm-dd',
-        maxDate: max,
-        minDate: min
-    });
 
 
     let app = {
@@ -25,16 +14,52 @@
                 mark: /^[0-9]{1,2}$/
             },
 
+            form:null,
+            btnSubmit:null,
+            inputMark:null,
+            inputCreateDate:null,
+
             initialize(){
-                app.setListeners();
+                let max = new Date();
+                let min = new Date(max.getFullYear(), 0, 1);
+                this.form = $("#form-add-grade");
+
+                this.inputCreateDate = this.form.find("input[name='createdate']");
+                this.inputCreateDate.datepicker({
+                    changeMonth:true,
+                    changeYear:true,
+                    showOtherMonths:true,
+                    dateFormat: 'yy-mm-dd',
+                    maxDate: max,
+                    minDate: min,
+                    onSelect:app.handlerInputForm
+                });
+
+                this.inputMark = this.form.find("input[name='mark']");
+
+                this.bthSubmit = $("#btnSubmit");
+                this.bthSubmit.attr("disabled", "disabled");
+
+                this.setListeners();
             },
 
             setListeners(){
-                $("#form-add-grade").on("submit", app.submitForm);
+                this.form.on("submit", app.submitForm);
+                this.inputMark.on("input", app.handlerInputForm);
             },
 
             submitForm(e){
                 return app.validateForm($(this));
+            },
+
+            handlerInputForm(){
+                if(app.inputCreateDate.val().length != 0 && app.inputMark.val().length != 0 && app.bthSubmit.attr("disabled") == "disabled"){
+                    app.bthSubmit.removeAttr("disabled");
+                }
+                else if(app.inputCreateDate.val().length == 0 || app.inputMark.val().length == 0){
+                    app.bthSubmit.attr("disabled", "disabled");
+                }
+                app.destroyMessage($(this));
             },
 
             validateForm(form){

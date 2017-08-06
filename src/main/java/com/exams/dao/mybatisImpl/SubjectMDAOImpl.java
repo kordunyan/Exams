@@ -63,15 +63,6 @@ public class SubjectMDAOImpl implements SubjectDAO {
     }
 
     @Override
-    public List<Subject> getAllWithExams() {
-        SqlSession session = sqlSessionFactory.openSession();
-        SubjectMapper mapper = session.getMapper(SubjectMapper.class);
-        List<Subject> subjects =  mapper.findAllSubjectWithExams();
-        session.close();
-        return subjects;
-    }
-
-    @Override
     public void delete(Subject subject) {
         SqlSession session = sqlSessionFactory.openSession();
         SubjectMapper mapper = session.getMapper(SubjectMapper.class);

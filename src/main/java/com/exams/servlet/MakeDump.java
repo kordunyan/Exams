@@ -35,7 +35,7 @@ public class MakeDump extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Subject> subjects = subjectService.getAllWithExams();
+        List<Subject> subjects = subjectService.getAll();
         for(Subject subject :  subjects){
             subject.setExams(examService.getBySubjectId(subject.getId(), true));
         }

@@ -1,13 +1,10 @@
 package com.exams.service.impl;
 
 import com.exams.dao.SubjectDAO;
-import com.exams.dao.hibernateImpl.SubjectHDAOImpl;
-import com.exams.dao.mybatisImpl.SubjectMDAOImpl;
 import com.exams.entity.Subject;
 import com.exams.exception.IncorectSubjectTitleException;
 import com.exams.service.SubjectService;
-import com.exams.validator.Validator;
-import com.exams.validator.impl.SubjectValidator;
+import com.exams.validator.SubjectValidator;
 import lombok.extern.log4j.Log4j;
 
 import java.util.List;
@@ -18,7 +15,7 @@ public class SubjectServiceImpl implements SubjectService {
     public static final int PER_PAGE = 7;
 
     private SubjectDAO dao;
-    private Validator validator;
+    private SubjectValidator validator;
 
     public SubjectServiceImpl(SubjectDAO dao) {
         this.dao = dao;
@@ -28,9 +25,7 @@ public class SubjectServiceImpl implements SubjectService {
     @Override
     public void addSubject(Subject subject) throws IncorectSubjectTitleException {
         log.info("Add subject: " + subject);
-        if (!validator.vlidate(subject)) {
-            throw new IncorectSubjectTitleException("Title must contain between 2 and 35 characters");
-        }
+        validator.vlidate(subject);
         if (dao.getByTitle(subject.getTitle()) != null) {
             throw new IncorectSubjectTitleException("Subject with same title already exists");
         }
@@ -68,9 +63,7 @@ public class SubjectServiceImpl implements SubjectService {
     @Override
     public void update(Subject subject) throws IncorectSubjectTitleException {
         log.info("Update subject: " + subject);
-        if (!validator.vlidate(subject)) {
-            throw new IncorectSubjectTitleException("Title must contain between 3 and 35 characters");
-        }
+        validator.vlidate(subject);
         if (dao.getByTitle(subject.getTitle()) != null) {
             throw new IncorectSubjectTitleException("Subject with same title already exists");
         }
@@ -105,17 +98,6 @@ public class SubjectServiceImpl implements SubjectService {
             return dao.getAll();
         } catch (Exception ex) {
             log.error("Error to get all subject", ex);
-            throw ex;
-        }
-    }
-
-    @Override
-    public List<Subject> getAllWithExams() {
-        log.info("Get all subjects with exams");
-        try {
-            return dao.getAllWithExams();
-        } catch (Exception ex) {
-            log.error("Error to get all subject with exams", ex);
             throw ex;
         }
     }

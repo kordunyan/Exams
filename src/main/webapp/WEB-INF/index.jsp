@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
@@ -31,12 +31,10 @@
                         <td><a href="<c:url value="/grades?subject=${subject.id}"/>">Grades</a></td>
                         <td><a href="<c:url value="/avg?subject=${subject.id}"/>">AVG grade</a></td>
                         <td class="text-right">
-                             <c:if test="${subject.isEnabled}">
-                                <form class="without-margin form-delete-subject" action="#" method="get">
-                                    <input type="hidden" name="subject" value="${subject.id}" />
-                                    <input type="submit" value="Delete" class="btn btn-default" />
-                                </form>
-                            </c:if>
+                            <form class="without-margin form-delete-subject" action="#" method="get">
+                                <input type="hidden" name="subject" value="${subject.id}"/>
+                                <input type="submit" value="Delete" class="btn btn-default"/>
+                            </form>
                         </td>
                     </tr>
                 </c:forEach>
@@ -52,44 +50,46 @@
 
 
 <div class="modal fade" id="countedSubject" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Delete subject ?</h4>
-      </div>
-      <div class="modal-body">
-        <p id="delete-subject-modal-content"></p>
-      </div>
-      <div class="modal-footer">
-        <form class="form-inline" action="<c:url value="/subject/delete"/>" method="post">
-            <input type="hidden" name="subject" id="input-delete-subject"/>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Delete</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Delete subject ?</h4>
             </div>
-        </form>
-      </div>
+            <div class="modal-body">
+                <p id="delete-subject-modal-content"></p>
+            </div>
+            <div class="modal-footer">
+                <form class="form-inline" action="<c:url value="/subject/delete"/>" method="post">
+                    <input type="hidden" name="subject" id="input-delete-subject"/>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Delete</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <div class="modal fade" id="error-modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Error !</h4>
-      </div>
-      <div class="modal-body">
-        <p>Server error. Please try later</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Delete</button>
-      </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Error !</h4>
+            </div>
+            <div class="modal-body">
+                <p>Server error. Please try later</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Delete</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 

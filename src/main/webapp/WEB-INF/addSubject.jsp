@@ -20,16 +20,16 @@
             <h3 class="text-center">Add subject</h3>
 
             <form class="form-horizontal add-form" id="formAddSubject" action="<c:url value="/add/subject"/>" method="post">
-                <div class="form-group <c:if test="${titleError != null}">has-error</c:if>">
+                <div class="form-group <c:if test="${messages.containsKey(\"title\")}">has-error</c:if>">
                     <label for="subjectTitle" class="col-sm-2 control-label">Title</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" name="title" value="${param.title}" id="subjectTitle" placeholder="Title">
-                        <span class="help-block">${titleError.message}</span>
+                        <span class="help-block">${messages.get("title")}</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-primary">Add subject</button>
+                        <button type="submit" id="btnSubmit" class="btn btn-primary">Add subject</button>
                     </div>
                 </div>
             </form>

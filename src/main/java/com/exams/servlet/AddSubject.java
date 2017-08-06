@@ -5,7 +5,6 @@ import com.exams.dao.factory.ServiceFactory;
 import com.exams.entity.Subject;
 import com.exams.exception.IncorectSubjectTitleException;
 import com.exams.service.SubjectService;
-import com.exams.service.impl.SubjectServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @WebServlet("/add/subject")
@@ -30,16 +31,21 @@ public class AddSubject extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		Map<String, String> messages = new HashMap<>();
 		String title = request.getParameter("title");
 		try {
 			subjectService.addSubject(new Subject(title));
 		} catch (IncorectSubjectTitleException ex) {
-			request.setAttribute("titleError", ex);
+			messages.put("title", ex.getMessage());
+		}
+
+		if (messages.isEmpty()) {
+			response.sendRedirect(request.getContextPath() + "/");
+		} else {
+			request.setAttribute("messages", messages);
 			request.setAttribute("page", "add/subject");
 			request.getRequestDispatcher("/WEB-INF/addSubject.jsp").forward(request, response);
 		}
-		if(request.getContextPath().equals("")) response.sendRedirect("/");
-		else response.sendRedirect(request.getContextPath());
 	}
 
 	@Override

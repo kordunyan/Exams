@@ -21,6 +21,6 @@ public class SessionListener implements HttpSessionListener {
     public void sessionDestroyed(HttpSessionEvent httpSessionEvent) {
         HttpSession session = httpSessionEvent.getSession();
         User user = (User) session.getAttribute("user");
-        log.info("User '" + user.getLogin() + "', is loged out");
+        log.info("User '" + user.getLogin() + "', is logged out");
     }
 }

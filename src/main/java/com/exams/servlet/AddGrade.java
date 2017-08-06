@@ -6,10 +6,11 @@ import com.exams.entity.Exam;
 import com.exams.entity.Subject;
 import com.exams.exception.ExamExistsException;
 import com.exams.exception.IncorectDateException;
+import com.exams.exception.IncorectMarkException;
+import com.exams.exception.IncorectSubjectTitleException;
 import com.exams.service.ExamService;
 import com.exams.service.SubjectService;
-import com.exams.service.impl.ExamServiceImpl;
-import com.exams.service.impl.SubjectServiceImpl;
+import lombok.extern.log4j.Log4j;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,7 +20,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.HashMap;
+import java.util.Map;
 
+@Log4j(topic = "file")
 @WebServlet("/add/grade")
 public class AddGrade extends HttpServlet {
 
@@ -36,41 +41,61 @@ public class AddGrade extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Map<String, String> messages = new HashMap<>();
+		Subject subject = null;
 		try{
 			int subjectId = Integer.parseInt(request.getParameter("subject"));
-			Subject subject = subjectService.getById(subjectId);
-			if(subject == null || !subject.getIsEnabled()) request.getRequestDispatcher("/WEB-INF/addGrade.jsp").forward(request, response);
-			request.setAttribute("subject", subject);
-			int mark = Math.abs(Integer.parseInt(request.getParameter("mark")));
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-			LocalDate date = LocalDate.parse(request.getParameter("createdate"), dtf);
-			examService.addExam(new Exam(mark, date, subject));
+			subject = subjectService.getById(subjectId);
+		}
+		catch (NumberFormatException ex){}
+
+		try {
+			if (subject == null) {
+				messages.put("global", "Such subject not exists");
+			} else if (!subject.getIsEnabled()) {
+				messages.put("global", "Subject is disabled");
+			} else {
+				request.setAttribute("subject", subject);
+				int mark = Math.abs(Integer.parseInt(request.getParameter("mark")));
+				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				LocalDate date = LocalDate.parse(request.getParameter("createdate"), dtf);
+				examService.addExam(new Exam(mark, date, subject));
+			}
+		} catch (ExamExistsException ex) {
+			messages.put("global", ex.getMessage());
+		} catch (IncorectDateException ex) {
+			messages.put("createDate", ex.getMessage());
+		} catch (NumberFormatException ex) {
+			messages.put("mark", "Mark should be a numeric");
+		} catch (IncorectMarkException ex) {
+			messages.put("mark", ex.getMessage());
+		} catch (DateTimeParseException ex){
+			messages.put("createDate", "Incorect date format");
+		}
+		catch (Exception ex) {
+			log.error("Error to add mark", ex);
+		}
+
+		System.out.println(messages);
+
+		if(messages.isEmpty()){
 			response.sendRedirect(String.format("%s/grades?subject=%d", request.getContextPath(), subject.getId()));
-			return;
 		}
-		catch(ExamExistsException ex){
-			request.setAttribute("examError", ex);
+		else{
+			request.setAttribute("subject", subject);
+			request.setAttribute("messages", messages);
+			request.getRequestDispatcher("/WEB-INF/addGrade.jsp").forward(request, response);
 		}
-		catch (IncorectDateException ex){
-			request.setAttribute("errorDate", ex);
-		}
-		catch (NumberFormatException ex){
-			request.setAttribute("errorMark", new NumberFormatException("Mark should be a numeric"));
-		}
-		catch(Exception ex){
-			ex.printStackTrace();
-		}
-		request.getRequestDispatcher("/WEB-INF/addGrade.jsp").forward(request, response);
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try{
+		try {
 			int subjectId = Integer.parseInt(request.getParameter("subject"));
 			Subject subject = subjectService.getById(subjectId);
 			request.setAttribute("subject", subject);
+		} catch (Exception ex) {
 		}
-		catch(Exception ex){}
 		request.getRequestDispatcher("/WEB-INF/addGrade.jsp").forward(request, response);
 	}
 }

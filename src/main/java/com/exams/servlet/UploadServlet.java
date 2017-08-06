@@ -6,6 +6,7 @@ import com.exams.entity.Exam;
 import com.exams.entity.Subject;
 import com.exams.exception.ExamExistsException;
 import com.exams.exception.IncorectDateException;
+import com.exams.exception.IncorectMarkException;
 import com.exams.exception.IncorectSubjectTitleException;
 import com.exams.service.ExamService;
 import com.exams.service.SubjectService;
@@ -68,6 +69,8 @@ public class UploadServlet extends HttpServlet {
             catch (IncorectDateException e) {
                 e.printStackTrace();
             } catch (ExamExistsException e) {
+                e.printStackTrace();
+            } catch (IncorectMarkException e) {
                 e.printStackTrace();
             }
         }

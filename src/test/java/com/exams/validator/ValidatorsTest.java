@@ -1,8 +1,8 @@
 package com.exams.validator;
 
 import com.exams.entity.Subject;
-import com.exams.validator.impl.LocalDateValidator;
-import com.exams.validator.impl.SubjectValidator;
+import com.exams.exception.IncorectDateException;
+import com.exams.exception.IncorectSubjectTitleException;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -33,27 +33,22 @@ public class ValidatorsTest {
 	}
 
 	@Test(dataProvider = "subjectTitleDataProvider")
-	public void testValidSubjectValidator(String title) {
-		Validator<Subject> validator = new SubjectValidator();
-		assertTrue(validator.vlidate(new Subject(title)));
+	public void testValidSubjectValidator(String title) throws IncorectSubjectTitleException {
+		new SubjectValidator().vlidate(new Subject(title));
+	}
+
+	@Test(expectedExceptions = {IncorectSubjectTitleException.class})
+	public void testInvalidSubjectValidator() throws IncorectSubjectTitleException {
+		new SubjectValidator().vlidate(new Subject("English language subject"));
+	}
+
+	@Test(dataProvider = "invalidLocalDate", expectedExceptions={IncorectDateException.class})
+	public void testInvalidLocalDate(LocalDate date) throws IncorectDateException {
+		new LocalDateValidator().vlidate(date);
 	}
 
 	@Test
-	public void testInvalidSubjectValidator() {
-		Validator<Subject> validator = new SubjectValidator();
-		assertFalse(validator.vlidate(new Subject("English language subject")));
-	}
-
-	@Test(dataProvider = "invalidLocalDate")
-	public void testInvalidLocalDate(LocalDate date){
-		Validator<LocalDate> validator = new LocalDateValidator();
-		assertFalse(validator.vlidate(date));
-	}
-
-	@Test
-	public void testValidLocalDate(){
-		Validator<LocalDate> validator = new LocalDateValidator();
-		LocalDate date = LocalDate.now();
-		assertTrue(validator.vlidate(date));
+	public void testValidLocalDate() throws IncorectDateException {
+		new LocalDateValidator().vlidate(LocalDate.now());
 	}
 }

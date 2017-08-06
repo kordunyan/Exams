@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 @WebServlet("")
 public class IndexServlet extends HttpServlet {
@@ -41,11 +43,13 @@ public class IndexServlet extends HttpServlet {
 		List<Subject> subjects = subjectService.getFormPage(page, SubjectServiceImpl.PER_PAGE);
 		long countItems = subjectService.getcount();
 		int pages = subjectService.calculateCountPages(countItems, SubjectServiceImpl.PER_PAGE);
-		PaginationService pagination = new PaginationServiceImpl(5, pages, page);
-		request.setAttribute("currentPage", page);
-		request.setAttribute("startPage", pagination.getStart());
-		request.setAttribute("endPage", pagination.getEnd());
-		request.setAttribute("pages", pages);
+		PaginationService pagination = new PaginationServiceImpl(5, pages, page, "/?page=");
+
+		Locale locale = new Locale("ua");
+		ResourceBundle messages = ResourceBundle.getBundle("locale/messages", locale);
+
+		request.setAttribute("msg", messages);
+		request.setAttribute("pagination", pagination);
 		request.setAttribute("subjects", subjects);
 		request.setAttribute("page", "home");
 		request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);

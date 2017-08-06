@@ -4,13 +4,15 @@ import com.exams.entity.Exam;
 import com.exams.entity.Subject;
 import com.exams.exception.ExamExistsException;
 import com.exams.exception.IncorectDateException;
+import com.exams.exception.IncorectMarkException;
+import com.exams.exception.IncorectSubjectTitleException;
 
 import java.time.LocalDate;
 import java.util.List;
 
 
 public interface ExamService {
-	void addExam(Exam exam) throws IncorectDateException, ExamExistsException;
+	void addExam(Exam exam) throws IncorectDateException, ExamExistsException, IncorectSubjectTitleException, IncorectMarkException;
 
 	void update(Exam exam) throws IncorectDateException, ExamExistsException;
 

@@ -7,13 +7,31 @@
         },
 
         pattern: /^[A-Za-z]{3,32}([\s][A-Za-z]{2,32}){0,1}$/,
+        form:null,
+        bthSubmit:null,
+        inputTitle:null,
 
         initialize(){
-            app.setListeners();
+            this.form = $("#formAddSubject");
+            this.bthSubmit = $("#btnSubmit");
+            this.bthSubmit.attr("disabled", "disabled");
+            this.inputTitle = app.form.find("input[name='title']");
+            this.setListeners();
         },
 
         setListeners(){
-            $("#formAddSubject").on("submit", app.submitForm);
+            this.inputTitle.on("input", app.inputHandler);
+            this.form.on("submit", app.submitForm);
+        },
+
+        inputHandler(){
+            app.destroyMessage($(this));
+            if($(this).val().length !== 0 && app.bthSubmit.attr("disabled") == "disabled"){
+                app.bthSubmit.removeAttr("disabled");
+            }
+            else if($(this).val().length == 0){
+                app.bthSubmit.attr("disabled", "disabled");
+            }
         },
 
         submitForm(e){

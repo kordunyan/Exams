@@ -29,5 +29,4 @@ public interface SubjectDAO {
 
     List<Subject> getForPage(Integer page, Integer perPage);
 
-    List<Subject> getAllWithExams();
 }

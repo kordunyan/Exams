@@ -26,16 +26,6 @@ public interface SubjectMapper {
 	@Select("SELECT id, title, isenabled FROM subject ORDER BY title")
 	List<Subject> findAllSubject();
 
-	@Select("SELECT id, title, isenabled FROM subject ORDER BY title")
-	@Results(value = {
-			@Result(id=true, column = "id", property = "id"),
-			@Result(column = "title", property = "title"),
-			@Result(column = "isenabled", property = "isEnabled"),
-			@Result(property="exams", column="subject_id", javaType= List.class, many=@Many(select = "com.exams.entity.mapper.ExamMapper.getBySubject"))
-	})
-	List<Subject> findAllSubjectWithExams();
-
-
 	@Select("SELECT id, title, isenabled FROM subject ORDER BY title limit #{param2} offset #{param1}")
 	List<Subject> getPerPage(int offset, int limit);
 
