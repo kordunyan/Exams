@@ -7,6 +7,6 @@
         <li role="presentation" <c:if test="${page.equals(\"add/subject\")}">class="active"</c:if>><a href="<c:url value="/add/subject"/>">${msg.getString("nav.addSubject")}</a></li>
         <li role="presentation" <c:if test="${page.equals(\"bydate\")}">class="active"</c:if>><a href="<c:url value="/bydate"/>">${msg.getString("nav.grades")}</a></li>
         <li role="presentation" <c:if test="${page.equals(\"database\")}">class="active"</c:if>><a href="<c:url value="/database"/>">${msg.getString("nav.database")}</a></li>
-        <li role="presentation"><a href="<c:url value="/logout"/>"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> ${msg.getString("nav.logout")}</a></li>
+
     </ul>
 </div>

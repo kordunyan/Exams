@@ -3,8 +3,13 @@
     let app = {
 
         messages: {
-            title: 'Title must contain between 3 and 35 characters',
+            'title':{
+                'en':'Title must contain between 3 and 35 characters',
+                'ua':'Назва повинна містит від 2 до 35 символів',
+            },
         },
+
+        locale:'en',
 
         pattern: /^[A-Za-z]{3,32}([\s][A-Za-z]{2,32}){0,1}$/,
         form:null,
@@ -12,6 +17,10 @@
         inputTitle:null,
 
         initialize(){
+
+            if($.cookie('locale') != null){
+                app.locale = $.cookie('locale');
+            }
             this.form = $("#formAddSubject");
             this.bthSubmit = $("#btnSubmit");
             this.bthSubmit.attr("disabled", "disabled");
@@ -60,7 +69,7 @@
             let formGroup = elem.closest('.form-group');
             formGroup.addClass('has-error');
             let withErrors = formGroup.find('.help-block');
-            withErrors.html(app.messages[error]);
+            withErrors.html(app.messages[error][app.locale]);
         }
 
     };

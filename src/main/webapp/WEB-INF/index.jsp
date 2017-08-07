@@ -11,13 +11,15 @@
 </head>
 <body>
 
+<jsp:include page="../headNav.jsp"/>
+
 <div class="container">
     <div class="row">
         <jsp:include page="../nav.jsp"/>
 
         <div class="col-md-9 main-book-wraper">
 
-            <h3 class="text-center">All subjects</h3>
+            <h3 class="text-center">${msg.getString("main.title")}</h3>
 
             <table class="table content-table">
                 <thead>
@@ -28,12 +30,12 @@
                 <c:forEach var="subject" items="${subjects}">
                     <tr <c:if test="${!subject.isEnabled}">class="warning"</c:if>>
                         <td>${subject.title}</td>
-                        <td><a href="<c:url value="/grades?subject=${subject.id}"/>">Grades</a></td>
-                        <td><a href="<c:url value="/avg?subject=${subject.id}"/>">AVG grade</a></td>
+                        <td><a href="<c:url value="/grades?subject=${subject.id}"/>">${msg.getString("main.table.Grades")}</a></td>
+                        <td><a href="<c:url value="/avg?subject=${subject.id}"/>">${msg.getString("main.table.AVG")}</a></td>
                         <td class="text-right">
                             <form class="without-margin form-delete-subject" action="#" method="get">
                                 <input type="hidden" name="subject" value="${subject.id}"/>
-                                <input type="submit" value="Delete" class="btn btn-default"/>
+                                <input type="submit" value="${msg.getString("btn.delete")}" class="btn btn-default"/>
                             </form>
                         </td>
                     </tr>
@@ -55,7 +57,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">Delete subject ?</h4>
+                <h4 class="modal-title">${msg.getString("main.modaldelete.title")}</h4>
             </div>
             <div class="modal-body">
                 <p id="delete-subject-modal-content"></p>
@@ -64,8 +66,8 @@
                 <form class="form-inline" action="<c:url value="/subject/delete"/>" method="post">
                     <input type="hidden" name="subject" id="input-delete-subject"/>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Delete</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">${msg.getString("btn.delete")}</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">${msg.getString("btn.close")}</button>
                     </div>
                 </form>
             </div>
@@ -85,8 +87,8 @@
                 <p>Server error. Please try later</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Delete</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">${msg.getString("btn.close")}</button>
+                <button type="button" class="btn btn-primary">${msg.getString("btn.delete")}</button>
             </div>
         </div>
     </div>
@@ -94,6 +96,7 @@
 
 
 <script src="<c:url value="/scripts/jquery-2.1.4.min.js"/>"></script>
+<script src="<c:url value="/scripts/jquery.cookie.js"/>"></script>
 <script src="<c:url value="/scripts/bootstrap.min.js"/>"></script>
 <script src="<c:url value="/scripts/indexPage.js"/>"></script>
 

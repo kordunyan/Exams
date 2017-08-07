@@ -10,28 +10,29 @@
 
 </head>
 <body>
+<jsp:include page="../headNav.jsp"/>
 <div class="container">
     <div class="row">
         <jsp:include page="../nav.jsp"/>
 
         <div class="col-md-9 main-book-wraper">
 
-            <h3 class="text-center">AVG grade of ${curSubject.title}</h3>
+            <h3 class="text-center">${msg.getString("avgdrade.title")} ${curSubject.title}</h3>
 
             <form class="form-inline form-input-date" action="<c:url value="/avg"/>">
                 <div class="form-group">
-                    <label for="subjectList">Subject</label>
+                    <label for="subjectList">${msg.getString("avgdrade.subject")}:  </label>
                     <select name="subject" id="subjectList" class="form-control">
-                        <option value="0">Select subject</option>
+                        <option value="0">${msg.getString("avgdrade.form.select")}</option>
                         <c:forEach items="${subjects}" var="subject">
                             <option <c:if test="${curSubject.equals(subject)}">selected</c:if> value="${subject.id}">${subject.title}</option>
                         </c:forEach>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-default">Show</button>
+                <button type="submit" class="btn btn-default">${msg.getString("btn.show")}</button>
             </form>
             <c:if test="${curSubject != null && avg != null}">
-                <h4 class="p-avg">AVG grade = ${avg}</h4>
+                <h4 class="p-avg">${msg.getString("avgdrade.avg")} = ${avg}</h4>
             </c:if>
             <c:if test="${curSubject != null && avg == null}">
                 <div class="alert alert-warning" role="alert">

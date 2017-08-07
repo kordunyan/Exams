@@ -11,14 +11,14 @@
 
 </head>
 <body>
-
+<jsp:include page="../headNav.jsp"/>
 <div class="container">
     <div class="row">
         <jsp:include page="../nav.jsp"/>
 
         <div class="col-md-9 main-book-wraper">
 
-            <h3 class="text-center">Add grade</h3>
+            <h3 class="text-center">${msg.getString("addgrade.title")}</h3>
 
             <form class="form-horizontal add-form" id="form-add-grade" action="<c:url value="/add/grade"/>"
                   method="post">
@@ -32,14 +32,14 @@
                 </c:if>
 
                 <div class="form-group">
-                    <label class="col-sm-2 col-sm-offset-2 control-label">Subject</label>
+                    <label class="col-sm-2 col-sm-offset-2 control-label">${msg.getString("addgrade.form.subject")}</label>
                     <div class="col-sm-5">
                         <p class="form-info">${subject.title}</p>
                     </div>
                 </div>
 
                 <div class="form-group <c:if test="${messages.containsKey(\"createDate\")}">has-error</c:if>">
-                    <label class="col-sm-2 col-sm-offset-2 control-label">Date</label>
+                    <label class="col-sm-2 col-sm-offset-2 control-label">${msg.getString("addgrade.form.date")}</label>
                     <div class="col-sm-5">
                         <input type="text" class="form-control" name="createdate" value="${param.createdate}"
                                placeholder="yyyy-mm-dd">
@@ -48,17 +48,17 @@
                 </div>
 
                 <div class="form-group <c:if test="${messages.containsKey(\"mark\")}">has-error</c:if>">
-                    <label for="mark" class="col-sm-2 col-sm-offset-2 control-label">Mark</label>
+                    <label for="mark" class="col-sm-2 col-sm-offset-2 control-label">${msg.getString("addgrade.form.mark")}</label>
                     <div class="col-sm-5">
                         <input type="text" class="form-control" name="mark" value="${param.mark}" id="mark"
-                               placeholder="mark">
+                               placeholder="${msg.getString("addgrade.form.mark")}">
                         <span class="help-block">${messages.get("mark")}</span>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-sm-offset-4 col-sm-5">
-                        <button type="submit" id="btnSubmit" class="btn btn-primary">Add grade</button>
+                        <button type="submit" id="btnSubmit" class="btn btn-primary">${msg.getString("btn.addgrade")}</button>
                     </div>
                 </div>
             </form>
@@ -70,7 +70,7 @@
 <script src='<c:url value="/scripts/jquery-ui.js"/>'></script>
 <script src='<c:url value="/scripts/ui.datepicker-ru.js"/>'></script>
 <script src="<c:url value="/scripts/bootstrap.min.js"/>"></script>
-<script src="<c:url value="/scripts/addGrade.js"/>"></script>
+<!--<script src="<c:url value="/scripts/addGrade.js"/>"></script>-->
 
 </body>
 </html>

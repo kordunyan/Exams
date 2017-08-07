@@ -7,12 +7,11 @@
     <link href="<c:url value="/css/style.css"/>" rel="stylesheet">
 </head>
 <body>
-
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
                 <div class="panel panel-primary login-panel">
-                    <div class="panel-heading">Login</div>
+                    <div class="panel-heading">${msg.getString("login.title")}</div>
                     <div class="panel-body">
                         <form action="<c:url value="/login"/>" method="post">
                             <c:if test="${messages.containsKey(\"login\")}">
@@ -21,20 +20,19 @@
                                 </div>
                             </c:if>
                             <div class="form-group <c:if test="${messages.containsKey(\"username\")}">has-error</c:if>">
-                                <input type="text" class="form-control" name="login" placeholder="Login" value="admin">
+                                <input type="text" class="form-control" name="login" placeholder="${msg.getString("login.input.login")}" value="admin">
                                 <span class="help-block">${messages.get("username")}</span>
                             </div>
                             <div class="form-group <c:if test="${messages.containsKey(\"password\")}">has-error</c:if>">
-                                <input type="password" class="form-control" name="password" placeholder="Password" value="12345">
+                                <input type="password" class="form-control" name="password" placeholder="${msg.getString("login.input.password")}" value="12345">
                                 <span class="help-block">${messages.get("password")}</span>
                             </div>
-                            <button type="submit" class="btn btn-default">Sign in</button>
+                            <button type="submit" class="btn btn-default">${msg.getString("btn.signin")}</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </body>
 </html>

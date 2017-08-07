@@ -4,6 +4,7 @@ import com.exams.dao.factory.DatabaseType;
 import com.exams.dao.factory.ServiceFactory;
 import com.exams.entity.Subject;
 import com.exams.exception.IncorectSubjectTitleException;
+import com.exams.i18n.ResourceBundleFactory;
 import com.exams.service.SubjectService;
 
 import javax.servlet.ServletException;
@@ -36,7 +37,7 @@ public class AddSubject extends HttpServlet {
 		try {
 			subjectService.addSubject(new Subject(title));
 		} catch (IncorectSubjectTitleException ex) {
-			messages.put("title", ex.getMessage());
+			messages.put("title", ResourceBundleFactory.getResourceBundle().getString("messages.error.subject"));
 		}
 
 		if (messages.isEmpty()) {

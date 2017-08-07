@@ -11,21 +11,21 @@
 
 </head>
 <body>
-
+<jsp:include page="../headNav.jsp"/>
 <div class="container">
     <div class="row">
         <jsp:include page="../nav.jsp"/>
 
         <div class="col-md-9 main-book-wraper">
 
-            <h3 class="text-center">Grades by date</h3>
+            <h3 class="text-center">${msg.getString("gradesbydate.title")}</h3>
 
             <form class="form-inline form-input-date" action="<c:url value="/bydate"/>">
                 <div class="form-group">
-                    <label for="createDate">Date</label>
+                    <label for="createDate">${msg.getString("gradesbydate.date")}:</label>
                     <input type="text" class="form-control" name="date" <c:if test="${date != null}">value="${date}"</c:if> id="createDate">
                 </div>
-                <button type="submit" class="btn btn-default">Show</button>
+                <button type="submit" class="btn btn-default">${msg.getString("btn.show")}</button>
             </form>
 
             
@@ -33,8 +33,8 @@
                 <table class="table table-striped content-table">
                     <thead>
                     <tr>
-                        <th>Subject</th>
-                        <th>Mark</th>
+                        <th>${msg.getString("gradesbydate.table.subject")}</th>
+                        <th>${msg.getString("gradesbydate.table.mark")}</th>
                     </tr>
                     </thead>
                     <c:forEach items="${exams}" var="exam">

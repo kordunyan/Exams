@@ -10,13 +10,13 @@
 
 </head>
 <body>
-
+<jsp:include page="../headNav.jsp"/>
 <div class="container">
     <div class="row">
         <jsp:include page="../nav.jsp"/>
 
         <div class="col-md-9 main-book-wraper">
-            <h3 class="text-center">Database</h3>
+            <h3 class="text-center">${msg.getString("database.title")}</h3>
 
                         <form class="form-horizontal add-form" id="formAddSubject" action="<c:url value="/dtabase/upload"/>" method="post" enctype="multipart/form-data">
                             <div class="form-group">
@@ -26,8 +26,8 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-primary">Load</button>
-                                    <a href="<c:url value="/database/dump"/>" class="btn btn-default">Dump</a>
+                                    <button type="submit" class="btn btn-primary">${msg.getString("btn.load")}</button>
+                                    <a href="<c:url value="/database/dump"/>" class="btn btn-default">${msg.getString("btn.dump")}</a>
                                 </div>
                             </div>
                         </form>

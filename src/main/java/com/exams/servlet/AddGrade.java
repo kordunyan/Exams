@@ -23,6 +23,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 @Log4j(topic = "file")
 @WebServlet("/add/grade")
@@ -43,6 +44,7 @@ public class AddGrade extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map<String, String> messages = new HashMap<>();
 		Subject subject = null;
+		ResourceBundle msg = (ResourceBundle) request.getAttribute("msg");
 		try{
 			int subjectId = Integer.parseInt(request.getParameter("subject"));
 			subject = subjectService.getById(subjectId);
@@ -51,9 +53,9 @@ public class AddGrade extends HttpServlet {
 
 		try {
 			if (subject == null) {
-				messages.put("global", "Such subject not exists");
+				messages.put("global", msg.getString("messages.error.nonesubject"));
 			} else if (!subject.getIsEnabled()) {
-				messages.put("global", "Subject is disabled");
+				messages.put("global", msg.getString("messages.error.disabledsubject"));
 			} else {
 				request.setAttribute("subject", subject);
 				int mark = Math.abs(Integer.parseInt(request.getParameter("mark")));
@@ -62,21 +64,20 @@ public class AddGrade extends HttpServlet {
 				examService.addExam(new Exam(mark, date, subject));
 			}
 		} catch (ExamExistsException ex) {
-			messages.put("global", ex.getMessage());
+			messages.put("global", msg.getString("messages.error.existexam"));
 		} catch (IncorectDateException ex) {
-			messages.put("createDate", ex.getMessage());
+			messages.put("createDate", msg.getString("messages.error.incorectdate"));
 		} catch (NumberFormatException ex) {
-			messages.put("mark", "Mark should be a numeric");
+			messages.put("mark", msg.getString("messages.error.markformat"));
 		} catch (IncorectMarkException ex) {
-			messages.put("mark", ex.getMessage());
+			messages.put("mark", msg.getString("messages.error.incorectmark"));
 		} catch (DateTimeParseException ex){
-			messages.put("createDate", "Incorect date format");
+			messages.put("createDate", msg.getString("messages.error.date"));
 		}
 		catch (Exception ex) {
 			log.error("Error to add mark", ex);
 		}
 
-		System.out.println(messages);
 
 		if(messages.isEmpty()){
 			response.sendRedirect(String.format("%s/grades?subject=%d", request.getContextPath(), subject.getId()));

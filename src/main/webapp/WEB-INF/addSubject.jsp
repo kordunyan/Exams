@@ -10,26 +10,26 @@
 
 </head>
 <body>
-
+<jsp:include page="../headNav.jsp"/>
 <div class="container">
     <div class="row">
         <jsp:include page="../nav.jsp"/>
 
         <div class="col-md-9 main-book-wraper">
 
-            <h3 class="text-center">Add subject</h3>
+            <h3 class="text-center">${msg.getString("addsubject.title")}</h3>
 
             <form class="form-horizontal add-form" id="formAddSubject" action="<c:url value="/add/subject"/>" method="post">
                 <div class="form-group <c:if test="${messages.containsKey(\"title\")}">has-error</c:if>">
-                    <label for="subjectTitle" class="col-sm-2 control-label">Title</label>
+                    <label for="subjectTitle" class="col-sm-2 control-label">${msg.getString("addsubject.form.title")}</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="title" value="${param.title}" id="subjectTitle" placeholder="Title">
+                        <input type="text" class="form-control" name="title" value="${param.title}" id="subjectTitle" placeholder="${msg.getString("addsubject.form.title")}">
                         <span class="help-block">${messages.get("title")}</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" id="btnSubmit" class="btn btn-primary">Add subject</button>
+                        <button type="submit" id="btnSubmit" class="btn btn-primary">${msg.getString("btn.add.subject")}</button>
                     </div>
                 </div>
             </form>
@@ -39,6 +39,7 @@
 </div>
 
 <script src="<c:url value="/scripts/jquery-2.1.4.min.js"/>"></script>
+<script src="<c:url value="/scripts/jquery.cookie.js"/>"></script>
 <script src="<c:url value="/scripts/bootstrap.min.js"/>"></script>
 <script src="<c:url value="/scripts/addSubject.js"/>"></script>
 

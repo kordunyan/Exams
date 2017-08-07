@@ -44,11 +44,6 @@ public class IndexServlet extends HttpServlet {
 		long countItems = subjectService.getcount();
 		int pages = subjectService.calculateCountPages(countItems, SubjectServiceImpl.PER_PAGE);
 		PaginationService pagination = new PaginationServiceImpl(5, pages, page, "/?page=");
-
-		Locale locale = new Locale("ua");
-		ResourceBundle messages = ResourceBundle.getBundle("locale/messages", locale);
-
-		request.setAttribute("msg", messages);
 		request.setAttribute("pagination", pagination);
 		request.setAttribute("subjects", subjects);
 		request.setAttribute("page", "home");

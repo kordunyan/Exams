@@ -5,6 +5,7 @@ import com.exams.dao.factory.ServiceFactory;
 import com.exams.entity.Exam;
 import com.exams.entity.Subject;
 import com.exams.entity.User;
+import com.exams.i18n.ResourceBundleFactory;
 import com.exams.service.ExamService;
 import com.exams.service.PaginationService;
 import com.exams.service.SubjectService;
@@ -25,7 +26,12 @@ public class Main {
 
 		Locale locale = new Locale("ua");
 
-		ResourceBundle messages = ResourceBundle.getBundle("locale/messages", locale);
+		System.out.println("Locale: "+locale.getDisplayLanguage());
+
+		//ResourceBundle messages = ResourceBundleFactory.getResourceBundle();
+		ResourceBundleFactory.setLocale(locale);
+		ResourceBundle messages = ResourceBundleFactory.getResourceBundle();
+
 
 		System.out.println("Головна торіна");
 
