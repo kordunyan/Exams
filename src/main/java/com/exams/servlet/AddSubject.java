@@ -35,7 +35,7 @@ public class AddSubject extends HttpServlet {
 		Map<String, String> messages = new HashMap<>();
 		String title = request.getParameter("title");
 		try {
-			subjectService.addSubject(new Subject(title));
+			subjectService.addSubject(new Subject(title, true));
 		} catch (IncorectSubjectTitleException ex) {
 			messages.put("title", ResourceBundleFactory.getResourceBundle().getString("messages.error.subject"));
 		}

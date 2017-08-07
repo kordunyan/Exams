@@ -5,10 +5,23 @@
     let app = {
 
             messages: {
-                empty:'Fill in this field',
-                mark: 'Mark should be a integer',
-                createdate: 'Date is not valid',
+                empty:{
+                    'en':'Fill in this field',
+                    'ua':'Заповніть дане поле',
+                },
+
+                mark:{
+                    'en':'Mark must between 0 and 99',
+                    'ua':'Оцінка повинна бути в межах від 0 до 99',
+                },
+
+                createdate: {
+                    'en':'Date is not valid',
+                    'ua':'Некоректна дата',
+                }
             },
+
+            locale:'en',
 
             patterns:{
                 mark: /^[0-9]{1,2}$/
@@ -20,6 +33,11 @@
             inputCreateDate:null,
 
             initialize(){
+
+                if($.cookie('locale') != null){
+                    app.locale = $.cookie('locale');
+                }
+
                 let max = new Date();
                 let min = new Date(max.getFullYear(), 0, 1);
                 this.form = $("#form-add-grade");
@@ -114,7 +132,7 @@
                 let formGroup = elem.closest('.form-group');
                 formGroup.addClass('has-error');
                 let withErrors = formGroup.find('.help-block');
-                withErrors.html(app.messages[error]);
+                withErrors.html(app.messages[error][app.locale]);
             }
 
         };

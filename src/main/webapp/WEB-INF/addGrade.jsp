@@ -67,10 +67,11 @@
 </div>
 
 <script src="<c:url value="/scripts/jquery-2.1.4.min.js"/>"></script>
+<script src="<c:url value="/scripts/jquery.cookie.js"/>"></script>
 <script src='<c:url value="/scripts/jquery-ui.js"/>'></script>
 <script src='<c:url value="/scripts/ui.datepicker-ru.js"/>'></script>
 <script src="<c:url value="/scripts/bootstrap.min.js"/>"></script>
-<!--<script src="<c:url value="/scripts/addGrade.js"/>"></script>-->
+<script src="<c:url value="/scripts/addGrade.js"/>"></script>
 
 </body>
 </html>

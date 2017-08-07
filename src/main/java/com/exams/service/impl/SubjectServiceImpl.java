@@ -30,7 +30,6 @@ public class SubjectServiceImpl implements SubjectService {
             throw new IncorectSubjectTitleException("Subject with same title already exists");
         }
         try {
-            subject.setIsEnabled(true);
             dao.addSubject(subject);
         } catch (Exception ex) {
             log.error("Error to add subject " + subject, ex);

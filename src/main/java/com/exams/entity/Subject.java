@@ -36,6 +36,11 @@ public class Subject {
 		this.title = title;
 	}
 
+	public Subject(String title, Boolean isEnabled) {
+		this.title = title;
+		this.isEnabled = isEnabled;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
