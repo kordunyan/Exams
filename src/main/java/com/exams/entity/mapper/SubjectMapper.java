@@ -43,4 +43,20 @@ public interface SubjectMapper {
 
 	@Update("UPDATE subject SET isenabled=#{param2} WHERE id=#{param1}")
 	void setEnabled(int subjectId, boolean isEnabled);
+
+	@Insert({"<script>",
+			"insert into  subject (title, isenabled) values ",
+			"<foreach collection='subjects' item='s' separator = '),(' open ='(' close=')' >#{s.title}, #{s.isEnabled}</foreach>",
+			"</script>"})
+	void insertAll(@Param("subjects") List<Subject> subjects);
+
+	@Select("SELECT id, title, isenabled FROM subject")
+	@Results(value = {
+			@Result(property="id", column = "id"),
+			@Result(property="title", column = "title"),
+			@Result(property="exams", column="id", javaType= List.class,
+					many=@Many(select="com.exams.entity.mapper.ExamMapper.getBySubject"))
+	})
+	List<Subject> selectAllSubject();
+
 }

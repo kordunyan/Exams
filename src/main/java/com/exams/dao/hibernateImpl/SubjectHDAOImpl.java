@@ -4,6 +4,7 @@ import com.exams.dao.SubjectDAO;
 import com.exams.entity.Subject;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.StatelessSession;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
@@ -68,6 +69,17 @@ public class SubjectHDAOImpl implements SubjectDAO {
     }
 
     @Override
+    public void insertAll(List<Subject> subjects) {
+        try (StatelessSession session = sessionFactory.openStatelessSession()) {
+            Transaction tx = session.beginTransaction();
+            for(Subject subject : subjects){
+                session.insert(subject);
+            }
+            tx.commit();
+        }
+    }
+
+    @Override
     public void delete(Subject subject) {
         try (Session session = sessionFactory.openSession()) {
             Transaction tx = session.beginTransaction();
@@ -109,5 +121,10 @@ public class SubjectHDAOImpl implements SubjectDAO {
             Query<Subject> query = session.createQuery("FROM Subject s ORDER BY s.title");
             return query.list();
         }
+    }
+
+    @Override
+    public List<Subject> getAllWithExam() {
+        return this.getAll();
     }
 }

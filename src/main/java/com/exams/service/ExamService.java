@@ -37,4 +37,6 @@ public interface ExamService {
 	void deleteAll();
 
 	int calculateCountPages(long countItems, int perPage);
+
+	void addAll(List<Exam> exams, Subject subject);
 }

@@ -3,7 +3,9 @@ package com.exams.servlet;
 
 import com.exams.dao.factory.DatabaseType;
 import com.exams.dao.factory.ServiceFactory;
+import com.exams.entity.Exam;
 import com.exams.entity.Subject;
+import com.exams.serializer.ExamSerializer;
 import com.exams.service.ExamService;
 import com.exams.service.SubjectService;
 import com.google.gson.Gson;
@@ -30,15 +32,15 @@ public class MakeDump extends HttpServlet{
         ServiceFactory.setDataBaseConfig(DatabaseType.PRODUCTION);
         this.examService = ServiceFactory.getExamService();
         this.subjectService = ServiceFactory.getSubjectService();
-        gson = new GsonBuilder().setPrettyPrinting().create();
+        gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .registerTypeAdapter(Exam.class, new ExamSerializer())
+                .create();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Subject> subjects = subjectService.getAll();
-        for(Subject subject :  subjects){
-            subject.setExams(examService.getBySubjectId(subject.getId(), true));
-        }
+        List<Subject> subjects = subjectService.getAllWithExams();
         response.setContentType("application/json");
         response.setContentType("APPLICATION/OCTET-STREAM");
         response.setHeader("Content-Disposition","attachment; filename=\"dump.json\"");

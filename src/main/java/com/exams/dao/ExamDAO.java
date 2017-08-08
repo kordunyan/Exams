@@ -33,5 +33,7 @@ public interface ExamDAO {
 
 	Long getCountBySubject(int subjectId);
 
+	void insertAll(List<Exam> exams, Subject subject);
+
 	void deleteAll();
 }

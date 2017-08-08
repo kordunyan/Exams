@@ -102,6 +102,18 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
+    public List<Subject> getAllWithExams() {
+        log.info("Get all with exams");
+        try{
+            return dao.getAllWithExam();
+        }
+        catch(Exception ex){
+            log.error("Error to get all subject with exams", ex);
+            throw ex;
+        }
+    }
+
+    @Override
     public List<Subject> getFormPage(int page, int perPage) {
         log.info("Get subjects for page: " + page + ", per page: " + perPage);
         try{
@@ -137,5 +149,17 @@ public class SubjectServiceImpl implements SubjectService {
 
     public int calculateCountPages(long countItems, int perPage){
         return (int) Math.ceil((double) countItems / perPage);
+    }
+
+    @Override
+    public void insertAll(List<Subject> subjects) {
+        log.info("Insert all subject");
+        try{
+            dao.insertAll(subjects);
+        }
+        catch (Exception ex){
+            log.error("Error to insert all: ", ex);
+            throw ex;
+        }
     }
 }

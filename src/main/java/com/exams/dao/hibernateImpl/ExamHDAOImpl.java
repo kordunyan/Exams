@@ -6,6 +6,7 @@ import com.exams.entity.Subject;
 import com.exams.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.StatelessSession;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
@@ -118,6 +119,18 @@ public class ExamHDAOImpl implements ExamDAO {
 			Query query = session.createQuery("SELECT COUNT(*) FROM Exam WHERE subject.id = :p_subject_id");
 			query.setParameter("p_subject_id", subjectId);
 			return (Long) query.uniqueResult();
+		}
+	}
+
+	@Override
+	public void insertAll(List<Exam> exams, Subject subject) {
+		try (StatelessSession session = sessionFactory.openStatelessSession()) {
+			Transaction tx = session.beginTransaction();
+			for(Exam exam : exams){
+				exam.setSubject(subject);
+				session.insert(exam);
+			}
+			tx.commit();
 		}
 	}
 

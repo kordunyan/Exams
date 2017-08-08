@@ -63,6 +63,15 @@ public class SubjectMDAOImpl implements SubjectDAO {
     }
 
     @Override
+    public void insertAll(List<Subject> subjects) {
+        SqlSession session = sqlSessionFactory.openSession();
+        SubjectMapper mapper = session.getMapper(SubjectMapper.class);
+        mapper.insertAll(subjects);
+        session.commit();
+        session.close();
+    }
+
+    @Override
     public void delete(Subject subject) {
         SqlSession session = sqlSessionFactory.openSession();
         SubjectMapper mapper = session.getMapper(SubjectMapper.class);
@@ -103,6 +112,15 @@ public class SubjectMDAOImpl implements SubjectDAO {
         SqlSession session = sqlSessionFactory.openSession();
         SubjectMapper mapper = session.getMapper(SubjectMapper.class);
         List<Subject> subjects =  mapper.findAllSubject();
+        session.close();
+        return subjects;
+    }
+
+    @Override
+    public List<Subject> getAllWithExam() {
+        SqlSession session = sqlSessionFactory.openSession();
+        SubjectMapper mapper = session.getMapper(SubjectMapper.class);
+        List<Subject> subjects =  mapper.selectAllSubject();
         session.close();
         return subjects;
     }

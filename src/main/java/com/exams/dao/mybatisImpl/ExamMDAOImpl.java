@@ -121,6 +121,15 @@ public class ExamMDAOImpl implements ExamDAO{
     }
 
     @Override
+    public void insertAll(List<Exam> exams, Subject subject) {
+        SqlSession session = sqlSessionFactory.openSession();
+        ExamMapper mapper = session.getMapper(ExamMapper.class);
+        mapper.insertAll(exams, subject.getId());
+        session.commit();
+        session.close();
+    }
+
+    @Override
     public void deleteAll() {
         SqlSession session = sqlSessionFactory.openSession();
         ExamMapper mapper = session.getMapper(ExamMapper.class);

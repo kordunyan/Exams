@@ -23,6 +23,8 @@ public interface SubjectService {
 
     List<Subject> getAll();
 
+    List<Subject> getAllWithExams();
+
     List<Subject> getFormPage(int page, int perPage);
 
     Subject getById(int id);
@@ -30,4 +32,6 @@ public interface SubjectService {
     void setEnabled(int subjectId, boolean isEnabled);
 
     int calculateCountPages(long countItems, int perPage);
+
+    void insertAll(List<Subject> subjects);
 }

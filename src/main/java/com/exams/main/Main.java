@@ -5,7 +5,9 @@ import com.exams.dao.factory.ServiceFactory;
 import com.exams.entity.Exam;
 import com.exams.entity.Subject;
 import com.exams.entity.User;
+import com.exams.exception.IncorectSubjectTitleException;
 import com.exams.i18n.ResourceBundleFactory;
+import com.exams.serializer.ExamSerializer;
 import com.exams.service.ExamService;
 import com.exams.service.PaginationService;
 import com.exams.service.SubjectService;
@@ -13,18 +15,69 @@ import com.exams.service.UserService;
 import com.exams.service.impl.ExamServiceImpl;
 import com.exams.service.impl.PaginationServiceImpl;
 import com.exams.service.impl.SubjectServiceImpl;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.lang.reflect.Type;
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.*;
 
 
 public class Main {
 	public static void main(String[] args) {
 
 
-		Locale locale = new Locale("ua");
+		/*List<Subject> subjects = Arrays.asList(
+				new Subject("Subject1", true),
+				new Subject("Subject2", true),
+				new Subject("Subject3", true),
+				new Subject("Subject4", true)
+		);
+*/
+		ServiceFactory.setDataBaseConfig(DatabaseType.TEST);
+		SubjectService subjectService = ServiceFactory.getSubjectService();
+		ExamService examService = ServiceFactory.getExamService();
+		examService.deleteAll();
+		subjectService.deleteAll();
+
+		try {
+			subjectService.addSubject(new Subject("Java", true));
+		} catch (IncorectSubjectTitleException e) {
+			e.printStackTrace();
+		}
+
+		Subject subject = subjectService.getByTitle("Java");
+
+		System.out.println(subject);
+
+		List<Exam> exams = Arrays.asList(new Exam(15, LocalDate.of(2017, Month.APRIL, 2), null),
+				new Exam(10, LocalDate.of(2017, Month.APRIL, 3), null),
+				new Exam(11, LocalDate.of(2017, Month.APRIL, 4), null),
+				new Exam(9, LocalDate.of(2017, Month.APRIL, 5), null));
+
+		examService.addAll(exams, subject);
+
+
+
+		/*String result = gson.toJson(subjects);
+
+		Type type = new TypeToken<List<Subject>>() {
+		}.getType();
+		List<Subject> subjectsJson = gson.fromJson(result, type);
+
+		for(Subject subject : subjectsJson){
+			System.out.println(subject);
+			System.out.println(subject.getExams());
+		}*/
+
+
+
+		//subjectService.insertAll(subjects);
+
+
+		/*Locale locale = new Locale("ua");
 
 		System.out.println("Locale: "+locale.getDisplayLanguage());
 
@@ -39,7 +92,7 @@ public class Main {
 		System.out.println(messages.getString("nav.addSubject"));
 		System.out.println(messages.getString("nav.grades"));
 		System.out.println(messages.getString("nav.database"));
-		System.out.println(messages.getString("nav.logout"));
+		System.out.println(messages.getString("nav.logout"));*/
 
 
 

@@ -67,4 +67,10 @@ public interface ExamMapper {
 
     @Select("SELECT COUNT(*) FROM exam WHERE subject_id = #{subjectId}")
     Long getCountBySubjectId(int subjectId);
+
+    @Insert({"<script>",
+            "INSERT INTO  exam (createdate, mark, subject_id) values ",
+            "<foreach collection='exams' item='ex' separator = '),(' open ='(' close=')' >#{ex.createDate}, #{ex.mark}, #{param2}</foreach>",
+            "</script>"})
+    void insertAll(@Param("exams") List<Exam> exams, int subject_id);
 }

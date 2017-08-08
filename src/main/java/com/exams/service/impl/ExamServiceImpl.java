@@ -174,4 +174,16 @@ public class ExamServiceImpl implements ExamService {
 		return (int) Math.ceil((double) countItems / perPage);
 	}
 
+	@Override
+	public void addAll(List<Exam> exams, Subject subject) {
+		log.info("Add all exams, subject: " + subject);
+		try{
+			dao.insertAll(exams, subject);
+		}
+		catch (Exception ex){
+			log.error("Error to add all exams, subject: " + subject, ex);
+			throw ex;
+		}
+	}
+
 }
