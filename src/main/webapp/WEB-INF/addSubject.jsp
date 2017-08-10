@@ -1,5 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${cookie['locale'].value}"/>
+<fmt:setBundle basename="locale/messages"  />
 <html>
 <head>
     <meta charset="utf-8">
@@ -17,19 +20,19 @@
 
         <div class="col-md-9 main-book-wraper">
 
-            <h3 class="text-center">${msg.getString("addsubject.title")}</h3>
+            <h3 class="text-center"><fmt:message key="addsubject.title"/></h3>
 
             <form class="form-horizontal add-form" id="formAddSubject" action="<c:url value="/add/subject"/>" method="post">
                 <div class="form-group <c:if test="${messages.containsKey(\"title\")}">has-error</c:if>">
-                    <label for="subjectTitle" class="col-sm-2 control-label">${msg.getString("addsubject.form.title")}</label>
+                    <label for="subjectTitle" class="col-sm-2 control-label"><fmt:message key="addsubject.form.title"/></label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="title" value="${param.title}" id="subjectTitle" placeholder="${msg.getString("addsubject.form.title")}">
+                        <input type="text" class="form-control" name="title" value="${param.title}" id="subjectTitle" placeholder="<fmt:message key="addsubject.form.title"/>">
                         <span class="help-block">${messages.get("title")}</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" id="btnSubmit" class="btn btn-primary">${msg.getString("btn.add.subject")}</button>
+                        <button type="submit" id="btnSubmit" class="btn btn-primary"><fmt:message key="btn.add.subject"/></button>
                     </div>
                 </div>
             </form>

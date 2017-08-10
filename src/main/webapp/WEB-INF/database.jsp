@@ -1,5 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${cookie['locale'].value}"/>
+<fmt:setBundle basename="locale/messages"/>
 <html>
 <head>
     <meta charset="utf-8">
@@ -16,24 +19,22 @@
         <jsp:include page="../nav.jsp"/>
 
         <div class="col-md-9 main-book-wraper">
-            <h3 class="text-center">${msg.getString("database.title")}</h3>
-
-                        <form class="form-horizontal add-form" id="formAddSubject" action="<c:url value="/dtabase/upload"/>" method="post" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <div class="col-sm-10 col-sm-offset-2">
-                                     <input type="file" name="dump" id="exampleInputFile" class="form-group">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-primary">${msg.getString("btn.load")}</button>
-                                    <a href="<c:url value="/database/dump"/>" class="btn btn-default">${msg.getString("btn.dump")}</a>
-                                </div>
-                            </div>
-                        </form>
-
-
-
+            <h3 class="text-center"><fmt:message key="database.title"/></h3>
+            <form class="form-horizontal add-form" id="formAddSubject" action="<c:url value="/dtabase/upload"/>"
+                  method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <div class="col-sm-10 col-sm-offset-2">
+                        <input type="file" name="dump" id="exampleInputFile" class="form-group">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary"><fmt:message key="btn.load"/></button>
+                        <a href="<c:url value="/database/dump"/>" class="btn btn-default"><fmt:message
+                                key="btn.dump"/></a>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

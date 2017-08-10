@@ -1,5 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${cookie['locale'].value}"/>
+<fmt:setBundle basename="locale/messages"  />
 
 <html>
 <head>
@@ -18,16 +21,18 @@
 
         <div class="col-md-9 main-book-wraper">
 
-            <h3 class="text-center">${msg.getString("allgrades.title")} ${subject.title}</h3>
+            <h3 class="text-center"><fmt:message key="allgrades.title"/> ${subject.title}</h3>
             <c:if test="${subject.isEnabled}">
-                <a href="<c:url value="/add/grade?subject=${param.subject}"/>" class="btn btn-primary btn-add-grade">${msg.getString("btn.addGrade")}</a>
+                <a href="<c:url value="/add/grade?subject=${param.subject}"/>"
+                   class="btn btn-primary btn-add-grade"><fmt:message key="btn.addGrade"/></a>
             </c:if>
             <c:if test="${exams != null && exams.size() > 0 }">
                 <table class="table table-striped content-table">
                     <thead>
                     <tr>
                         <th>
-                            <a class="order-link" href="<c:url value="/grades?subject=${subjectId}&order=${!order}"/>">${msg.getString("allgrades.table.date")}
+                            <a class="order-link"
+                               href="<c:url value="/grades?subject=${subjectId}&order=${!order}"/>"><fmt:message key="allgrades.table.date"/>
                                 <span class="glyphicon
                         <c:choose>
                             <c:when test="${!order}">glyphicon-triangle-bottom</c:when>
@@ -35,7 +40,7 @@
                         </c:choose>"></span>
                             </a>
                         </th>
-                        <th colspan="2">${msg.getString("allgrades.table.mark")}</th>
+                        <th colspan="2"><fmt:message key="allgrades.table.mark"/></th>
                     </tr>
                     </thead>
                     <c:forEach var="exam" items="${exams}">
@@ -45,7 +50,7 @@
                             <td class="text-right">
                                 <form action="#" class="without-margin form-delete-mark">
                                     <input type="hidden" name="mark" value="${exam.id}">
-                                    <input type="submit" value="${msg.getString("btn.delete")}" class="btn btn-default">
+                                    <input type="submit" value="<fmt:message key="btn.delete"/>" class="btn btn-default">
                                 </form>
                             </td>
                         </tr>
@@ -58,7 +63,6 @@
                     This subject not have a mark
                 </div>
             </c:if>
-
 
         </div>
         <div class="row">

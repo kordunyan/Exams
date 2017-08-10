@@ -1,5 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${cookie['locale'].value}"/>
+<fmt:setBundle basename="locale/messages"  />
 <html>
 <head>
     <meta charset="utf-8">
@@ -18,14 +21,14 @@
 
         <div class="col-md-9 main-book-wraper">
 
-            <h3 class="text-center">${msg.getString("gradesbydate.title")}</h3>
+            <h3 class="text-center"><fmt:message key="gradesbydate.title"/></h3>
 
             <form class="form-inline form-input-date" action="<c:url value="/bydate"/>">
                 <div class="form-group">
-                    <label for="createDate">${msg.getString("gradesbydate.date")}:</label>
+                    <label for="createDate"><fmt:message key="gradesbydate.date"/>:</label>
                     <input type="text" class="form-control" name="date" <c:if test="${date != null}">value="${date}"</c:if> id="createDate">
                 </div>
-                <button type="submit" class="btn btn-default">${msg.getString("btn.show")}</button>
+                <button type="submit" class="btn btn-default"><fmt:message key="btn.show"/></button>
             </form>
 
             
@@ -33,8 +36,8 @@
                 <table class="table table-striped content-table">
                     <thead>
                     <tr>
-                        <th>${msg.getString("gradesbydate.table.subject")}</th>
-                        <th>${msg.getString("gradesbydate.table.mark")}</th>
+                        <th><fmt:message key="gradesbydate.table.subject"/></th>
+                        <th><fmt:message key="gradesbydate.table.mark"/></th>
                     </tr>
                     </thead>
                     <c:forEach items="${exams}" var="exam">
@@ -60,7 +63,6 @@
 <script src='<c:url value="/scripts/ui.datepicker-ru.js"/>'></script>
 <script src="<c:url value="/scripts/bootstrap.min.js"/>"></script>
 <script src="<c:url value="/scripts/getByDate.js"/>"></script>
-
 
 
 </body>

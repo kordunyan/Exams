@@ -4,7 +4,7 @@ import com.exams.dao.factory.DatabaseType;
 import com.exams.dao.factory.ServiceFactory;
 import com.exams.entity.Subject;
 import com.exams.exception.IncorectSubjectTitleException;
-import com.exams.i18n.ResourceBundleFactory;
+import com.exams.i18n.ResourceBundleLocale;
 import com.exams.service.SubjectService;
 
 import javax.servlet.ServletException;
@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 
 @WebServlet("/add/subject")
@@ -32,12 +33,13 @@ public class AddSubject extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		ResourceBundle msg = new ResourceBundleLocale(request.getCookies()).getResourceBundle();
 		Map<String, String> messages = new HashMap<>();
 		String title = request.getParameter("title");
 		try {
 			subjectService.addSubject(new Subject(title, true));
 		} catch (IncorectSubjectTitleException ex) {
-			messages.put("title", ResourceBundleFactory.getResourceBundle().getString("messages.error.subject"));
+			messages.put("title", msg.getString("messages.error.subject"));
 		}
 
 		if (messages.isEmpty()) {

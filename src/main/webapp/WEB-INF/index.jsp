@@ -1,5 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${cookie['locale'].value}"/>
+<fmt:setBundle basename="locale/messages"  />
 <html>
 <head>
     <meta charset="utf-8">
@@ -19,7 +22,7 @@
 
         <div class="col-md-9 main-book-wraper">
 
-            <h3 class="text-center">${msg.getString("main.title")}</h3>
+            <h3 class="text-center"><fmt:message key="main.title"/></h3>
 
             <table class="table content-table">
                 <thead>
@@ -30,12 +33,12 @@
                 <c:forEach var="subject" items="${subjects}">
                     <tr <c:if test="${!subject.isEnabled}">class="warning"</c:if>>
                         <td>${subject.title}</td>
-                        <td><a href="<c:url value="/grades?subject=${subject.id}"/>">${msg.getString("main.table.Grades")}</a></td>
-                        <td><a href="<c:url value="/avg?subject=${subject.id}"/>">${msg.getString("main.table.AVG")}</a></td>
+                        <td><a href="<c:url value="/grades?subject=${subject.id}"/>"><fmt:message key="main.table.Grades"/></a></td>
+                        <td><a href="<c:url value="/avg?subject=${subject.id}"/>"><fmt:message key="main.table.AVG"/></a></td>
                         <td class="text-right">
                             <form class="without-margin form-delete-subject" action="#" method="get">
                                 <input type="hidden" name="subject" value="${subject.id}"/>
-                                <input type="submit" value="${msg.getString("btn.delete")}" class="btn btn-default"/>
+                                <input type="submit" value="<fmt:message key="btn.delete"/>" class="btn btn-default"/>
                             </form>
                         </td>
                     </tr>
@@ -57,7 +60,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">${msg.getString("main.modaldelete.title")}</h4>
+                <h4 class="modal-title"><fmt:message key="main.modaldelete.title"/></h4>
             </div>
             <div class="modal-body">
                 <p id="delete-subject-modal-content"></p>
@@ -66,8 +69,8 @@
                 <form class="form-inline" action="<c:url value="/subject/delete"/>" method="post">
                     <input type="hidden" name="subject" id="input-delete-subject"/>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary">${msg.getString("btn.delete")}</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">${msg.getString("btn.close")}</button>
+                        <button type="submit" class="btn btn-primary"><fmt:message key="btn.delete"/></button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><fmt:message key="btn.close"/></button>
                     </div>
                 </form>
             </div>
@@ -87,8 +90,8 @@
                 <p>Server error. Please try later</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">${msg.getString("btn.close")}</button>
-                <button type="button" class="btn btn-primary">${msg.getString("btn.delete")}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><fmt:message key="btn.close"/></button>
+                <button type="button" class="btn btn-primary"><fmt:message key="btn.delete"/></button>
             </div>
         </div>
     </div>

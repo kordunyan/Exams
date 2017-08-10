@@ -12,11 +12,11 @@ import java.io.IOException;
  */
 @WebFilter("/*")
 public class LoginFilter implements Filter {
+	@Override
+	public void destroy() {}
 
 	@Override
-	public void init(FilterConfig filterConfig) throws ServletException {
-
-	}
+	public void init(FilterConfig filterConfig) throws ServletException {}
 
 	@Override
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
@@ -36,10 +36,5 @@ public class LoginFilter implements Filter {
 		else{
 			response.sendRedirect(loginURI);
 		}
-	}
-
-	@Override
-	public void destroy() {
-
 	}
 }

@@ -8,6 +8,7 @@ import com.exams.exception.ExamExistsException;
 import com.exams.exception.IncorectDateException;
 import com.exams.exception.IncorectMarkException;
 import com.exams.exception.IncorectSubjectTitleException;
+import com.exams.i18n.ResourceBundleLocale;
 import com.exams.service.ExamService;
 import com.exams.service.SubjectService;
 import lombok.extern.log4j.Log4j;
@@ -44,7 +45,7 @@ public class AddGrade extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map<String, String> messages = new HashMap<>();
 		Subject subject = null;
-		ResourceBundle msg = (ResourceBundle) request.getAttribute("msg");
+		ResourceBundle msg = new ResourceBundleLocale(request.getCookies()).getResourceBundle();
 		try{
 			int subjectId = Integer.parseInt(request.getParameter("subject"));
 			subject = subjectService.getById(subjectId);
