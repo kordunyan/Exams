@@ -22,6 +22,15 @@
             <h3 class="text-center"><fmt:message key="database.title"/></h3>
             <form class="form-horizontal add-form" id="formAddSubject" action="<c:url value="/dtabase/upload"/>"
                   method="post" enctype="multipart/form-data">
+
+                <c:if test="${messages.containsKey(\"error\")}">
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-9">
+                            <div class="alert alert-danger" role="alert"> ${messages.get("error")}</div>
+                        </div>
+                    </div>
+                </c:if>
+
                 <div class="form-group">
                     <div class="col-sm-10 col-sm-offset-2">
                         <input type="file" name="dump" id="exampleInputFile" class="form-group">

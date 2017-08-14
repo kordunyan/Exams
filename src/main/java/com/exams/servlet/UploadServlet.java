@@ -21,7 +21,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet("/dtabase/upload")
 @MultipartConfig
@@ -42,22 +44,39 @@ public class UploadServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String pattern = "(.)*(\\.json){1}";
 		Part filePart = request.getPart("dump");
-		BufferedReader br = new BufferedReader(new InputStreamReader(filePart.getInputStream(), "UTF-8"));
-		List<Subject> subjects = new ArrayList<>();
-		Type type = new TypeToken<List<Subject>>() {
-		}.getType();
-		subjects = gson.fromJson(br, type);
-		examService.deleteAll();
-		subjectService.deleteAll();
-		subjectService.insertAll(subjects);
-		for (Subject subject : subjects) {
-			if (subject.getExams().size() != 0) {
-				Subject saved = subjectService.getByTitle(subject.getTitle());
-				examService.addAll(subject.getExams(), saved);
+		Map<String, String> messages = new HashMap<>();
+
+		if(!filePart.getSubmittedFileName().matches(pattern)){
+			messages.put("error", "File must be in json format");
+		}
+		else{
+			BufferedReader br = new BufferedReader(new InputStreamReader(filePart.getInputStream(), "UTF-8"));
+			List<Subject> subjects = new ArrayList<>();
+			Type type = new TypeToken<List<Subject>>() {}.getType();
+			try{
+				subjects = gson.fromJson(br, type);
+				examService.deleteAll();
+				subjectService.deleteAll();
+				subjectService.insertAll(subjects);
+				for (Subject subject : subjects) {
+					if (subject.getExams().size() != 0) {
+						Subject saved = subjectService.getByTitle(subject.getTitle());
+						examService.addAll(subject.getExams(), saved);
+					}
+				}
+			}
+			catch (Exception ex){
+				messages.put("error", "Incorect JSON format");
 			}
 		}
-		if (request.getContextPath().equals("")) response.sendRedirect("/");
-		else response.sendRedirect(request.getContextPath());
+		if(messages.isEmpty()){
+			response.sendRedirect(request.getContextPath()+"/");
+		}
+		else{
+			request.setAttribute("messages", messages);
+			request.getRequestDispatcher("/WEB-INF/database.jsp").forward(request, response);
+		}
 	}
 }

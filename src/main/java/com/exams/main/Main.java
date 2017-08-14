@@ -17,6 +17,7 @@ public class Main {
 	public static void main(String[] args) {
 
 
+
 		/*List<Subject> subjects = Arrays.asList(
 				new Subject("Subject1", true),
 				new Subject("Subject2", true),
@@ -24,7 +25,7 @@ public class Main {
 				new Subject("Subject4", true)
 		);
 */
-		ServiceFactory.setDataBaseConfig(DatabaseType.TEST);
+		/*ServiceFactory.setDataBaseConfig(DatabaseType.TEST);
 		SubjectService subjectService = ServiceFactory.getSubjectService();
 		ExamService examService = ServiceFactory.getExamService();
 		examService.deleteAll();
@@ -47,7 +48,7 @@ public class Main {
 
 		examService.addAll(exams, subject);
 
-
+*/
 
 		/*String result = gson.toJson(subjects);
 
