@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
-@Log4j(topic = "admin")
 @WebListener
 public class SessionListener implements HttpSessionListener {
 
@@ -21,6 +20,6 @@ public class SessionListener implements HttpSessionListener {
     public void sessionDestroyed(HttpSessionEvent httpSessionEvent) {
         HttpSession session = httpSessionEvent.getSession();
         User user = (User) session.getAttribute("user");
-        log.info("User '" + user.getLogin() + "', is logged out");
+        //log.info("User '" + user.getLogin() + "', is logged out");
     }
 }

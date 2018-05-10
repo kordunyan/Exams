@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@Log4j
 @WebServlet("/subject/delete")
 public class DeleteSubject extends HttpServlet {
 
@@ -45,7 +44,7 @@ public class DeleteSubject extends HttpServlet {
             }
         }
         catch (Exception ex){
-            log.error("Error to delete or disable subject", ex);
+            //log.error("Error to delete or disable subject", ex);
         }
         if(request.getContextPath().equals("")) response.sendRedirect("/");
         else response.sendRedirect(request.getContextPath());

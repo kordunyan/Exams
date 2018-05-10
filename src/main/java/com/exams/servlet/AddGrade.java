@@ -11,7 +11,7 @@ import com.exams.exception.IncorectSubjectTitleException;
 import com.exams.i18n.ResourceBundleLocale;
 import com.exams.service.ExamService;
 import com.exams.service.SubjectService;
-import lombok.extern.log4j.Log4j;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,7 +26,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-@Log4j(topic = "file")
 @WebServlet("/add/grade")
 public class AddGrade extends HttpServlet {
 
@@ -76,7 +75,7 @@ public class AddGrade extends HttpServlet {
 			messages.put("createDate", msg.getString("messages.error.date"));
 		}
 		catch (Exception ex) {
-			log.error("Error to add mark", ex);
+			//log.error("Error to add mark", ex);
 		}
 
 

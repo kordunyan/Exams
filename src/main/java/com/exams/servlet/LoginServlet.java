@@ -5,7 +5,6 @@ import com.exams.dao.factory.ServiceFactory;
 import com.exams.entity.User;
 import com.exams.service.UserService;
 import lombok.extern.log4j.Log4j;
-import org.apache.log4j.Logger;
 
 
 import javax.servlet.ServletException;
@@ -18,7 +17,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@Log4j(topic = "admin")
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet{
 
@@ -49,7 +47,7 @@ public class LoginServlet extends HttpServlet{
 			user.setLogin(login);
 			User checked = userService.getByLoginAndPassword(user);
 			if(checked != null){
-				log.info("User '" + user.getLogin() + "', is logged in");
+				//log.info("User '" + user.getLogin() + "', is logged in");
 				HttpSession session = request.getSession();
 				session.setAttribute("user", checked);
 				response.sendRedirect(request.getContextPath() + "/");

@@ -19,7 +19,6 @@ import lombok.extern.log4j.Log4j;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.hibernate.SessionFactory;
 
-@Log4j(topic = "file")
 public class ServiceFactory {
 
     private static SubjectService subjectService;
@@ -30,12 +29,12 @@ public class ServiceFactory {
     private static ORMType currentORMType;
 
     static {
-        currentORMType = ORMType.MYBATIS;
+        currentORMType = ORMType.HIBERNATE;
     }
 
     public static void setDataBaseConfig(DatabaseType dataBaseType){
         if(currentType != dataBaseType){
-            log.info("Change database config to : " + dataBaseType);
+            //log.info("Change database config to : " + dataBaseType);
             currentType = dataBaseType;
             if(currentORMType == ORMType.MYBATIS){
                 SqlSessionFactory sqlSessionFactory = new MyBatisUtil(dataBaseType).getSqlSessnioFactory();
